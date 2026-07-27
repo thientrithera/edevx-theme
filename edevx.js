@@ -332,4 +332,6 @@ document.addEventListener("DOMContentLoaded", function() {
             articleBodyForSlide.innerHTML = articleBodyForSlide.innerHTML.replace(/&nbsp;/g, ' ');
         }
     }
+
+    // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE BẢN GỐC ---
 });

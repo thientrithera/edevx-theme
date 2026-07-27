@@ -124,3 +124,5 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   blockquote, details, .code-wrapper { break-inside: avoid !important; }
   h2, h3 { break-after: avoid !important; }
 }
+
+/* 8. IN ẤN A4 (@media print) */
