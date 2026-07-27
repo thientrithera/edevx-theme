@@ -1,15 +1,12 @@
 /* ======================================================== */
-/* EDUCATION DEVX - CORE STYLESHEET (V1.0)                  */
+/* EDUCATION DEVX - CORE STYLESHEET (V1.0.FINAL)            */
 /* ======================================================== */
 
 /* 1. ROOT & CORE TYPOGRAPHY */
 :root { --article-font-size: 1.05rem; }
 .prose p, .prose li, .prose blockquote { font-size: var(--article-font-size) !important; }
-body { font-family: 'Inter', sans-serif !important; animation: fadeIn 0.6s ease-out forwards; }
+body { animation: fadeIn 0.6s ease-out forwards; }
 @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
-pre, pre *, code, code *, .code-block, .code-block * { font-family: 'JetBrains Mono', monospace !important; }
-.fa, .fas, .far, .fab, .fa-solid, .fa-regular, .fa-brands { font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands' !important; font-weight: 900; }
-.katex, .katex * { font-family: KaTeX_Main, 'Times New Roman', serif !important; }
 
 /* 2. CSS SCROLL-DRIVEN ANIMATION (Thanh tiến độ không cần JS) */
 #reading-progress { transform-origin: left; animation: progress-grow auto linear; animation-timeline: scroll(root); }
@@ -101,6 +98,11 @@ body:has(.slide-container) main.lg\:col-span-9 { width: 100% !important; max-wid
 body:has(.slide-container) article.post-content { padding: 0 !important; border: none !important; box-shadow: none !important; background: transparent !important; }
 body:has(.slide-container) .slide-container { margin: 3rem auto !important; }
 
+/* FIX SLIDE TRẮNG CHỮ TRONG DARK MODE */
+html.dark body:has(.slide-container) .dark\:prose-invert { --tw-prose-body: #27272a !important; --tw-prose-headings: #18181b !important; --tw-prose-bold: #18181b !important; --tw-prose-counters: #52525b !important; --tw-prose-bullets: #52525b !important; }
+body:has(.slide-container) .slide-container [class*="dark:text-"] { color: inherit !important; }
+body:has(.slide-container) .slide-container br { display: none !important; }
+
 body:not(:has(.slide-container)) .post-content * { min-width: 0 !important; }
 body:not(:has(.slide-container)) .post-content div, body:not(:has(.slide-container)) .post-content section, body:not(:has(.slide-container)) .post-content blockquote, body:not(:has(.slide-container)) .post-content p, body:not(:has(.slide-container)) .post-content ul, body:not(:has(.slide-container)) .post-content ol, body:not(:has(.slide-container)) .post-content li { max-width: 100% !important; box-sizing: border-box !important; }
 @media (max-width: 639px) {
@@ -109,10 +111,6 @@ body:not(:has(.slide-container)) .post-content div, body:not(:has(.slide-contain
 }
 body:not(:has(.slide-container)) .post-content p, body:not(:has(.slide-container)) .post-content li, body:not(:has(.slide-container)) .post-content h1, body:not(:has(.slide-container)) .post-content h2, body:not(:has(.slide-container)) .post-content h3, body:not(:has(.slide-container)) .post-content h4, body:not(:has(.slide-container)) .post-content span:not(.katex *):not(.katex) { white-space: normal !important; overflow-wrap: anywhere !important; word-break: normal !important; }
 body:not(:has(.slide-container)) .post-content iframe, body:not(:has(.slide-container)) .post-content video, body:not(:has(.slide-container)) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
-
-body:has(.slide-container) .slide-container * { color: #18181b !important; }
-body:has(.slide-container) .slide-container [class*="text-"] { color: inherit !important; }
-
 
 /* 8. IN ẤN A4 (@media print) */
 @media print {

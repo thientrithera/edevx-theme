@@ -1,5 +1,5 @@
 /* ======================================================== */
-/* EDUCATION DEVX - CORE JAVASCRIPT (V1.0)                  */
+/* EDUCATION DEVX - CORE JAVASCRIPT (V1.0.FINAL)            */
 /* ======================================================== */
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const mobileMenu = document.getElementById('mobile-menu');
     if(mobileBtn && mobileMenu) mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-    // PWA Service Worker
+    // PWA Service Worker Inline
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             const swCode = `const CACHE_NAME='edevx-offline-v1';self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>e.waitUntil(clients.claim()));self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(res=>{const resClone=res.clone();caches.open(CACHE_NAME).then(c=>c.put(e.request,resClone));return res;}).catch(()=>caches.match(e.request)));});`;
@@ -109,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const cBtn = document.getElementById('close-toc-mobile');
         
         if(tocWrap) {
-            // FIX: Gỡ đúng 3 lớp khóa tàng hình
             const toggleToc = () => { tocWrap.classList.toggle('translate-y-full'); tocWrap.classList.toggle('opacity-0'); tocWrap.classList.toggle('pointer-events-none'); };
             if(oBtn) oBtn.addEventListener('click', toggleToc); 
             if(cBtn) cBtn.addEventListener('click', toggleToc);
@@ -312,24 +311,17 @@ document.addEventListener("DOMContentLoaded", function() {
             if(lg.toLowerCase().includes('gb')||lg.toLowerCase().includes('uk')) lg='gb'; else lg='us';
             if(txt) { const icn = btn.querySelector('i'); const oldCls = icn?icn.className:''; if(icn) icn.className='fas fa-volume-up text-blue-500 animate-pulse'; playPremiumAudio(txt, lg); setTimeout(()=> { if(icn)icn.className=oldCls; }, 1500); }
         });
+    })();
 
-        // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE ---
+    // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE ---
     const slideElem = document.querySelector('.slide-container');
     if (slideElem) {
-        // 1. Tự động tắt Dark Mode để chữ không bị chuyển thành màu trắng
-        const htmlTag = document.documentElement;
-        htmlTag.classList.remove('dark');
-        
-        // 2. Gỡ bỏ CSS Typography của Blog để không làm vỡ giao diện Slide
+        document.documentElement.classList.remove('dark');
         const articleBodyForSlide = document.getElementById('article-body-content');
         if (articleBodyForSlide) {
             articleBodyForSlide.classList.remove('prose', 'prose-zinc', 'dark:prose-invert');
-            
-            // 3. Dọn sạch rác thẻ <br> và khoảng trắng do Blogger tự sinh ra
             articleBodyForSlide.querySelectorAll('br').forEach(br => br.remove());
             articleBodyForSlide.innerHTML = articleBodyForSlide.innerHTML.replace(/&nbsp;/g, ' ');
         }
     }
-
-    })();
 });
