@@ -1,5 +1,5 @@
 /* ======================================================== */
-/* EDUCATION DEVX - CORE JAVASCRIPT (V1.0.FINAL)            */
+/* EDUCATION DEVX - CORE JAVASCRIPT (V1.0 MASTER)           */
 /* ======================================================== */
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if(fDec) fDec.addEventListener('click', (e) => { e.preventDefault(); if(currentFontSize > 0.85) updateFont(-0.1); });
     }
 
-    // --- 2. FLOATING BUTTONS BẰNG INTERSECTION OBSERVER ---
+    // --- 2. FLOATING BUTTONS (NÚT NỔI & MỤC LỤC MOBILE) ---
     const bttBtn = document.getElementById('back-to-top');
     const tocBtn = document.getElementById('open-toc-mobile');
     if (bttBtn || tocBtn) {
@@ -109,7 +109,12 @@ document.addEventListener("DOMContentLoaded", function() {
         const cBtn = document.getElementById('close-toc-mobile');
         
         if(tocWrap) {
-            const toggleToc = () => { tocWrap.classList.toggle('translate-y-full'); tocWrap.classList.toggle('opacity-0'); tocWrap.classList.toggle('pointer-events-none'); };
+            // FIX: Gỡ đúng 3 lớp khóa tàng hình
+            const toggleToc = () => { 
+                tocWrap.classList.toggle('translate-y-full'); 
+                tocWrap.classList.toggle('opacity-0'); 
+                tocWrap.classList.toggle('pointer-events-none'); 
+            };
             if(oBtn) oBtn.addEventListener('click', toggleToc); 
             if(cBtn) cBtn.addEventListener('click', toggleToc);
             tocWrap.addEventListener('click', e => { if(e.target.tagName==='A' && window.innerWidth < 1024) toggleToc(); });
@@ -313,18 +318,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     })();
 
-    // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE (BẢN GỐC CHUẨN) ---
+    // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE BẢN GỐC ---
     const slideElem = document.querySelector('.slide-container');
     if (slideElem) {
-        // 1. Gắn class kích hoạt Slide
         document.body.classList.add('has-slide');
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
         
-        // 2. Chặn đứng Dark Mode phá bĩnh
-        const htmlTag = document.documentElement;
-        htmlTag.classList.remove('dark');
-        localStorage.setItem('theme', 'light'); // Ép bộ nhớ lưu light để ngăn Tailwind lật lọng
-        
-        // 3. Gỡ Prose và dọn rác Blogger
         const articleBodyForSlide = document.getElementById('article-body-content');
         if (articleBodyForSlide) {
             articleBodyForSlide.classList.remove('prose', 'prose-zinc', 'dark:prose-invert');

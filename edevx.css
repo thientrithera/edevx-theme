@@ -1,5 +1,5 @@
 /* ======================================================== */
-/* EDUCATION DEVX - CORE STYLESHEET (V1.0.FINAL)            */
+/* EDUCATION DEVX - CORE STYLESHEET (V1.0 MASTER)           */
 /* ======================================================== */
 
 /* 1. ROOT & CORE TYPOGRAPHY */
@@ -37,7 +37,7 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .prose .code-wrapper pre::-webkit-scrollbar-track { background: transparent; }
 .prose .code-wrapper pre::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
 
-/* 5. EDTECH: FLASHCARD & QUIZ & SPOILER */
+/* 5. EDTECH: FLASHCARD, QUIZ, SPOILER */
 .flashcard-wrapper { perspective: 1000px; cursor: pointer; display: block; }
 .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
 .flashcard-wrapper.is-flipped .flashcard-inner { transform: rotateY(180deg); }
@@ -61,7 +61,7 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .prose details[open] summary::before { transform: rotate(90deg); }
 .prose details[open] summary { margin-bottom: 1rem; border-bottom: 1px dashed rgba(34,197,94,0.3); padding-bottom: 0.5rem; }
 
-/* 6. SIDEBAR & TOCBOT */
+/* 6. SIDEBAR WIDGETS & TOCBOT */
 .toc-list { list-style: none; padding-left: 1rem; }
 .toc-link { color: #71717a; text-decoration: none; display: block; padding: 0.35rem 0; font-size: 0.9rem; transition: 0.2s; }
 .toc-link:hover { color: #18181b; }
@@ -89,8 +89,8 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .dark .loader { border-color: rgba(39,39,42,0.5); border-top-color: #60a5fa; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-/* 7. SLIDE MODE PRO (KHÔI PHỤC BẢN GỐC CHUẨN 100%) */
-body.has-slide { background-color: #0b0f19 !important; overflow-x: hidden; }
+/* 7. SLIDE MODE PRO (BẢN GỐC CHỐNG LỖI MÀU & VỠ KHUNG) */
+body.has-slide { background-color: #0b0f19 !important; overflow-x: hidden !important; }
 body.has-slide header, body.has-slide footer, body.has-slide aside, body.has-slide #reading-progress, body.has-slide .post-header, body.has-slide .nextprev, body.has-slide .flex.flex-wrap, body.has-slide .mt-16.pt-8, body.has-slide .post-content h1:first-child { display: none !important; }
 body.has-slide .grid.lg\:grid-cols-12 { display: block !important; }
 body.has-slide .max-w-7xl { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
@@ -98,7 +98,11 @@ body.has-slide main.lg\:col-span-9 { width: 100% !important; max-width: 100% !im
 body.has-slide article.post-content { padding: 0 !important; border: none !important; box-shadow: none !important; background: transparent !important; }
 body.has-slide .slide-container { margin: 3rem auto !important; }
 
-/* KHÓA VỠ KHUNG MOBILE BẢN GỐC */
+/* Trị bệnh mờ chữ: Ép màu đen sắc nét cho Slide */
+body.has-slide .slide-container { color: #27272a !important; }
+html.dark body.has-slide .slide-container [class*="dark:text-"] { color: inherit !important; }
+
+/* Khóa vỡ khung Responsive (Miễn trừ Slide) */
 body:not(.has-slide) .post-content * { min-width: 0 !important; }
 body:not(.has-slide) .post-content div, body:not(.has-slide) .post-content section, body:not(.has-slide) .post-content blockquote, body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content ul, body:not(.has-slide) .post-content ol, body:not(.has-slide) .post-content li { max-width: 100% !important; box-sizing: border-box !important; }
 @media (max-width: 639px) {
