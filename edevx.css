@@ -89,28 +89,24 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .dark .loader { border-color: rgba(39,39,42,0.5); border-top-color: #60a5fa; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-/* 7. SLIDE MODE PRO (BẰNG CSS :HAS) & RESPONSIVE KHÓA VỠ KHUNG */
-body:has(.slide-container) { background-color: #0b0f19 !important; overflow-x: hidden; }
-body:has(.slide-container) header, body:has(.slide-container) footer, body:has(.slide-container) aside, body:has(.slide-container) #reading-progress, body:has(.slide-container) .post-header, body:has(.slide-container) .nextprev, body:has(.slide-container) .flex.flex-wrap, body:has(.slide-container) .mt-16.pt-8, body:has(.slide-container) .post-content h1:first-child { display: none !important; }
-body:has(.slide-container) .grid.lg\:grid-cols-12 { display: block !important; }
-body:has(.slide-container) .max-w-7xl { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
-body:has(.slide-container) main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; display: block !important; }
-body:has(.slide-container) article.post-content { padding: 0 !important; border: none !important; box-shadow: none !important; background: transparent !important; }
-body:has(.slide-container) .slide-container { margin: 3rem auto !important; }
+/* 7. SLIDE MODE PRO (KHÔI PHỤC BẢN GỐC CHUẨN 100%) */
+body.has-slide { background-color: #0b0f19 !important; overflow-x: hidden; }
+body.has-slide header, body.has-slide footer, body.has-slide aside, body.has-slide #reading-progress, body.has-slide .post-header, body.has-slide .nextprev, body.has-slide .flex.flex-wrap, body.has-slide .mt-16.pt-8, body.has-slide .post-content h1:first-child { display: none !important; }
+body.has-slide .grid.lg\:grid-cols-12 { display: block !important; }
+body.has-slide .max-w-7xl { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+body.has-slide main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; display: block !important; }
+body.has-slide article.post-content { padding: 0 !important; border: none !important; box-shadow: none !important; background: transparent !important; }
+body.has-slide .slide-container { margin: 3rem auto !important; }
 
-/* FIX SLIDE TRẮNG CHỮ TRONG DARK MODE */
-html.dark body:has(.slide-container) .dark\:prose-invert { --tw-prose-body: #27272a !important; --tw-prose-headings: #18181b !important; --tw-prose-bold: #18181b !important; --tw-prose-counters: #52525b !important; --tw-prose-bullets: #52525b !important; }
-body:has(.slide-container) .slide-container [class*="dark:text-"] { color: inherit !important; }
-body:has(.slide-container) .slide-container br { display: none !important; }
-
-body:not(:has(.slide-container)) .post-content * { min-width: 0 !important; }
-body:not(:has(.slide-container)) .post-content div, body:not(:has(.slide-container)) .post-content section, body:not(:has(.slide-container)) .post-content blockquote, body:not(:has(.slide-container)) .post-content p, body:not(:has(.slide-container)) .post-content ul, body:not(:has(.slide-container)) .post-content ol, body:not(:has(.slide-container)) .post-content li { max-width: 100% !important; box-sizing: border-box !important; }
+/* KHÓA VỠ KHUNG MOBILE BẢN GỐC */
+body:not(.has-slide) .post-content * { min-width: 0 !important; }
+body:not(.has-slide) .post-content div, body:not(.has-slide) .post-content section, body:not(.has-slide) .post-content blockquote, body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content ul, body:not(.has-slide) .post-content ol, body:not(.has-slide) .post-content li { max-width: 100% !important; box-sizing: border-box !important; }
 @media (max-width: 639px) {
-  body:not(:has(.slide-container)) article.post-content { padding: 1rem !important; overflow-x: hidden !important; }
-  body:not(:has(.slide-container)) .post-content ul, body:not(:has(.slide-container)) .post-content ol { padding-left: 1.2rem !important; margin-left: 0 !important; }
+  body:not(.has-slide) article.post-content { padding: 1rem !important; overflow-x: hidden !important; }
+  body:not(.has-slide) .post-content ul, body:not(.has-slide) .post-content ol { padding-left: 1.2rem !important; margin-left: 0 !important; }
 }
-body:not(:has(.slide-container)) .post-content p, body:not(:has(.slide-container)) .post-content li, body:not(:has(.slide-container)) .post-content h1, body:not(:has(.slide-container)) .post-content h2, body:not(:has(.slide-container)) .post-content h3, body:not(:has(.slide-container)) .post-content h4, body:not(:has(.slide-container)) .post-content span:not(.katex *):not(.katex) { white-space: normal !important; overflow-wrap: anywhere !important; word-break: normal !important; }
-body:not(:has(.slide-container)) .post-content iframe, body:not(:has(.slide-container)) .post-content video, body:not(:has(.slide-container)) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
+body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content li, body:not(.has-slide) .post-content h1, body:not(.has-slide) .post-content h2, body:not(.has-slide) .post-content h3, body:not(.has-slide) .post-content h4, body:not(.has-slide) .post-content span:not(.katex *):not(.katex) { white-space: normal !important; overflow-wrap: anywhere !important; word-break: normal !important; }
+body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content video, body:not(.has-slide) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
 
 /* 8. IN ẤN A4 (@media print) */
 @media print {
@@ -120,7 +116,7 @@ body:not(:has(.slide-container)) .post-content iframe, body:not(:has(.slide-cont
   .prose { max-width: 100% !important; }
   .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
   a { text-decoration: none !important; color: black !important; }
-  body:has(.slide-container) .slide-container { margin: 0 !important; box-shadow: none !important; border: 1px solid #ccc; break-inside: avoid; }
+  body.has-slide .slide-container { margin: 0 !important; box-shadow: none !important; border: 1px solid #ccc; break-inside: avoid; }
   blockquote, details, .code-wrapper { break-inside: avoid !important; }
   h2, h3 { break-after: avoid !important; }
 }

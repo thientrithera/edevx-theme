@@ -313,10 +313,18 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     })();
 
-    // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE ---
+    // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE (BẢN GỐC CHUẨN) ---
     const slideElem = document.querySelector('.slide-container');
     if (slideElem) {
-        document.documentElement.classList.remove('dark');
+        // 1. Gắn class kích hoạt Slide
+        document.body.classList.add('has-slide');
+        
+        // 2. Chặn đứng Dark Mode phá bĩnh
+        const htmlTag = document.documentElement;
+        htmlTag.classList.remove('dark');
+        localStorage.setItem('theme', 'light'); // Ép bộ nhớ lưu light để ngăn Tailwind lật lọng
+        
+        // 3. Gỡ Prose và dọn rác Blogger
         const articleBodyForSlide = document.getElementById('article-body-content');
         if (articleBodyForSlide) {
             articleBodyForSlide.classList.remove('prose', 'prose-zinc', 'dark:prose-invert');
