@@ -1,0 +1,23 @@
+name: Purge jsDelivr Cache
+
+# Con Bot sẽ tự động chạy khi bạn sửa file CSS hoặc JS trên nhánh main
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '*.css'
+      - '*.js'
+
+jobs:
+  purge-cdn:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧹 Dọn dẹp Cache file CSS
+        run: |
+          curl -X POST https://purge.jsdelivr.net/gh/${{ github.repository }}@main/edevx.css
+
+      - name: 🧹 Dọn dẹp Cache file JS
+        run: |
+          curl -X POST https://purge.jsdelivr.net/gh/${{ github.repository }}@main/edevx.js
