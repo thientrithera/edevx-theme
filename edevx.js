@@ -312,5 +312,20 @@ document.addEventListener("DOMContentLoaded", function() {
             if(lg.toLowerCase().includes('gb')||lg.toLowerCase().includes('uk')) lg='gb'; else lg='us';
             if(txt) { const icn = btn.querySelector('i'); const oldCls = icn?icn.className:''; if(icn) icn.className='fas fa-volume-up text-blue-500 animate-pulse'; playPremiumAudio(txt, lg); setTimeout(()=> { if(icn)icn.className=oldCls; }, 1500); }
         });
+
+        // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE ---
+    const slideElem = document.querySelector('.slide-container');
+    if (slideElem) {
+        // Tắt Dark Mode
+        document.documentElement.classList.remove('dark');
+        // Gỡ định dạng thẻ Prose và dọn rác <br>
+        const articleBodyForSlide = document.getElementById('article-body-content');
+        if (articleBodyForSlide) {
+            articleBodyForSlide.classList.remove('prose', 'prose-zinc', 'dark:prose-invert');
+            articleBodyForSlide.querySelectorAll('br').forEach(br => br.remove());
+            articleBodyForSlide.innerHTML = articleBodyForSlide.innerHTML.replace(/&nbsp;/g, ' ');
+        }
+    }
+    
     })();
 });
