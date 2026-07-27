@@ -316,16 +316,20 @@ document.addEventListener("DOMContentLoaded", function() {
         // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE ---
     const slideElem = document.querySelector('.slide-container');
     if (slideElem) {
-        // Tắt Dark Mode
-        document.documentElement.classList.remove('dark');
-        // Gỡ định dạng thẻ Prose và dọn rác <br>
+        // 1. Tự động tắt Dark Mode để chữ không bị chuyển thành màu trắng
+        const htmlTag = document.documentElement;
+        htmlTag.classList.remove('dark');
+        
+        // 2. Gỡ bỏ CSS Typography của Blog để không làm vỡ giao diện Slide
         const articleBodyForSlide = document.getElementById('article-body-content');
         if (articleBodyForSlide) {
             articleBodyForSlide.classList.remove('prose', 'prose-zinc', 'dark:prose-invert');
+            
+            // 3. Dọn sạch rác thẻ <br> và khoảng trắng do Blogger tự sinh ra
             articleBodyForSlide.querySelectorAll('br').forEach(br => br.remove());
             articleBodyForSlide.innerHTML = articleBodyForSlide.innerHTML.replace(/&nbsp;/g, ' ');
         }
     }
-    
+
     })();
 });
