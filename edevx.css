@@ -152,5 +152,17 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     page-break-after: auto !important; 
     break-after: auto !important;
   }
+  /* TIÊU DIỆT NỀN ĐEN VÀ KHUNG GRID CỦA BLOGGER KHI IN */
+  html, body, body.has-slide { 
+      background: #ffffff !important; 
+      background-color: #ffffff !important; 
+      height: auto !important; 
+  }
+  
+  .post-body, .post-content, .max-w-7xl, .lg\:col-span-9, .grid, .slide-container {
+      display: block !important; 
+      margin: 0 !important; 
+      padding: 0 !important;
+  }
 }
 
