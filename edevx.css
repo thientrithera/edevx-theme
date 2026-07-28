@@ -114,10 +114,10 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
 
 /* ======================================================== */
 /* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (A4 LANDSCAPE)    */
-/* BẢN HOÀN HẢO TỐI THƯỢNG - FIX LỖI 44 TRANG & TRÀN CHỮ    */
+/* BẢN CHUẨN ĐỒNG BỘ 100% - CHỐNG DÃN & CHỐNG TRÀN SLIDE   */
 /* ======================================================== */
 @media print { 
-  /* 1. KHAI BÁO KHỔ GIẤY VÀ TIÊU DIỆT NỀN ĐEN */
+  /* 1. KHAI BÁO KHỔ GIẤY VÀ NỀN TRẮNG TUYỆT ĐỐI */
   @page { size: A4 landscape; margin: 0; }
   html body, 
   html body.has-slide { 
@@ -147,10 +147,10 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   body:not(.has-slide) h2, body:not(.has-slide) h3 { break-after: avoid !important; }
 
   /* ================================================= */
-  /* 4. DÀNH CHO IN SLIDE (MODE 2) - BẢN FIX TOÀN DIỆN  */
+  /* 4. DÀNH CHO IN SLIDE (MODE 2) - BẢN ĐỒNG BỘ HOÀN HẢO */
   /* ================================================= */
   
-  /* A. Dập phẳng mọi lớp áo bọc bên ngoài của Blogger để không gây vỡ trang */
+  /* A. Dập phẳng các lớp bọc Blogger để không gây vỡ trang */
   html body.has-slide .max-w-7xl, 
   html body.has-slide .grid, 
   html body.has-slide main, 
@@ -168,23 +168,21 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     position: static !important;
   }
   
-  /* B. Khóa chặt kích thước Slide A4 Ngang & Tự động Zoom 88% chống tràn nội dung */
+  /* B. Khóa cứng Slide thành Thẻ 16:9 Căn giữa A4 (Chống giãn Slide ít chữ) */
   html body.has-slide .slide-container { 
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    width: 297mm !important; 
-    height: 210mm !important; 
-    max-height: 210mm !important; 
-    margin: 0 !important; 
-    padding: 10mm 15mm !important; /* Lề viền mỏng thoáng đạt */
-    border: none !important; 
-    border-radius: 0 !important; 
+    width: 275mm !important;  /* Tỷ lệ 16:9 vàng trên khổ A4 */
+    height: 175mm !important; /* Cao 175mm giúp hở lề trên/dưới 17mm cực sang */
+    max-height: 175mm !important; 
+    margin: 12mm auto !important; /* Căn giữa đúng tâm tờ giấy A4 */
+    padding: 8mm 12mm !important; 
+    border: 1px solid #cbd5e1 !important; /* Viền khung giáo án mảnh tinh tế */
+    border-radius: 6mm !important; 
     box-shadow: none !important;
     background: #ffffff !important;
-    
-    /* BẢO BỐI CHỐNG TRÀN NỘI DUNG CHÂN TRANG */
-    zoom: 0.88 !important;
+    zoom: 1 !important; /* Bỏ zoom cũ để tránh méo layout */
     
     page-break-inside: avoid !important; 
     break-inside: avoid !important;
@@ -194,10 +192,24 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     box-sizing: border-box !important; 
     overflow: hidden !important;
   }
+
+  /* C. TỰ ĐỘNG NÉN KHOẢNG CÁCH NỘI DUNG KHI IN (BẮT BÀI SLIDE NHIỀU CHỮ / CÓ SVG) */
+  html body.has-slide .slide-container .space-y-8 > * + * { margin-top: 0.85rem !important; }
+  html body.has-slide .slide-container .space-y-6 > * + * { margin-top: 0.65rem !important; }
+  html body.has-slide .slide-container .space-y-5 > * + * { margin-top: 0.5rem !important; }
+  html body.has-slide .slide-container .gap-10 { gap: 1rem !important; }
+  html body.has-slide .slide-container .gap-8 { gap: 0.75rem !important; }
+  html body.has-slide .slide-container .p-8 { padding: 1rem !important; }
+  html body.has-slide .slide-container .p-7 { padding: 0.85rem !important; }
   
-  /* C. Khử trang trắng dư thừa ở Slide cuối cùng */
+  /* Khống chế chiều cao hình vẽ SVG để không đẩy tràn chân trang */
+  html body.has-slide .slide-container svg { max-height: 130px !important; width: auto !important; margin: 0 auto !important; }
+  html body.has-slide .slide-container h2 { font-size: 1.6rem !important; line-height: 2rem !important; }
+  html body.has-slide .slide-container p { font-size: 0.95rem !important; line-height: 1.4rem !important; }
+
+  /* D. Khử trang trắng dư thừa ở Slide cuối cùng */
   html body.has-slide .slide-container:last-of-type {
-    page-break-after: auto !important; 
-    break-after: auto !important;
+    page-break-after: avoid !important; 
+    break-after: avoid !important;
   }
 }
