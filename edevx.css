@@ -112,75 +112,91 @@ body:not(.has-slide) .post-content div, body:not(.has-slide) .post-content secti
 body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content li, body:not(.has-slide) .post-content h1, body:not(.has-slide) .post-content h2, body:not(.has-slide) .post-content h3, body:not(.has-slide) .post-content h4, body:not(.has-slide) .post-content span:not(.katex *):not(.katex) { white-space: normal !important; overflow-wrap: anywhere !important; word-break: normal !important; }
 body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content video, body:not(.has-slide) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
 
-/* ======================================================== */
-/* 8. IN ẤN A4 (@media print) - MASTER ENGINE               */
-/* ======================================================== */
-@media print {
-  /* 1. XÓA BỎ NỀN ĐEN BÁM ĐUÔI */
-  html, body, body.has-slide { 
-    background: #ffffff !important; 
-    background-color: #ffffff !important; 
-    color: #000000 !important;
-    -webkit-print-color-adjust: exact !important; 
-    print-color-adjust: exact !important; 
-  }
+/* ========================================== */
+    /* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (A4)*/
+    /* BẢN NÂNG CẤP TỐI THƯỢNG - FIX LỖI 44 TRANG */
+    /* ========================================== */
+    @media print { 
+      /* 1. KHAI BÁO KHỔ GIẤY VÀ XÓA SỔ NỀN ĐEN */
+      @page { size: A4 landscape; margin: 0; }
+      html, body { 
+        background: #ffffff !important; 
+        color: #000000 !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        -webkit-print-color-adjust: exact !important; 
+        print-color-adjust: exact !important; 
+      }
+      
+      /* 2. DỌN RÁC GIAO DIỆN (Dùng chung cho cả 2 Mode) */
+      header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
+      #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { 
+        display: none !important; 
+      }
+      
+      /* ================================================= */
+      /* 3. DÀNH CHO IN BÀI HỌC BÌNH THƯỜNG (MODE 1)       */
+      /* ================================================= */
+      body:not(.has-slide) main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; flex: none !important; display: block !important; }
+      body:not(.has-slide) .prose { max-width: 100% !important; }
+      body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
+      body:not(.has-slide) a { text-decoration: none !important; color: black !important; }
+      
+      /* Chống ngắt đôi các ô ghi chú khi in sang trang mới */
+      body:not(.has-slide) blockquote, body:not(.has-slide) details { break-inside: avoid !important; }
+      
+      /* Chống tiêu đề mồ côi ở cuối trang */
+      body:not(.has-slide) h2, body:not(.has-slide) h3 { break-after: avoid !important; }
 
-  /* 2. ẨN RÁC GIAO DIỆN BLOGGER */
-  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
-  #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor,
-  .post-header { display: none !important; }
-
-  /* 3. DẬP PHẲNG TOÀN BỘ ÁO KHOÁC CỦA BLOGGER (FIX LỖI 44 TRANG) */
-  /* Tiền tố body.has-slide giúp đoạn CSS này có sức mạnh tuyệt đối */
-  body.has-slide .max-w-7xl, 
-  body.has-slide .grid, 
-  body.has-slide main, 
-  body.has-slide article.post-content, 
-  body.has-slide .prose, 
-  body.has-slide #article-body-content,
-  body.has-slide .lesson-container {
-    display: block !important; 
-    width: 100% !important; 
-    max-width: none !important; 
-    margin: 0 !important; 
-    padding: 0 !important; 
-    border: none !important; 
-    box-shadow: none !important;
-    position: static !important;
-  }
-
-  /* 4. ÉP KHUÔN GIẤY A4 LANDSCAPE CHO TỪNG SLIDE */
-  body.has-slide .slide-container { 
-    display: flex !important; 
-    width: 297mm !important; 
-    height: 210mm !important; 
-    max-height: 210mm !important; 
-    margin: 0 !important; 
-    padding: 16mm 20mm !important; 
-    border: none !important; 
-    border-radius: 0 !important; 
-    box-shadow: none !important;
-    background: #ffffff !important;
-    
-    page-break-inside: avoid !important; 
-    break-inside: avoid !important;
-    page-break-after: always !important; 
-    break-after: page !important;
-    box-sizing: border-box !important; 
-    overflow: hidden !important;
-  }
-  
-  body.has-slide .slide-container:last-of-type {
-    page-break-after: auto !important; 
-    break-after: auto !important;
-  }
-
-  /* 5. DÀNH CHO IN BÀI VIẾT BÌNH THƯỜNG (MODE 1) */
-  body:not(.has-slide) main.lg\:col-span-9 { width: 100% !important; flex: none !important; display: block !important; }
-  body:not(.has-slide) .prose { max-width: 100% !important; }
-  body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
-  body:not(.has-slide) a { text-decoration: none !important; color: black !important; }
-  body:not(.has-slide) blockquote, body:not(.has-slide) details { break-inside: avoid !important; }
-  body:not(.has-slide) h2, body:not(.has-slide) h3 { break-after: avoid !important; }
-}
-
+      /* ================================================= */
+      /* 4. DÀNH CHO IN SLIDE (MODE 2) - FIX LỖI 44 TRANG  */
+      /* ================================================= */
+      
+      /* A. "DẬP PHẲNG" mọi lớp áo bọc bên ngoài của Blogger */
+      /* Chính các padding và grid này đã ép Slide hẹp lại và đẩy xuống gây ra mảng đen */
+      body.has-slide .max-w-7xl, 
+      body.has-slide .grid, 
+      body.has-slide main, 
+      body.has-slide article.post-content, 
+      body.has-slide .prose, 
+      body.has-slide #article-body-content,
+      body.has-slide .lesson-container {
+        display: block !important; 
+        width: 100% !important; 
+        max-width: none !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        border: none !important; 
+        box-shadow: none !important;
+        position: static !important;
+      }
+      
+      /* B. "KHÓA CHẶT" kích thước từng Slide đúng chuẩn A4 Ngang */
+      body.has-slide .slide-container { 
+        display: flex !important;
+        width: 297mm !important; 
+        height: 210mm !important; 
+        max-height: 210mm !important; 
+        margin: 0 !important; 
+        padding: 16mm 20mm !important; 
+        border: none !important; 
+        border-radius: 0 !important; 
+        box-shadow: none !important;
+        background: #ffffff !important;
+        
+        /* Bắt buộc phải có lệnh cắt trang này */
+        page-break-inside: avoid !important; 
+        break-inside: avoid !important;
+        page-break-after: always !important; 
+        break-after: page !important;
+        
+        box-sizing: border-box !important; 
+        overflow: hidden !important;
+      }
+      
+      /* C. Khử trang trắng dư thừa ở Slide cuối cùng */
+      body.has-slide .slide-container:last-of-type {
+        page-break-after: auto !important; 
+        break-after: auto !important;
+      }
+    }
