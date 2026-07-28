@@ -112,10 +112,10 @@ body:not(.has-slide) .post-content div, body:not(.has-slide) .post-content secti
 body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content li, body:not(.has-slide) .post-content h1, body:not(.has-slide) .post-content h2, body:not(.has-slide) .post-content h3, body:not(.has-slide) .post-content h4, body:not(.has-slide) .post-content span:not(.katex *):not(.katex) { white-space: normal !important; overflow-wrap: anywhere !important; word-break: normal !important; }
 body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content video, body:not(.has-slide) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
 
-/* ========================================== */
-/* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (A4)*/
-/* BẢN NÂNG CẤP TỐI THƯỢNG - FIX LỖI 44 TRANG */
-/* ========================================== */
+/* ======================================================== */
+/* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (A4 LANDSCAPE)    */
+/* BẢN HOÀN HẢO TỐI THƯỢNG - FIX LỖI 44 TRANG & TRÀN CHỮ    */
+/* ======================================================== */
 @media print { 
   /* 1. KHAI BÁO KHỔ GIẤY VÀ TIÊU DIỆT NỀN ĐEN */
   @page { size: A4 landscape; margin: 0; }
@@ -130,7 +130,7 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     print-color-adjust: exact !important; 
   }
   
-  /* 2. DỌN RÁC GIAO DIỆN (Dùng chung cho cả 2 Mode) */
+  /* 2. DỌN RÁC GIAO DIỆN (Dùng chung cho cả Mode 1 và Mode 2) */
   header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
   #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { 
     display: none !important; 
@@ -147,10 +147,10 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   body:not(.has-slide) h2, body:not(.has-slide) h3 { break-after: avoid !important; }
 
   /* ================================================= */
-  /* 4. DÀNH CHO IN SLIDE (MODE 2) - FIX LỖI 44 TRANG  */
+  /* 4. DÀNH CHO IN SLIDE (MODE 2) - BẢN FIX TOÀN DIỆN  */
   /* ================================================= */
   
-  /* A. Dập phẳng mọi lớp áo bọc bên ngoài của Blogger */
+  /* A. Dập phẳng mọi lớp áo bọc bên ngoài của Blogger để không gây vỡ trang */
   html body.has-slide .max-w-7xl, 
   html body.has-slide .grid, 
   html body.has-slide main, 
@@ -168,18 +168,23 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     position: static !important;
   }
   
-  /* B. Khóa chặt kích thước từng Slide vừa khít A4 Ngang */
+  /* B. Khóa chặt kích thước Slide A4 Ngang & Tự động Zoom 88% chống tràn nội dung */
   html body.has-slide .slide-container { 
     display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
     width: 297mm !important; 
     height: 210mm !important; 
     max-height: 210mm !important; 
-    margin: 0 !important; /* Lệnh này bây giờ là BẤT KHẢ XIN HÀI vì độ ưu tiên cao nhất */
-    padding: 16mm 20mm !important; 
+    margin: 0 !important; 
+    padding: 10mm 15mm !important; /* Lề viền mỏng thoáng đạt */
     border: none !important; 
     border-radius: 0 !important; 
     box-shadow: none !important;
     background: #ffffff !important;
+    
+    /* BẢO BỐI CHỐNG TRÀN NỘI DUNG CHÂN TRANG */
+    zoom: 0.88 !important;
     
     page-break-inside: avoid !important; 
     break-inside: avoid !important;
