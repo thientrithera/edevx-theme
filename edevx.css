@@ -115,106 +115,69 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
 
 /* ======================================================== */
 /* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (A4 LANDSCAPE)    */
-/* BẢN RESET HẠT NHÂN - TRỊ TẬN GỐC SLIDE CŨ BỊ VỠ KHUNG    */
+/* BẢN SAO CHÉP MÔI TRƯỜNG LOCAL - CHỐNG ÉP FLEXBOX         */
 /* ======================================================== */
 @media print { 
-  /* 1. KHAI BÁO KHỔ GIẤY VÀ NỀN TRẮNG */
-  @page { 
-    size: 297mm 210mm; 
-    margin: 0 !important; 
-  }
+  /* 1. KÍCH THƯỚC GIẤY CHUẨN A4 */
+  @page { size: A4 landscape; margin: 0; }
+  
+  /* 2. NỀN TRẮNG TUYỆT ĐỐI */
   html, body, body.has-slide { 
-    width: 297mm !important;
-    height: 210mm !important;
     background: #ffffff !important; 
     margin: 0 !important; 
     padding: 0 !important; 
     -webkit-print-color-adjust: exact !important; 
     print-color-adjust: exact !important; 
   }
-
-  /* 2. ẨN RÁC GIAO DIỆN BLOGGER */
+  
+  /* 3. ẨN MỌI RÁC GIAO DIỆN BLOGGER */
   header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
   #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { 
     display: none !important; 
   }
 
   /* ================================================= */
-  /* 3. MODE 2: SLIDE IN ẤN (ÁP DỤNG CODE CHUẨN CỦA SẾP)*/
+  /* 4. CHÌA KHÓA VÀNG: HỦY DIỆT LỚP ĐỆM BLOGGER WRAPPER */
   /* ================================================= */
-  
-  /* A. DẬP PHẲNG TOÀN BỘ VỎ BỌC BLOGGER (Chống ép khung) */
-  body.has-slide .max-w-7xl, 
-  body.has-slide .flex-grow,
-  body.has-slide .grid, 
-  body.has-slide main, 
-  body.has-slide article.post-content, 
-  body.has-slide .prose, 
-  body.has-slide #article-body-content,
-  body.has-slide .lesson-container {
+  /* Lệnh này xóa sạch 100px chiều cao vô hình, giúp Chrome không bị ép Flexbox */
+  .max-w-7xl, .grid, main, article.post-content, .prose, #article-body-content, .lesson-container {
     display: block !important; 
     width: 100% !important; 
-    max-width: none !important; 
-    height: auto !important;
-    margin: 0 !important; 
+    max-width: 100% !important; 
     padding: 0 !important; 
+    margin: 0 !important; 
     border: none !important; 
     box-shadow: none !important;
-    position: static !important;
   }
 
-  /* B. TIÊU DIỆT "BÓNG MA" CLASS PROSE TRONG CÁC SLIDE CŨ */
-  /* Đây là mấu chốt để các slide cũ không bị chữ đè lên nhau hay đẩy tràn viền */
-  body.has-slide .slide-container h1,
-  body.has-slide .slide-container h2,
-  body.has-slide .slide-container h3,
-  body.has-slide .slide-container h4,
-  body.has-slide .slide-container p {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* C. KHÓA CỨNG KÍCH THƯỚC SLIDE THEO BẢN CHUẨN CỦA SẾP */
+  /* ================================================= */
+  /* 5. CODE IN SLIDE (MODE 2) - Y HỆT FILE LOCAL CỦA SẾP */
+  /* ================================================= */
   body.has-slide .slide-container { 
     width: 297mm !important; 
     height: 210mm !important; 
-    max-width: 297mm !important;
-    max-height: 210mm !important;
     margin: 0 !important; 
-    padding: 14mm 20mm !important; /* Lề viền an toàn theo code của sếp */
+    padding: 16mm 20mm !important; 
     border: none !important; 
     border-radius: 0 !important; 
     box-shadow: none !important;
     
-    page-break-before: always !important;
-    page-break-after: always !important; 
     page-break-inside: avoid !important; 
     break-inside: avoid !important;
-    
-    overflow: hidden !important; 
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    box-sizing: border-box !important;
-    background: #ffffff !important;
+    page-break-after: always !important; 
+    break-after: page !important;
+    box-sizing: border-box !important; 
   }
   
-  body.has-slide .slide-container:first-of-type {
-    page-break-before: avoid !important;
+  /* Khử trang trắng cuối cùng */
+  body.has-slide .slide-container:last-of-type {
+    page-break-after: auto !important; 
+    break-after: auto !important;
   }
 
-  /* D. KHÓA CỨNG LƯỚI GRID KHÔNG CHO XÔ LỆCH CÁC CỘT TRONG SLIDE CŨ */
-  body.has-slide .grid-cols-4 { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
-  body.has-slide .grid-cols-3 { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
-  body.has-slide .grid-cols-2 { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-  body.has-slide .grid-cols-12 { display: grid !important; grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
-
   /* ================================================= */
-  /* 4. MODE 1: BÀI HỌC BÌNH THƯỜNG                    */
+  /* 6. DÀNH CHO BÀI HỌC BÌNH THƯỜNG (MODE 1)          */
   /* ================================================= */
-  body:not(.has-slide) main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; flex: none !important; display: block !important; }
-  body:not(.has-slide) .prose { max-width: 100% !important; }
   body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
   body:not(.has-slide) a { text-decoration: none !important; color: black !important; }
   body:not(.has-slide) blockquote, body:not(.has-slide) details { break-inside: avoid !important; }
