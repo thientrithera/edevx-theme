@@ -115,71 +115,69 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
 
 /* ======================================================== */
 /* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (A4 LANDSCAPE)    */
-/* BẢN CHUẨN XÁC TỪ MÃ LỆNH CỦA SẾP ĐÃ TEST THÀNH CÔNG      */
+/* BẢN SAO CHÉP MÔI TRƯỜNG LOCAL - CHỐNG ÉP FLEXBOX         */
 /* ======================================================== */
 @media print { 
-  @page { 
-    size: 297mm 210mm; 
-    margin: 0 !important; 
-  }
+  /* 1. KÍCH THƯỚC GIẤY CHUẨN A4 */
+  @page { size: A4 landscape; margin: 0; }
   
-  html, body { 
-    width: 297mm !important;
-    height: 210mm !important;
+  /* 2. NỀN TRẮNG TUYỆT ĐỐI */
+  html, body, body.has-slide { 
     background: #ffffff !important; 
     margin: 0 !important; 
     padding: 0 !important; 
     -webkit-print-color-adjust: exact !important; 
     print-color-adjust: exact !important; 
   }
-
-  /* Ẩn rác giao diện Blogger */
+  
+  /* 3. ẨN MỌI RÁC GIAO DIỆN BLOGGER */
   header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
   #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { 
     display: none !important; 
   }
 
   /* ================================================= */
-  /* MODE 2: SLIDE PRO (ÁP DỤNG CHÍNH XÁC CODE CỦA SẾP)*/
+  /* 4. CHÌA KHÓA VÀNG: HỦY DIỆT LỚP ĐỆM BLOGGER WRAPPER */
+  /* ================================================= */
+  /* Lệnh này xóa sạch 100px chiều cao vô hình, giúp Chrome không bị ép Flexbox */
+  .max-w-7xl, .grid, main, article.post-content, .prose, #article-body-content, .lesson-container {
+    display: block !important; 
+    width: 100% !important; 
+    max-width: 100% !important; 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    border: none !important; 
+    box-shadow: none !important;
+  }
+
+  /* ================================================= */
+  /* 5. CODE IN SLIDE (MODE 2) - Y HỆT FILE LOCAL CỦA SẾP */
   /* ================================================= */
   body.has-slide .slide-container { 
     width: 297mm !important; 
     height: 210mm !important; 
-    max-width: 297mm !important;
-    max-height: 210mm !important;
     margin: 0 !important; 
-    padding: 14mm 20mm !important; 
+    padding: 16mm 20mm !important; 
     border: none !important; 
     border-radius: 0 !important; 
     box-shadow: none !important;
     
-    page-break-before: always !important;
-    page-break-after: always !important; 
     page-break-inside: avoid !important; 
     break-inside: avoid !important;
-    
-    overflow: hidden !important; 
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    box-sizing: border-box !important;
+    page-break-after: always !important; 
+    break-after: page !important;
+    box-sizing: border-box !important; 
   }
   
-  body.has-slide .slide-container:first-of-type {
-    page-break-before: avoid !important;
+  /* Khử trang trắng cuối cùng */
+  body.has-slide .slide-container:last-of-type {
+    page-break-after: auto !important; 
+    break-after: auto !important;
   }
 
-  /* Khóa cứng các lưới cột không cho xô lệch khi in */
-  body.has-slide .grid-cols-4 { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
-  body.has-slide .grid-cols-3 { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
-  body.has-slide .grid-cols-2 { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-  body.has-slide .grid-cols-12 { display: grid !important; grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
-
   /* ================================================= */
-  /* MODE 1: BÀI HỌC BÌNH THƯỜNG                       */
+  /* 6. DÀNH CHO BÀI HỌC BÌNH THƯỜNG (MODE 1)          */
   /* ================================================= */
-  body:not(.has-slide) main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; flex: none !important; display: block !important; }
-  body:not(.has-slide) .prose { max-width: 100% !important; }
   body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
   body:not(.has-slide) a { text-decoration: none !important; color: black !important; }
   body:not(.has-slide) blockquote, body:not(.has-slide) details { break-inside: avoid !important; }

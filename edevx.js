@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     })();
 
-    // --- 8. SLIDE MODE ENGINE ---
+    // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE BẢN GỐC ---
     const slideElem = document.querySelector('.slide-container');
     if (slideElem) {
         document.body.classList.add('has-slide');
@@ -360,7 +360,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         const articleBodyForSlide = document.getElementById('article-body-content');
         if (articleBodyForSlide) {
-            articleBodyForSlide.className = ''; 
+            articleBodyForSlide.classList.remove('prose', 'prose-zinc', 'dark:prose-invert');
             articleBodyForSlide.querySelectorAll('br').forEach(br => br.remove());
             articleBodyForSlide.innerHTML = articleBodyForSlide.innerHTML.replace(/&nbsp;/g, ' ');
         }
