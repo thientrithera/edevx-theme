@@ -360,7 +360,8 @@ document.addEventListener("DOMContentLoaded", function() {
         
         const articleBodyForSlide = document.getElementById('article-body-content');
         if (articleBodyForSlide) {
-            articleBodyForSlide.classList.remove('prose', 'prose-zinc', 'dark:prose-invert');
+            // Lột bỏ hoàn toàn class prose để triệt hạ margin rác của Tailwind
+            articleBodyForSlide.className = ''; 
             articleBodyForSlide.querySelectorAll('br').forEach(br => br.remove());
             articleBodyForSlide.innerHTML = articleBodyForSlide.innerHTML.replace(/&nbsp;/g, ' ');
         }
