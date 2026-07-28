@@ -112,32 +112,60 @@ body:not(.has-slide) .post-content div, body:not(.has-slide) .post-content secti
 body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content li, body:not(.has-slide) .post-content h1, body:not(.has-slide) .post-content h2, body:not(.has-slide) .post-content h3, body:not(.has-slide) .post-content h4, body:not(.has-slide) .post-content span:not(.katex *):not(.katex) { white-space: normal !important; overflow-wrap: anywhere !important; word-break: normal !important; }
 body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content video, body:not(.has-slide) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
 
-/* 8. IN ẤN A4 (@media print) */
+/* ======================================================== */
+/* 8. IN ẤN A4 (@media print) - BẢN TRẢ PHẲNG TUYỆT ĐỐI     */
+/* ======================================================== */
 @media print {
-  /* Ẩn rác giao diện */
-  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor { display: none !important; }
-  
-  /* Cấu hình in bài viết bình thường */
-  main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; flex: none !important; }
-  body { background: white !important; color: black !important; font-size: 12pt !important; margin: 0 !important; padding: 0 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-  .prose { max-width: 100% !important; }
-  .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
-  a { text-decoration: none !important; color: black !important; }
-  blockquote, details, .code-wrapper { break-inside: avoid !important; }
-  h2, h3 { break-after: avoid !important; }
-  
-  /* ======================================================== */
-  /* FIX LỖI 44 TRANG: ÉP KHUNG CHUẨN CHO TẤT CẢ SLIDE CŨ & MỚI */
-  /* ======================================================== */
-  body.has-slide .slide-container, 
-  .slide-container { 
+  /* 1. ẨN TOÀN BỘ UI THỪA */
+  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
+  #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor { 
+    display: none !important; 
+  }
+
+  /* 2. TIÊU DIỆT NỀN ĐEN CỦA BODY SLIDE */
+  html, body, body.has-slide { 
+    background: #ffffff !important; 
+    color: #000000 !important;
+    margin: 0 !important; 
+    padding: 0 !important; 
+    height: auto !important;
+    min-height: auto !important;
+    -webkit-print-color-adjust: exact !important; 
+    print-color-adjust: exact !important; 
+  }
+
+  /* 3. TRẢ PHẲNG MỌI LỚP BAO BỌC CỦA BLOGGER (THỦ PHẠM GÂY 44 TRANG) */
+  /* Gỡ bỏ hoàn toàn Grid, Padding, Margin của các thẻ cha */
+  body.has-slide .max-w-7xl, 
+  body.has-slide .grid, 
+  body.has-slide main, 
+  body.has-slide article.post-content, 
+  body.has-slide .prose, 
+  body.has-slide #article-body-content {
+    display: block !important; 
+    width: 100% !important; 
+    max-width: 100% !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    border: none !important; 
+    box-shadow: none !important;
+    position: static !important;
+  }
+
+  /* 4. ÉP KÍCH THƯỚC SLIDE CHUẨN A4 LANDSCAPE */
+  body.has-slide .slide-container { 
+    display: flex !important; /* Giữ cấu trúc bên trong Slide */
     width: 297mm !important; 
     height: 210mm !important; 
-    margin: 0 !important; /* Ghi đè tuyệt đối margin 3rem gây lỗi nhảy trang */
+    max-height: 210mm !important; /* Khóa cứng chiều cao */
+    margin: 0 !important; 
     padding: 16mm 20mm !important; 
     border: none !important; 
     border-radius: 0 !important; 
     box-shadow: none !important;
+    background: #ffffff !important;
+    
+    /* Lệnh cắt trang cứng rắn nhất */
     page-break-inside: avoid !important; 
     break-inside: avoid !important;
     page-break-after: always !important; 
@@ -147,22 +175,17 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   }
   
   /* Khử trang trắng dư thừa ở Slide cuối cùng */
-  body.has-slide .slide-container:last-of-type, 
-  .slide-container:last-of-type {
-    page-break-after: auto !important; 
-    break-after: auto !important;
+  body.has-slide .slide-container:last-of-type {
+    page-break-after: avoid !important; 
+    break-after: avoid !important;
   }
-  /* TIÊU DIỆT NỀN ĐEN VÀ KHUNG GRID CỦA BLOGGER KHI IN */
-  html, body, body.has-slide { 
-      background: #ffffff !important; 
-      background-color: #ffffff !important; 
-      height: auto !important; 
-  }
-  
-  .post-body, .post-content, .max-w-7xl, .lg\:col-span-9, .grid, .slide-container {
-      display: block !important; 
-      margin: 0 !important; 
-      padding: 0 !important;
-  }
+
+  /* 5. DÀNH CHO BÀI VIẾT BÌNH THƯỜNG (MODE 1) */
+  body:not(.has-slide) main.lg\:col-span-9 { width: 100% !important; flex: none !important; display: block !important; }
+  body:not(.has-slide) .prose { max-width: 100% !important; }
+  body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
+  body:not(.has-slide) a { text-decoration: none !important; color: black !important; }
+  body:not(.has-slide) blockquote, body:not(.has-slide) details { break-inside: avoid !important; }
+  body:not(.has-slide) h2, body:not(.has-slide) h3 { break-after: avoid !important; }
 }
 
