@@ -118,39 +118,103 @@ body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content li, bod
 body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content video, body:not(.has-slide) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
 
 
-/* ========================================== */
-/* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (A4)*/
-/* CHUẨN BẢN GỐC - ĐẶT NGAY DƯỚI MODULE 7     */
-/* ========================================== */
+/* ======================================================== */
+/* [MODULE 8]: CSS IN ẤN SLIDE (MODE 2) - THUẬT TOÁN VECTOR SCALE */
+/* BẢO TOÀN 100% BỐ CỤC MÀN HÌNH - CHỐNG RỚT DÒNG & TRÀN TRANG  */
+/* ======================================================== */
 @media print { 
+  /* 1. KHAI BÁO KHỔ GIẤY A4 NGANG VÀ NỀN TRẮNG TUYỆT ĐỐI */
   @page { size: A4 landscape; margin: 0; }
   
-  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { display: none !important; }
-  
-  main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; flex: none !important; display: block !important; }
-  
-  body, html { background: white !important; color: black !important; font-size: 12pt !important; margin: 0 !important; padding: 0 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-  
-  .prose { max-width: 100% !important; }
-  .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
-  a { text-decoration: none !important; color: black !important; }
-  
-  /* ĐÈ BẸP MARGIN 3REM CỦA MODULE 7 KHI BẤM IN */
-  body.has-slide .slide-container { 
+  html, body, html body.has-slide { 
+    background: #ffffff !important; 
+    background-color: #ffffff !important; 
+    color: #000000 !important; 
     margin: 0 !important; 
-    box-shadow: none !important; 
-    border: none !important; 
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-    page-break-after: always !important;
-    break-after: page !important;
+    padding: 0 !important; 
+    width: 297mm !important;
+    height: 210mm !important;
+    -webkit-print-color-adjust: exact !important; 
+    print-color-adjust: exact !important; 
   }
   
-  body.has-slide .slide-container:last-of-type {
-    page-break-after: avoid !important;
-    break-after: avoid !important;
+  /* 2. DỌN RÁC GIAO DIỆN */
+  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
+  #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { 
+    display: none !important; 
+  }
+  
+  /* 3. MODE 1: BÀI HỌC BÌNH THƯỜNG */
+  body:not(.has-slide) main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; flex: none !important; display: block !important; }
+  body:not(.has-slide) .prose { max-width: 100% !important; }
+  body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
+  body:not(.has-slide) a { text-decoration: none !important; color: black !important; }
+  body:not(.has-slide) blockquote, body:not(.has-slide) details { break-inside: avoid !important; }
+  body:not(.has-slide) h2, body:not(.has-slide) h3 { break-after: avoid !important; }
+
+  /* 4. MODE 2: SLIDE PRO - CHUẨN VECTOR SCALE 1:1 (FIX TRIỆT ĐỂ LỖI TRÀN) */
+  
+  /* A. Dập phẳng 100% vỏ bọc Blogger (Xóa sạch 72px lề thừa) */
+  html body.has-slide .max-w-7xl, 
+  html body.has-slide .grid, 
+  html body.has-slide main, 
+  html body.has-slide article.post-content, 
+  html body.has-slide .prose, 
+  html body.has-slide #article-body-content,
+  html body.has-slide .lesson-container {
+    display: block !important; 
+    width: 100% !important; 
+    max-width: none !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+    border: none !important; 
+    box-shadow: none !important;
+    position: static !important;
+  }
+  
+  /* B. Xóa sạch margin rác do Tailwind/Prose bơm vào chữ khi in */
+  html body.has-slide .slide-container h1,
+  html body.has-slide .slide-container h2,
+  html body.has-slide .slide-container h3,
+  html body.has-slide .slide-container h4,
+  html body.has-slide .slide-container p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 
-  blockquote, details, .code-wrapper { break-inside: avoid !important; }
-  h2, h3 { break-after: avoid !important; }
+  /* C. Khóa cứng độ phân giải 1280x720px và Scale 81% vừa khít A4 */
+  html body.has-slide .slide-container { 
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    
+    /* Khóa chặt kích thước màn hình chuẩn 16:9 để KHÔNG BỊ RỚT DÒNG CHỮ */
+    width: 1280px !important; 
+    height: 720px !important; 
+    min-width: 1280px !important;
+    min-height: 720px !important;
+    
+    /* Co nhỏ nguyên khối Vector 81% để đặt vừa khít tờ A4 */
+    transform: scale(0.81) !important;
+    transform-origin: top left !important; 
+    
+    margin: 12mm 0 0 10mm !important; /* Căn giữa đúng tâm tờ giấy A4 */
+    border: none !important; 
+    border-radius: 0 !important; 
+    box-shadow: none !important;
+    background: #ffffff !important;
+    
+    page-break-inside: avoid !important; 
+    break-inside: avoid !important;
+    page-break-after: always !important; 
+    break-after: page !important;
+    box-sizing: border-box !important; 
+    overflow: hidden !important;
+  }
+  
+  /* D. Khử trang trắng dư thừa ở Slide cuối cùng */
+  html body.has-slide .slide-container:last-of-type {
+    page-break-after: avoid !important; 
+    break-after: auto !important;
+  }
 }
