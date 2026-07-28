@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     })();
 
-    // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE BẢN GỐC ---
+    // --- 8. SLIDE MODE ENGINE ---
     const slideElem = document.querySelector('.slide-container');
     if (slideElem) {
         document.body.classList.add('has-slide');
@@ -360,7 +360,6 @@ document.addEventListener("DOMContentLoaded", function() {
         
         const articleBodyForSlide = document.getElementById('article-body-content');
         if (articleBodyForSlide) {
-            // Lột bỏ hoàn toàn class prose để triệt hạ margin rác của Tailwind
             articleBodyForSlide.className = ''; 
             articleBodyForSlide.querySelectorAll('br').forEach(br => br.remove());
             articleBodyForSlide.innerHTML = articleBodyForSlide.innerHTML.replace(/&nbsp;/g, ' ');
