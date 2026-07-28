@@ -29,8 +29,13 @@ document.addEventListener("DOMContentLoaded", function() {
     // Font Size & Reading Time
     const articleBody = document.getElementById('article-body-content');
     if(articleBody) {
-        const words = articleBody.innerText.trim().split(/\s+/).length;
-        const rt = document.querySelector('.rt-val'); if(rt) rt.textContent = Math.ceil(words / 225) || 1;
+        // [FIX UX]: Thuật toán đếm chữ thông minh (loại trừ code, svg, style)
+        const clone = articleBody.cloneNode(true);
+        clone.querySelectorAll('svg, style, script, .code-wrapper').forEach(el => el.remove());
+        const words = (clone.innerText || '').trim().split(/\s+/).filter(w => w.length > 0).length;
+        
+        const rt = document.querySelector('.rt-val'); 
+        if(rt) rt.textContent = Math.ceil(words / 225) || 1;
         
         let currentFontSize = parseFloat(localStorage.getItem('edevx_font_size')) || 1.05;
         document.documentElement.style.setProperty('--article-font-size', currentFontSize + 'rem');
@@ -71,6 +76,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const dropdown = document.getElementById('search-dropdown');
         const resultsBox = document.getElementById('search-results');
         
+        // [FIX BẢO MẬT]: Hàm chống XSS (Cross-Site Scripting)
+        const escapeHTML = (str) => str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag]));
+
         searchInput.addEventListener('input', function() {
             clearTimeout(timeout); const query = this.value.trim();
             if(query.length === 0) { dropdown.classList.add('hidden'); return; }
@@ -82,7 +90,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         data.feed.entry.forEach(post => {
                             let link = post.link.find(l => l.rel === 'alternate')?.href || '#';
                             let thumb = post.media$thumbnail ? `<img src="${post.media$thumbnail.url}" class="w-10 h-10 object-cover rounded-md flex-shrink-0 border border-zinc-200 dark:border-zinc-700">` : `<div class="w-10 h-10 rounded-md bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center flex-shrink-0 border border-zinc-200 dark:border-zinc-700"><i class="fas fa-file-alt text-zinc-400"></i></div>`;
-                            resultsBox.innerHTML += `<a href="${link}" class="flex gap-3 items-center p-3 border-b border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition">${thumb}<span class="text-sm font-semibold text-zinc-800 dark:text-zinc-200 line-clamp-2">${post.title.$t}</span></a>`;
+                            
+                            // [ĐÃ FIX]: Sử dụng escapeHTML() bảo vệ post.title.$t
+                            resultsBox.innerHTML += `<a href="${link}" class="flex gap-3 items-center p-3 border-b border-zinc-100 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition">${thumb}<span class="text-sm font-semibold text-zinc-800 dark:text-zinc-200 line-clamp-2">${escapeHTML(post.title.$t)}</span></a>`;
                         });
                         resultsBox.innerHTML += `<a href="/search?q=${encodeURIComponent(query)}" class="block p-3 text-center text-sm font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 transition">Xem tất cả kết quả &rarr;</a>`;
                     } else { resultsBox.innerHTML = `<div class="p-4 text-center text-sm text-zinc-500">Không tìm thấy bài viết nào.</div>`; }
@@ -123,21 +133,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // --- 5. LAZY LOAD (KaTeX & PrismJS) ---
     function loadLazyCSS(href) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); }
+    const loadScript = (src) => new Promise(resolve => { const s = document.createElement('script'); s.src = src; s.onload = resolve; document.body.appendChild(s); });
+
     if (document.querySelector('pre')) {
         loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css');
-        const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js'; document.body.appendChild(s);
+        loadScript('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js');
     }
+    
     if (articleBody && (articleBody.innerText.includes('$$') || articleBody.innerText.includes('$'))) {
         loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css');
-        const k = document.createElement('script'); k.src = 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js';
-        k.onload = () => {
-            const r = document.createElement('script'); r.src = 'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js';
-            r.onload = () => {
-                document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
-                renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false });
-                if(tocContainer) setTimeout(() => tocbot.refresh(), 500);
-            }; document.body.appendChild(r);
-        }; document.body.appendChild(k);
+        (async () => {
+            await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
+            await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js');
+            
+            document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
+            renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false });
+            if(tocContainer) setTimeout(() => tocbot.refresh(), 500);
+        })();
     }
 
     // --- 6. EDTECH COMPONENTS (Global Event Delegation) ---
@@ -233,6 +245,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         let cacheTrans = { google: '', bing: '' };
+        let dictAbortController = null; // Thêm bộ điều khiển hủy API
+
         async function fetchBing(text, isVi) { try { const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${isVi?'vi':'en'}|${isVi?'en':'vi'}`); const data = await res.json(); return data?.responseData?.translatedText || "Lỗi máy chủ Bing"; } catch(e){ return "Lỗi kết nối Bing"; } }
 
         function updatePos(rect, isLong) {
@@ -243,31 +257,35 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         document.addEventListener('mouseup', async (e) => {
-            // Kiểm tra cả Nội dung, Tiêu đề, URL VÀ Nhãn (Labels) của bài viết Blogger
             const pageContent = (document.title + ' ' + window.location.href + ' ' + document.body.innerText.slice(0, 2000)).toLowerCase();
             const pageHTML = document.body.innerHTML.toLowerCase();
-
-            // Tự động kích hoạt từ điển nếu bài viết chứa Nhãn English, Tieng-Anh hoặc có từ khóa
-            const isEnglishArticle = 
-            pageContent.includes('english') || 
-            pageContent.includes('tiếng anh') || 
-            pageContent.includes('tieng anh') || 
-            pageHTML.includes('/search/label/english') || 
-            pageHTML.includes('/search/label/tieng-anh') ||
-            pageHTML.includes('/search/label/anh-van');
+            const isEnglishArticle = pageContent.includes('english') || pageContent.includes('tiếng anh') || pageContent.includes('tieng anh') || pageHTML.includes('/search/label/english') || pageHTML.includes('/search/label/tieng-anh') || pageHTML.includes('/search/label/anh-van');
 
             if (!isEnglishArticle) return;
             const sel = window.getSelection(); const text = sel.toString().trim();
-            if(!text || text.length < 2 || popover.contains(e.target)) { if(!popover.contains(e.target)) { popover.classList.add('hidden'); if(window.currentOxfordAudio)window.currentOxfordAudio.pause(); window.speechSynthesis.cancel(); } return; }
+            if(!text || text.length < 2 || popover.contains(e.target)) { 
+                if(!popover.contains(e.target)) { 
+                    popover.classList.add('hidden'); 
+                    if(window.currentOxfordAudio)window.currentOxfordAudio.pause(); 
+                    window.speechSynthesis.cancel(); 
+                    if(dictAbortController) dictAbortController.abort(); // Hủy API khi click ra ngoài
+                } 
+                return; 
+            }
             const rect = sel.getRangeAt(0).getBoundingClientRect(); const isLong = text.split(/\s+/).length > 3; const isVi = isVietnamese(text);
             popover.innerHTML = `<div class="flex items-center justify-center gap-2.5 text-zinc-500 p-3 text-[14px] font-medium animate-pulse"><i class="fas fa-circle-notch fa-spin text-blue-600"></i> Đang dịch...</div>`;
             popover.classList.remove('hidden'); updatePos(rect, isLong);
 
+            // FIX RACE CONDITION
+            if (dictAbortController) dictAbortController.abort();
+            dictAbortController = new AbortController();
+            const signal = dictAbortController.signal;
+
             try {
                 const [gtRes, jsonDictRes, enDictRes] = await Promise.all([
-                    fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${isVi?'vi':'en'}&tl=${isVi?'en':'vi'}&dt=t&dt=bd&q=${encodeURIComponent(text)}`),
-                    (!isLong && !isVi) ? fetch(`https://dict.minhqnd.com/api/v1/lookup?word=${encodeURIComponent(text.toLowerCase())}`).then(r=>r.ok?r.json():null).catch(()=>null) : null,
-                    (!isLong && !isVi) ? fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(text.toLowerCase())}`).then(r=>r.ok?r.json():null).catch(()=>null) : null
+                    fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${isVi?'vi':'en'}&tl=${isVi?'en':'vi'}&dt=t&dt=bd&q=${encodeURIComponent(text)}`, { signal }),
+                    (!isLong && !isVi) ? fetch(`https://dict.minhqnd.com/api/v1/lookup?word=${encodeURIComponent(text.toLowerCase())}`, { signal }).then(r=>r.ok?r.json():null).catch(()=>null) : null,
+                    (!isLong && !isVi) ? fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(text.toLowerCase())}`, { signal }).then(r=>r.ok?r.json():null).catch(()=>null) : null
                 ]);
                 const gtData = await gtRes.json(); cacheTrans.google = gtData[0] ? gtData[0].map(i=>i[0]?i[0]:'').join('') : ''; cacheTrans.bing = '';
                 let ipaText = ''; let htmlVi = ''; let htmlEn = '';
@@ -317,7 +335,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 setTimeout(() => updatePos(rect, isLong), 10);
                 popover.querySelectorAll('.pop-speak-btn').forEach(btn => btn.onclick = (e) => { e.stopPropagation(); playPremiumAudio(isVi?cacheTrans.google:text, btn.getAttribute('data-lang')); });
-            } catch(e) { popover.classList.add('hidden'); console.error(e); }
+            } catch(e) { 
+                if (e.name === 'AbortError') return; 
+                popover.classList.add('hidden'); console.error(e); 
+            }
         });
         document.addEventListener('mousedown', (e) => { if(!popover.contains(e.target)) { popover.classList.add('hidden'); if(window.currentOxfordAudio)window.currentOxfordAudio.pause(); window.speechSynthesis.cancel(); } });
         
@@ -344,6 +365,4 @@ document.addEventListener("DOMContentLoaded", function() {
             articleBodyForSlide.innerHTML = articleBodyForSlide.innerHTML.replace(/&nbsp;/g, ' ');
         }
     }
-
-    // --- 8. PHỤC HỒI ĐỘNG CƠ XỬ LÝ SLIDE MODE BẢN GỐC ---
 });
