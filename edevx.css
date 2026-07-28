@@ -114,15 +114,43 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
 
 /* 8. IN ẤN A4 (@media print) */
 @media print {
-  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, #comments, .js-toc, #back-to-top, #open-toc-mobile { display: none !important; }
+  /* Ẩn rác giao diện */
+  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor { display: none !important; }
+  
+  /* Cấu hình in bài viết bình thường */
   main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; flex: none !important; }
-  body { background: white !important; color: black !important; font-size: 12pt !important; }
+  body { background: white !important; color: black !important; font-size: 12pt !important; margin: 0 !important; padding: 0 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
   .prose { max-width: 100% !important; }
   .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
   a { text-decoration: none !important; color: black !important; }
-  body.has-slide .slide-container { margin: 0 !important; box-shadow: none !important; border: 1px solid #ccc; break-inside: avoid; }
   blockquote, details, .code-wrapper { break-inside: avoid !important; }
   h2, h3 { break-after: avoid !important; }
+  
+  /* ======================================================== */
+  /* FIX LỖI 44 TRANG: ÉP KHUNG CHUẨN CHO TẤT CẢ SLIDE CŨ & MỚI */
+  /* ======================================================== */
+  body.has-slide .slide-container, 
+  .slide-container { 
+    width: 297mm !important; 
+    height: 210mm !important; 
+    margin: 0 !important; /* Ghi đè tuyệt đối margin 3rem gây lỗi nhảy trang */
+    padding: 16mm 20mm !important; 
+    border: none !important; 
+    border-radius: 0 !important; 
+    box-shadow: none !important;
+    page-break-inside: avoid !important; 
+    break-inside: avoid !important;
+    page-break-after: always !important; 
+    break-after: page !important;
+    box-sizing: border-box !important; 
+    overflow: hidden !important;
+  }
+  
+  /* Khử trang trắng dư thừa ở Slide cuối cùng */
+  body.has-slide .slide-container:last-of-type, 
+  .slide-container:last-of-type {
+    page-break-after: auto !important; 
+    break-after: auto !important;
+  }
 }
 
-/* 8. IN ẤN A4 (@media print) */
