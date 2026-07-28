@@ -113,38 +113,35 @@ body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content li, bod
 body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content video, body:not(.has-slide) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
 
 /* ======================================================== */
-/* 8. IN ẤN A4 (@media print) - BẢN TRẢ PHẲNG TUYỆT ĐỐI     */
+/* 8. IN ẤN A4 (@media print) - MASTER ENGINE               */
 /* ======================================================== */
 @media print {
-  /* 1. ẨN TOÀN BỘ UI THỪA */
-  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
-  #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor { 
-    display: none !important; 
-  }
-
-  /* 2. TIÊU DIỆT NỀN ĐEN CỦA BODY SLIDE */
+  /* 1. XÓA BỎ NỀN ĐEN BÁM ĐUÔI */
   html, body, body.has-slide { 
     background: #ffffff !important; 
+    background-color: #ffffff !important; 
     color: #000000 !important;
-    margin: 0 !important; 
-    padding: 0 !important; 
-    height: auto !important;
-    min-height: auto !important;
     -webkit-print-color-adjust: exact !important; 
     print-color-adjust: exact !important; 
   }
 
-  /* 3. TRẢ PHẲNG MỌI LỚP BAO BỌC CỦA BLOGGER (THỦ PHẠM GÂY 44 TRANG) */
-  /* Gỡ bỏ hoàn toàn Grid, Padding, Margin của các thẻ cha */
+  /* 2. ẨN RÁC GIAO DIỆN BLOGGER */
+  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
+  #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor,
+  .post-header { display: none !important; }
+
+  /* 3. DẬP PHẲNG TOÀN BỘ ÁO KHOÁC CỦA BLOGGER (FIX LỖI 44 TRANG) */
+  /* Tiền tố body.has-slide giúp đoạn CSS này có sức mạnh tuyệt đối */
   body.has-slide .max-w-7xl, 
   body.has-slide .grid, 
   body.has-slide main, 
   body.has-slide article.post-content, 
   body.has-slide .prose, 
-  body.has-slide #article-body-content {
+  body.has-slide #article-body-content,
+  body.has-slide .lesson-container {
     display: block !important; 
     width: 100% !important; 
-    max-width: 100% !important; 
+    max-width: none !important; 
     margin: 0 !important; 
     padding: 0 !important; 
     border: none !important; 
@@ -152,12 +149,12 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     position: static !important;
   }
 
-  /* 4. ÉP KÍCH THƯỚC SLIDE CHUẨN A4 LANDSCAPE */
+  /* 4. ÉP KHUÔN GIẤY A4 LANDSCAPE CHO TỪNG SLIDE */
   body.has-slide .slide-container { 
-    display: flex !important; /* Giữ cấu trúc bên trong Slide */
+    display: flex !important; 
     width: 297mm !important; 
     height: 210mm !important; 
-    max-height: 210mm !important; /* Khóa cứng chiều cao */
+    max-height: 210mm !important; 
     margin: 0 !important; 
     padding: 16mm 20mm !important; 
     border: none !important; 
@@ -165,7 +162,6 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     box-shadow: none !important;
     background: #ffffff !important;
     
-    /* Lệnh cắt trang cứng rắn nhất */
     page-break-inside: avoid !important; 
     break-inside: avoid !important;
     page-break-after: always !important; 
@@ -174,13 +170,12 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     overflow: hidden !important;
   }
   
-  /* Khử trang trắng dư thừa ở Slide cuối cùng */
   body.has-slide .slide-container:last-of-type {
-    page-break-after: avoid !important; 
-    break-after: avoid !important;
+    page-break-after: auto !important; 
+    break-after: auto !important;
   }
 
-  /* 5. DÀNH CHO BÀI VIẾT BÌNH THƯỜNG (MODE 1) */
+  /* 5. DÀNH CHO IN BÀI VIẾT BÌNH THƯỜNG (MODE 1) */
   body:not(.has-slide) main.lg\:col-span-9 { width: 100% !important; flex: none !important; display: block !important; }
   body:not(.has-slide) .prose { max-width: 100% !important; }
   body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
