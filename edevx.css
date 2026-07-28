@@ -121,6 +121,15 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   /* 1. KÍCH THƯỚC GIẤY CHUẨN A4 VÀ NỀN TRẮNG TUYỆT ĐỐI */
   @page { size: A4 landscape; margin: 0; }
   
+  /* TEST CDN: BƠM MÀU HỒNG VÀO NỀN IN ẤN */
+  html, body, body.has-slide { 
+    background-color: pink !important; /* <--- Chỗ này đây sếp! */
+    margin: 0 !important; 
+    padding: 0 !important; 
+    -webkit-print-color-adjust: exact !important; 
+    print-color-adjust: exact !important; 
+  }
+
   html, body, html body.has-slide { 
     width: 297mm !important; /* Khóa bề ngang trang in */
     height: 210mm !important;
