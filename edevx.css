@@ -115,14 +115,16 @@ body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content li, bod
 body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content video, body:not(.has-slide) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
 
 
-/* ========================================== */
-/* 8. IN ẤN ĐỀ THI / GIÁO ÁN (CHỈ CHẠY KHI BẤM IN) */
-/* ========================================== */
+/* ======================================================== */
+/* [MODULE 8]: CSS IN ẤN SLIDE (MODE 2) - BẢN DIỆT LỖI TRÀN  */
+/* Nén ép nốt các Slide siêu nhồi nhét chữ & SVG (Zoom 78%)  */
+/* ======================================================== */
 @media print { 
-  /* 1. KHAI BÁO KHỔ GIẤY VÀ NỀN TRẮNG TUYỆT ĐỐI */
+  /* 1. KHỔ GIẤY A4 NGANG & NỀN TRẮNG TUYỆT ĐỐI */
   @page { size: A4 landscape; margin: 0; }
   html body, html body.has-slide { 
     background: #ffffff !important; 
+    background-color: #ffffff !important; 
     color: #000000 !important; 
     margin: 0 !important; 
     padding: 0 !important; 
@@ -136,7 +138,7 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     display: none !important; 
   }
   
-  /* 3. MODE 1: BÀI HỌC BÌNH THƯỜNG */
+  /* 3. DÀNH CHO BÀI HỌC BÌNH THƯỜNG (MODE 1) */
   body:not(.has-slide) main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; flex: none !important; display: block !important; }
   body:not(.has-slide) .prose { max-width: 100% !important; }
   body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
@@ -144,7 +146,9 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   body:not(.has-slide) blockquote, body:not(.has-slide) details { break-inside: avoid !important; }
   body:not(.has-slide) h2, body:not(.has-slide) h3 { break-after: avoid !important; }
 
-  /* 4. MODE 2: SLIDE PRO (CHỈ DỌN LỀ KHI IN) */
+  /* 4. DÀNH CHO SLIDE (MODE 2) - TIÊU DIỆT LỖI TRÀN CHÂN TRANG */
+  
+  /* A. Dập phẳng hoàn toàn vỏ bọc Blogger */
   html body.has-slide .max-w-7xl, 
   html body.has-slide .grid, 
   html body.has-slide main, 
@@ -162,32 +166,23 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     position: static !important;
   }
   
-  /* Dọn sạch margin rác của tiêu đề chữ ĐỂ KHÔNG ĐÈ LÊN THẺ khi in */
-  html body.has-slide .slide-container h1,
-  html body.has-slide .slide-container h2,
-  html body.has-slide .slide-container h3,
-  html body.has-slide .slide-container h4,
-  html body.has-slide .slide-container p {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-
-  /* Khóa cứng kích thước A4 & Thu nhỏ 85% ĐỂ KHÔNG XÉN CHÂN TRANG khi in */
+  /* B. Ép khung Slide A4 + Zoom 78% (Tỷ lệ vàng chống tràn) */
   html body.has-slide .slide-container { 
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    width: 297mm !important; 
-    height: 210mm !important; 
+    width: 297mm !important;  /* Đúng bề ngang A4 */
+    height: 210mm !important; /* Đúng chiều cao A4 */
     max-height: 210mm !important; 
     margin: 0 !important; 
-    padding: 8mm 12mm !important; 
+    padding: 6mm 10mm !important; 
     border: none !important; 
     border-radius: 0 !important; 
     box-shadow: none !important;
     background: #ffffff !important;
     
-    zoom: 0.85 !important;
+    /* BẢO BỐI TỶ LỆ VÀNG 78%: Co gọn mọi Slide dày đặc chữ vào vừa khít A4 */
+    zoom: 0.78 !important;
     
     page-break-inside: avoid !important; 
     break-inside: avoid !important;
@@ -196,9 +191,28 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     box-sizing: border-box !important; 
     overflow: hidden !important;
   }
+
+  /* C. NÉN ÉP KHOẢNG CÁCH TAILWIND CỦA CÁC SLIDE DÀY ĐẶC NỘI DUNG/CARD/SVG */
+  html body.has-slide .slide-container .space-y-8 > * + * { margin-top: 0.4rem !important; }
+  html body.has-slide .slide-container .space-y-6 > * + * { margin-top: 0.3rem !important; }
+  html body.has-slide .slide-container .space-y-5 > * + * { margin-top: 0.25rem !important; }
+  html body.has-slide .slide-container .gap-10 { gap: 0.5rem !important; }
+  html body.has-slide .slide-container .gap-8 { gap: 0.5rem !important; }
+  html body.has-slide .slide-container .gap-6 { gap: 0.4rem !important; }
+  html body.has-slide .slide-container .p-8,
+  html body.has-slide .slide-container .p-7,
+  html body.has-slide .slide-container .p-6 { padding: 0.5rem !important; }
+  html body.has-slide .slide-container .mb-8,
+  html body.has-slide .slide-container .mb-6 { margin-bottom: 0.3rem !important; }
   
+  /* Nén chiều cao hình vẽ SVG & Font chữ khi in */
+  html body.has-slide .slide-container svg { max-height: 110px !important; width: auto !important; margin: 0 auto !important; }
+  html body.has-slide .slide-container h2 { font-size: 1.4rem !important; line-height: 1.7rem !important; }
+  html body.has-slide .slide-container p { font-size: 0.88rem !important; line-height: 1.25rem !important; }
+
+  /* D. Khử trang trắng dư thừa ở Slide cuối cùng */
   html body.has-slide .slide-container:last-of-type {
     page-break-after: avoid !important; 
-    break-after: auto !important;
+    break-after: avoid !important;
   }
 }
