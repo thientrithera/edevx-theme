@@ -243,8 +243,20 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         document.addEventListener('mouseup', async (e) => {
-            const fText = (document.title + ' ' + window.location.href + ' ' + document.body.innerText.slice(0, 1500)).toLowerCase();
-            if(!(fText.includes('english') || fText.includes('tiếng anh') || fText.includes('tieng anh'))) return;
+            // Kiểm tra cả Nội dung, Tiêu đề, URL VÀ Nhãn (Labels) của bài viết Blogger
+            const pageContent = (document.title + ' ' + window.location.href + ' ' + document.body.innerText.slice(0, 2000)).toLowerCase();
+            const pageHTML = document.body.innerHTML.toLowerCase();
+
+            // Tự động kích hoạt từ điển nếu bài viết chứa Nhãn English, Tieng-Anh hoặc có từ khóa
+            const isEnglishArticle = 
+            pageContent.includes('english') || 
+            pageContent.includes('tiếng anh') || 
+            pageContent.includes('tieng anh') || 
+            pageHTML.includes('/search/label/english') || 
+            pageHTML.includes('/search/label/tieng-anh') ||
+            pageHTML.includes('/search/label/anh-van');
+
+            if (!isEnglishArticle) return;
             const sel = window.getSelection(); const text = sel.toString().trim();
             if(!text || text.length < 2 || popover.contains(e.target)) { if(!popover.contains(e.target)) { popover.classList.add('hidden'); if(window.currentOxfordAudio)window.currentOxfordAudio.pause(); window.speechSynthesis.cancel(); } return; }
             const rect = sel.getRangeAt(0).getBoundingClientRect(); const isLong = text.split(/\s+/).length > 3; const isVi = isVietnamese(text);
