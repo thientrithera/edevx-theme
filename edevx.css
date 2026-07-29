@@ -117,17 +117,15 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
 /* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (SMART DUAL-MODE)  */
 /* ======================================================== */
 @media print { 
-  /* 1. KÍCH THƯỚC GIẤY CƠ BẢN (Người dùng tự chọn Hướng ngang/dọc lúc in) */
+  /* 1. CÀI ĐẶT CHUNG CHO TOÀN BỘ WEBSITE */
   @page { margin: 0 !important; }
   
-  /* 2. CÀI ĐẶT NỀN CHUNG */
   html, body { 
     background: #ffffff !important; 
     -webkit-print-color-adjust: exact !important; 
     print-color-adjust: exact !important; 
   }
   
-  /* 3. ẨN RÁC GIAO DIỆN BLOGGER (Áp dụng chung) */
   header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
   #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { 
     display: none !important; 
@@ -136,24 +134,20 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   /* ======================================================== */
   /* 🟢 MODE 1: BÀI HỌC BÌNH THƯỜNG TRÊN BLOG                 */
   /* ======================================================== */
-  /* Cứu bài học dài: Cho phép chảy dọc, trả lại lề giấy vì @page đang margin 0 */
   body:not(.has-slide) { height: auto !important; width: auto !important; padding: 15mm !important; }
   
   body:not(.has-slide) .max-w-7xl, body:not(.has-slide) main, body:not(.has-slide) article.post-content, body:not(.has-slide) .prose, body:not(.has-slide) #article-body-content, body:not(.has-slide) .lesson-container {
     display: block !important; width: 100% !important; max-width: 100% !important; 
-    padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important;
+    padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important; background: #ffffff !important;
   }
 
-  /* Chống cắt đôi dòng/hình khi sang trang */
   body:not(.has-slide) h2, body:not(.has-slide) h3 { page-break-after: avoid !important; break-after: avoid !important; }
   body:not(.has-slide) img, body:not(.has-slide) svg, body:not(.has-slide) .quiz-container, body:not(.has-slide) .code-wrapper { page-break-inside: avoid !important; break-inside: avoid !important; }
 
-  /* BẢN GỐC CỦA SẾP (Mode 1) */
   body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
   body:not(.has-slide) a { text-decoration: none !important; color: black !important; }
   body:not(.has-slide) blockquote, body:not(.has-slide) details { break-inside: avoid !important; }
 
-  /* [FIX FLASHCARD CỦA SẾP]: Ép 3D thành 2D phẳng, chống ngược chữ */
   body:not(.has-slide) .flashcard-wrapper { perspective: none !important; height: auto !important; page-break-inside: avoid !important; break-inside: avoid !important; }
   body:not(.has-slide) .flashcard-inner { transform: none !important; transform-style: flat !important; height: auto !important; }
   body:not(.has-slide) .flashcard-front, body:not(.has-slide) .flashcard-back { position: static !important; transform: none !important; backface-visibility: visible !important; height: auto !important; padding: 1rem !important; box-shadow: none !important; }
@@ -163,16 +157,19 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
 
 
   /* ======================================================== */
-  /* 🟣 MODE 2: TRÌNH CHIẾU SLIDE 16:9 (BẢN BẤT TỬ CỦA SẾP)   */
+  /* 🟣 MODE 2: TRÌNH CHIẾU SLIDE 16:9 (BẢN BẤT TỬ)           */
   /* ======================================================== */
+  
+  /* [ĐÃ FIX LỖI DẢI ĐEN]: Cho phép height tự động kéo dài theo số lượng Slide */
   body.has-slide { 
-    width: 297mm !important; height: 210mm !important; 
-    padding: 0 !important; margin: 0 !important;
+    width: auto !important; height: auto !important; 
+    padding: 0 !important; margin: 0 !important; background: #ffffff !important;
   }
   
-  body.has-slide .max-w-7xl, body.has-slide main, body.has-slide article.post-content, body.has-slide .prose, body.has-slide #article-body-content, body.has-slide .lesson-container {
-    display: block !important; width: 100% !important; max-width: 100% !important; 
-    padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important;
+  /* Quét sơn trắng toàn bộ các lớp đệm của Blogger để chống lem màu */
+  body.has-slide .max-w-7xl, body.has-slide .max-w-7xl > .grid, body.has-slide main, body.has-slide article.post-content, body.has-slide .prose, body.has-slide #article-body-content, body.has-slide .lesson-container {
+    display: block !important; width: 100% !important; max-width: 100% !important; height: auto !important;
+    padding: 0 !important; margin: 0 !important; gap: 0 !important; border: none !important; box-shadow: none !important; background: #ffffff !important;
   }
 
   body.has-slide #article-body-content > *:not(.slide-container) { display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
@@ -187,7 +184,7 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
 
   body.has-slide .slide-container { 
     width: 297mm !important; height: 210mm !important; max-width: 297mm !important; max-height: 210mm !important;
-    margin: 0 auto !important; padding: 14mm 20mm !important; transform: none !important;
+    margin: 0 auto !important; padding: 14mm 20mm !important; transform: none !important; background: #ffffff !important;
     page-break-inside: avoid !important; break-inside: avoid !important; page-break-after: always !important; break-after: page !important;
     overflow: hidden !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;
     border: none !important; border-radius: 0 !important; box-shadow: none !important; box-sizing: border-box !important; 
