@@ -228,56 +228,46 @@ body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content li, bod
 body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content video, body:not(.has-slide) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
 
 /* ======================================================== */
-/* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (A4 LANDSCAPE)    */
-/* PHIÊN BẢN NATIVE A4 (CHUẨN XÁC TỪ MÃ NGUỒN CỦA SẾP)     */
+/* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (SMART DUAL-MODE)  */
 /* ======================================================== */
 @media print { 
-  /* 1. KÍCH THƯỚC GIẤY CHUẨN A4 VÀ ẨN RÁC */
-  @page { size: 297mm 210mm; margin: 0 !important; }
-  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
-  #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { display: none !important; }
-
-  /* ======================================================== */
-  /* 🟢 MODE 1: BÀI HỌC BÌNH THƯỜNG TRÊN BLOG                 */
-  /* ======================================================== */
-  body:not(.has-slide) { 
-    background: #ffffff !important; width: 100% !important; height: auto !important; padding: 15mm !important;
-    -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; 
+  /* 1. KÍCH THƯỚC GIẤY VÀ NỀN CHUNG */
+  /* [ĐÃ FIX]: Bỏ size cố định để Mode 1 in dọc được, Mode 2 sếp tự chọn ngang lúc in */
+  @page { margin: 0 !important; }
+  
+  html, body { 
+    background: #ffffff !important; 
+    -webkit-print-color-adjust: exact !important; 
+    print-color-adjust: exact !important; 
   }
+  
+  /* 2. ẨN MỌI RÁC GIAO DIỆN BLOGGER */
+  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
+  #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { 
+    display: none !important; 
+  }
+
+  /* ===================================================================== */
+  /* 🟢 BỔ SUNG CHO BÀI HỌC BÌNH THƯỜNG TRÊN BLOG (MODE 1)                 */
+  /* ===================================================================== */
+  /* Mở khóa chiều cao để chữ chảy dọc nhiều trang */
+  body:not(.has-slide) { height: auto !important; width: 100% !important; padding: 15mm !important; }
   
   body:not(.has-slide) .max-w-7xl, body:not(.has-slide) main, body:not(.has-slide) article.post-content, body:not(.has-slide) .prose, body:not(.has-slide) #article-body-content, body:not(.has-slide) .lesson-container {
     display: block !important; width: 100% !important; max-width: none !important; 
-    padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important; background: #ffffff !important;
+    padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important;
   }
 
-  /* -------------------------------------------------------- */
-  /* [ĐÃ FIX NGẮT TRANG]: CHỐNG CẮT ĐÔI KHỐI NỘI DUNG         */
-  /* -------------------------------------------------------- */
-  /* Tiêu đề không được nằm chỏng chơ ở cuối trang */
-  body:not(.has-slide) h2, 
-  body:not(.has-slide) h3 { 
-    page-break-after: avoid !important; break-after: avoid !important; 
-  }
-  
-  /* Các khối Đồ họa, List, Quote, và BẤT KỲ KHỐI BOX NÀO CỦA BÀI HỌC đều không được cắt đôi */
-  body:not(.has-slide) img, 
-  body:not(.has-slide) svg, 
-  body:not(.has-slide) li, 
-  body:not(.has-slide) blockquote, 
-  body:not(.has-slide) details,
-  body:not(.has-slide) .quiz-container, 
-  body:not(.has-slide) .code-wrapper,
-  body:not(.has-slide) .lesson-container > div, 
-  body:not(.has-slide) .prose > div { 
+  /* CHỐNG CẮT ĐÔI KHỐI NỘI DUNG */
+  body:not(.has-slide) h2, body:not(.has-slide) h3 { page-break-after: avoid !important; break-after: avoid !important; }
+  body:not(.has-slide) img, body:not(.has-slide) svg, body:not(.has-slide) li, body:not(.has-slide) blockquote, body:not(.has-slide) details, body:not(.has-slide) .quiz-container, body:not(.has-slide) .code-wrapper, body:not(.has-slide) .lesson-container > div, body:not(.has-slide) .prose > div { 
     page-break-inside: avoid !important; break-inside: avoid !important; 
   }
 
-  body:not(.has-slide) .code-wrapper { border: 1px solid #ccc; background: transparent; }
+  body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
   body:not(.has-slide) a { text-decoration: none !important; color: black !important; }
 
-  /* -------------------------------------------------------- */
-  /* Ép 3D thành 2D phẳng, chống ngược chữ cho Flashcard      */
-  /* -------------------------------------------------------- */
+  /* Ép 3D thành 2D phẳng, chống ngược chữ cho Flashcard */
   body:not(.has-slide) .flashcard-wrapper { perspective: none !important; height: auto !important; page-break-inside: avoid !important; break-inside: avoid !important; }
   body:not(.has-slide) .flashcard-inner { transform: none !important; transform-style: flat !important; height: auto !important; }
   body:not(.has-slide) .flashcard-front, body:not(.has-slide) .flashcard-back { position: static !important; transform: none !important; backface-visibility: visible !important; height: auto !important; padding: 1rem !important; box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
@@ -285,31 +275,25 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   body:not(.has-slide) .flashcard-back { border-radius: 0 0 1rem 1rem !important; border-top: none !important; }
   body:not(.has-slide) .speak-btn { display: none !important; }
 
-  /* ===================================================================== */
-  /* 🟣 DÀNH CHO SLIDE MODE (GIỮ NGUYÊN 100% CODE GỐC CỦA SẾP)             */
-  /* Khóa cứng chiều cao 210mm chống dải đen, giữ nguyên padding lề đẹp    */
-  /* ===================================================================== */
-  
-  body.has-slide { 
-    width: 297mm !important;
-    height: 210mm !important;
-    background: #ffffff !important; 
-    margin: 0 !important; 
-    padding: 0 !important; 
-    -webkit-print-color-adjust: exact !important; 
-    print-color-adjust: exact !important; 
-  }
 
+  /* ===================================================================== */
+  /* 🟣 SLIDE MODE (BẢN GỐC CỦA SẾP - GIỮ NGUYÊN 100%)                     */
+  /* ===================================================================== */
+  body.has-slide { 
+    width: 297mm !important; height: 210mm !important; margin: 0 !important; padding: 0 !important;
+  }
+  
   body.has-slide .max-w-7xl, body.has-slide main, body.has-slide article.post-content, body.has-slide .prose, body.has-slide #article-body-content, body.has-slide .lesson-container {
-    display: block !important; 
-    width: 100% !important; max-width: 100% !important; 
+    display: block !important; width: 100% !important; max-width: 100% !important; 
     padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important;
   }
 
-  body.has-slide #article-body-content > *:not(.slide-container) {
+  /* [ĐÃ FIX LỖI TEXT TÀNG HÌNH]: Xóa dấu > để diệt sạch mọi rác Blogger đẻ ra */
+  body.has-slide #article-body-content *:not(.slide-container):not(.slide-container *) {
     display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important;
   }
 
+  /* Khóa Grid */
   body.has-slide .grid { display: grid !important; }
   body.has-slide .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   body.has-slide .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
@@ -318,36 +302,16 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   body.has-slide .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
   body.has-slide .flex-wrap { flex-wrap: nowrap !important; }
 
+  /* BẢN GỐC ÉP A4 LANDSCAPE */
   body.has-slide .slide-container { 
-    width: 297mm !important; 
-    height: 210mm !important; 
-    max-width: 297mm !important;
-    max-height: 210mm !important;
-    margin: 0 auto !important; 
-    padding: 14mm 20mm !important;
-    
-    transform: none !important;
-    
-    page-break-inside: avoid !important; 
-    break-inside: avoid !important;
-    page-break-after: always !important; 
-    break-after: page !important;
-    
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    
-    border: none !important; 
-    border-radius: 0 !important; 
-    box-shadow: none !important;
-    box-sizing: border-box !important; 
+    width: 297mm !important; height: 210mm !important; max-width: 297mm !important; max-height: 210mm !important;
+    margin: 0 auto !important; padding: 14mm 20mm !important; transform: none !important;
+    page-break-inside: avoid !important; break-inside: avoid !important; page-break-after: always !important; break-after: page !important;
+    overflow: hidden !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;
+    border: none !important; border-radius: 0 !important; box-shadow: none !important; box-sizing: border-box !important; 
   }
   
-  body.has-slide .slide-container:last-of-type,
-  body.has-slide .slide-container:last-child { 
-    page-break-after: auto !important; 
-    break-after: auto !important; 
+  body.has-slide .slide-container:last-of-type, body.has-slide .slide-container:last-child { 
+    page-break-after: auto !important; break-after: auto !important; 
   }
 }
-
