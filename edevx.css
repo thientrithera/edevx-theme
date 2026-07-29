@@ -115,6 +115,7 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
 
 /* ======================================================== */
 /* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (SMART DUAL-MODE)  */
+/* BẢN CHỐT CUỐI: TRÀN VIỀN - CHỐNG DẢI ĐEN - PHẲNG FLASHCARD */
 /* ======================================================== */
 @media print { 
   /* 1. CÀI ĐẶT CHUNG CHO TOÀN BỘ WEBSITE */
@@ -148,6 +149,7 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   body:not(.has-slide) a { text-decoration: none !important; color: black !important; }
   body:not(.has-slide) blockquote, body:not(.has-slide) details { break-inside: avoid !important; }
 
+  /* Ép 3D thành 2D phẳng, chống ngược chữ cho Flashcard */
   body:not(.has-slide) .flashcard-wrapper { perspective: none !important; height: auto !important; page-break-inside: avoid !important; break-inside: avoid !important; }
   body:not(.has-slide) .flashcard-inner { transform: none !important; transform-style: flat !important; height: auto !important; }
   body:not(.has-slide) .flashcard-front, body:not(.has-slide) .flashcard-back { position: static !important; transform: none !important; backface-visibility: visible !important; height: auto !important; padding: 1rem !important; box-shadow: none !important; }
@@ -160,7 +162,7 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   /* 🟣 MODE 2: TRÌNH CHIẾU SLIDE 16:9 (BẢN BẤT TỬ)           */
   /* ======================================================== */
   
-  /* [ĐÃ FIX LỖI DẢI ĐEN]: Cho phép height tự động kéo dài theo số lượng Slide */
+  /* Cho phép height tự động kéo dài theo số lượng Slide để chống dải màu đen */
   body.has-slide { 
     width: auto !important; height: auto !important; 
     padding: 0 !important; margin: 0 !important; background: #ffffff !important;
@@ -172,8 +174,10 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     padding: 0 !important; margin: 0 !important; gap: 0 !important; border: none !important; box-shadow: none !important; background: #ffffff !important;
   }
 
+  /* Ẩn rác HTML thừa của Blogger sinh ra chống trang trắng đầu tiên */
   body.has-slide #article-body-content > *:not(.slide-container) { display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
 
+  /* Khóa cứng cột Grid Tailwind */
   body.has-slide .grid { display: grid !important; }
   body.has-slide .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   body.has-slide .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
@@ -182,14 +186,21 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   body.has-slide .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
   body.has-slide .flex-wrap { flex-wrap: nowrap !important; }
 
+  /* ÉP KHUNG SLIDE TRÀN VIỀN */
   body.has-slide .slide-container { 
     width: 297mm !important; height: 210mm !important; max-width: 297mm !important; max-height: 210mm !important;
-    margin: 0 auto !important; padding: 14mm 20mm !important; transform: none !important; background: #ffffff !important;
+    margin: 0 auto !important; 
+    
+    /* Gọt lề nhỏ lại cho Slide bung tỏa to hơn */
+    padding: 8mm 12mm !important; 
+    
+    transform: none !important; background: #ffffff !important;
     page-break-inside: avoid !important; break-inside: avoid !important; page-break-after: always !important; break-after: page !important;
     overflow: hidden !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;
     border: none !important; border-radius: 0 !important; box-shadow: none !important; box-sizing: border-box !important; 
   }
   
+  /* Xử lý ngắt trang mượt mà */
   body.has-slide .slide-container:first-of-type { page-break-before: avoid !important; }
   body.has-slide .slide-container:last-of-type, body.has-slide .slide-container:last-child { page-break-after: auto !important; break-after: auto !important; }
 }
