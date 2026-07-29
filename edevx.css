@@ -162,7 +162,7 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   /* Đảm bảo Flexbox không bị tràn dòng */
   body.has-slide .flex-wrap { flex-wrap: nowrap !important; }
 
-  /* ================================================= */
+/* ================================================= */
   /* 6. BẢN GỐC CỦA SẾP: ÉP VỪA KHÍT A4 LANDSCAPE      */
   /* ================================================= */
   body.has-slide .slide-container { 
@@ -170,18 +170,18 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     height: 210mm !important; 
     max-width: 297mm !important;
     max-height: 210mm !important;
-    margin: 0 !important; 
-    padding: 14mm 20mm !important; /* Padding chuẩn của sếp */
+    margin: 0 auto !important; 
+    padding: 14mm 20mm !important;
     
-    transform: none !important; /* Xóa bỏ lệnh scale rác */
+    transform: none !important;
     
-    page-break-before: always !important;
-    page-break-after: always !important; 
+    /* [ĐÃ FIX]: Chỉ dùng Break-After, tuyệt đối KHÔNG dùng Break-Before */
     page-break-inside: avoid !important; 
     break-inside: avoid !important;
-    overflow: hidden !important;
+    page-break-after: always !important; 
+    break-after: page !important;
     
-    /* Ép Flexbox giữ nguyên bố cục Header - Body - Footer */
+    overflow: hidden !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
@@ -192,9 +192,12 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     box-sizing: border-box !important; 
   }
   
-  /* Khử trang trắng đầu tiên và cuối cùng */
-  body.has-slide .slide-container:first-of-type { page-break-before: avoid !important; }
-  body.has-slide .slide-container:last-of-type { page-break-after: auto !important; break-after: auto !important; }
+  /* Khử trang trắng cuối cùng */
+  body.has-slide .slide-container:last-of-type,
+  body.has-slide .slide-container:last-child { 
+    page-break-after: auto !important; 
+    break-after: auto !important; 
+  }
 
   /* 7. DÀNH CHO BÀI HỌC BÌNH THƯỜNG TRÊN BLOG */
   body:not(.has-slide) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
