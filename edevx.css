@@ -149,18 +149,26 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   body.has-slide .grid-cols-12 { display: grid !important; grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
 
   /* ================================================= */
-  /* 6. CHÌA KHÓA VÀNG: SCALE NGUYÊN KHỐI SLIDE      */
+  /* 6. CHÌA KHÓA VÀNG: SCALE NGUYÊN KHỐI SLIDE (V2)   */
   /* ================================================= */
+  body.has-slide {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Ép căn giữa toàn bộ trang in */
+  }
+
   body.has-slide .slide-container { 
     /* Bắt buộc giữ nguyên kích thước gốc của màn hình */
     width: 1280px !important; 
     height: 720px !important; 
-    margin: 0 !important; 
     padding: 3.5rem 4.5rem !important; 
     
-    /* Bí thuật: Thu nhỏ toàn bộ Slide 87.5% để vừa khít chiều rộng giấy A4 (~1122px) */
-    transform: scale(0.875) !important; 
-    transform-origin: top left !important;
+    /* FIX 1: Tăng độ lớn lên 89% và lấy tâm phóng to ở giữa trang */
+    transform: scale(0.89) !important; 
+    transform-origin: top center !important;
+    
+    /* FIX 2: Bù trừ khoảng trắng ảo do scale sinh ra (720 - 720*0.89 = ~79px) */
+    margin: 0 auto -79px auto !important; 
     
     /* Thiết lập ngắt trang chuẩn */
     page-break-inside: avoid !important; 
