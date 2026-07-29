@@ -149,6 +149,16 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   }
 
   /* ================================================= */
+  /* [FIX BÓNG MA]: Ẩn sạch rác HTML thừa của Blogger  */
+  /* ================================================= */
+  body.has-slide #article-body-content > *:not(.slide-container) {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* ================================================= */
   /* 5. CỨU TINH CỦA SLIDE CŨ: KHÓA TOÀN BỘ GRID       */
   /* Trình duyệt tự phá Grid khi in, ta ép nó phải giữ */
   /* ================================================= */
