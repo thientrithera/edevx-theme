@@ -18,11 +18,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const mobileMenu = document.getElementById('mobile-menu');
     if(mobileBtn && mobileMenu) mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-    // PWA Service Worker Inline
+    // XÓA BỎ SERVICE WORKER (THỦ PHẠM ĐÁNH CHẶN F5 GÂY TREO JSON)
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            const swCode = `const CACHE_NAME='edevx-offline-v1';self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>e.waitUntil(clients.claim()));self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(res=>{const resClone=res.clone();caches.open(CACHE_NAME).then(c=>c.put(e.request,resClone));return res;}).catch(()=>caches.match(e.request)));});`;
-            try { navigator.serviceWorker.register(URL.createObjectURL(new Blob([swCode], {type: 'text/javascript'}))).catch(()=>{}); } catch(e){}
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister();
+            }
         });
     }
 
