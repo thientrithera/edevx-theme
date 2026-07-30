@@ -140,14 +140,19 @@ document.addEventListener("DOMContentLoaded", function() {
         loadScript('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js');
     }
     
-    if (articleBody && (articleBody.innerText.includes('$$') || articleBody.innerText.includes('$'))) {
+    // [ĐÃ FIX]: Quét toàn bộ thẻ Body để phát hiện dấu $ ở cả Trang chủ lẫn Trang con
+    if (document.body && (document.body.innerText.includes('$$') || document.body.innerText.includes('$'))) {
         loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css');
         (async () => {
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js');
             
+            // Xử lý xuống dòng cho công thức
             document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
+            
+            // Render toàn bộ trang
             renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false });
+            
             if(tocContainer) setTimeout(() => tocbot.refresh(), 500);
         })();
     }
