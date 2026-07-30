@@ -383,17 +383,31 @@ document.addEventListener("DOMContentLoaded", function() {
                 const cleanSrc = src.trim();
                 const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${RAW_GITHUB_BASE}${cleanSrc}`;
 
-                // Vũ khí Nuclear: Dùng cache: 'reload' của chuẩn Fetch API. 
-                // Trình duyệt sẽ đi thẳng qua mọi lớp Cache (kể cả F5 thường) mà không gây lỗi CORS.
-                fetch(fullUrl, { cache: 'reload' })
+                // Vũ khí duy nhất: Gắn mốc thời gian để lách luật Cache của F5
+                const safeUrl = `${fullUrl}?t=${new Date().getTime()}`;
+
+                // Khóa an toàn 6 giây: Tránh treo vĩnh viễn
+                let isResolved = false;
+                const timeoutId = setTimeout(() => {
+                    if (!isResolved) resolve(null);
+                }, 6000);
+
+                // Lệnh fetch TRẦN TRỤI, không cài cắm bất kỳ thông số header nào
+                fetch(safeUrl)
                     .then(res => {
                         if (!res.ok) throw new Error(`HTTP ${res.status}`);
                         return res.json();
                     })
-                    .then(data => resolve(data))
+                    .then(data => {
+                        isResolved = true;
+                        clearTimeout(timeoutId);
+                        resolve(data);
+                    })
                     .catch(err => {
+                        isResolved = true;
+                        clearTimeout(timeoutId);
                         console.error('[EDEVX JSON Error]:', err);
-                        resolve(null); // Giải phóng Promise, không bao giờ bị treo
+                        resolve(null);
                     });
             });
         }
