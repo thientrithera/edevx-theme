@@ -368,33 +368,29 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ========================================================
-    // --- 9. GITHUB JSON DATABASE ENGINE (V12 NUCLEAR BOMB) ---
+    // --- 9. GITHUB JSON DATABASE ENGINE (V13 KẺ HỦY DIỆT) ---
     // ========================================================
     (function initGitHubJsonQuizEngine() {
         const containers = document.querySelectorAll('.edevx-quiz-db');
         if (!containers.length) return;
 
-        // Dùng Raw GitHub - Tốc độ nhanh nhất, không bị delay CDN
-        const RAW_GITHUB_BASE = 'https://raw.githubusercontent.com/thientrithera/edevx-theme/main/';
-
-       // Tự động đọc mã Hash sếp đang cấu hình trên Blogger
-        const selfScript = document.currentScript || Array.from(document.scripts).find(s => s.src && s.src.includes('edevx.js'));
-        const GITHUB_CDN_BASE = selfScript ? selfScript.src.substring(0, selfScript.src.lastIndexOf('/') + 1) : 'https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/';
+        // Dùng API trực tiếp của GitHub để vượt qua mọi bức tường lửa CORS/Cache
+        const GITHUB_API_URL = 'https://raw.githubusercontent.com/thientrithera/edevx-theme/main/';
 
         function loadDataset(src) {
             return new Promise((resolve) => {
                 const cleanSrc = src.trim();
-                
-                // Nối tên file JSON vào đúng cái mã Hash đang chạy trên Blogger
-                const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${GITHUB_CDN_BASE}${cleanSrc}`;
+                const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${GITHUB_API_URL}${cleanSrc}`;
+
+                // Vũ khí Kẻ Hủy Diệt: Đuôi thời gian thực + Request trần trụi
+                const safeUrl = `${fullUrl}?cachebreaker=${new Date().getTime()}`;
 
                 let isResolved = false;
                 const timeoutId = setTimeout(() => {
                     if (!isResolved) resolve(null);
-                }, 6000);
+                }, 8000);
 
-                // Lệnh FETCH THUẦN KHIẾT NHẤT: Trình duyệt và jsDelivr cực kỳ thích điều này!
-                fetch(fullUrl)
+                fetch(safeUrl)
                     .then(res => {
                         if (!res.ok) throw new Error(`HTTP ${res.status}`);
                         return res.json();
@@ -425,10 +421,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (!src) return;
 
-            // Bọc HTML hiển thị Loading
             box.innerHTML = `<div class="p-6 text-center text-zinc-500 animate-pulse font-medium text-sm flex items-center justify-center gap-2"><i class="fas fa-circle-notch fa-spin text-blue-600 text-lg"></i> <span>Đang nạp ngân hàng câu hỏi...</span></div>`;
 
-            // Gọi dữ liệu (Chắc chắn trả về Data hoặc Null, không bao giờ bị treo)
             const rawData = await loadDataset(src);
             
             if (!rawData) {
@@ -436,7 +430,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="p-5 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-3xl text-sm font-bold border border-red-200 dark:border-red-800 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-exclamation-circle text-lg"></i>
-                        <span>Không thể tải file: <b>${src}</b>. Trình duyệt đang chặn luồng mạng.</span>
+                        <span>Lỗi mạng: Không thể tải file <b>${src}</b>. Trình duyệt đang chặn luồng tải.</span>
                     </div>
                     <button class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-black uppercase tracking-wider shadow hover:bg-red-700 transition" onclick="location.reload()">Thử lại</button>
                 </div>`;
