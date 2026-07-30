@@ -377,23 +377,24 @@ document.addEventListener("DOMContentLoaded", function() {
         // Dùng Raw GitHub - Tốc độ nhanh nhất, không bị delay CDN
         const RAW_GITHUB_BASE = 'https://raw.githubusercontent.com/thientrithera/edevx-theme/main/';
 
-        // Dùng Promise thuần thay vì Async/Await để chống Freeze của trình duyệt
+       // Tự động đọc mã Hash sếp đang cấu hình trên Blogger
+        const selfScript = document.currentScript || Array.from(document.scripts).find(s => s.src && s.src.includes('edevx.js'));
+        const GITHUB_CDN_BASE = selfScript ? selfScript.src.substring(0, selfScript.src.lastIndexOf('/') + 1) : 'https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/';
+
         function loadDataset(src) {
             return new Promise((resolve) => {
                 const cleanSrc = src.trim();
-                const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${RAW_GITHUB_BASE}${cleanSrc}`;
+                
+                // Nối tên file JSON vào đúng cái mã Hash đang chạy trên Blogger
+                const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${GITHUB_CDN_BASE}${cleanSrc}`;
 
-                // Vũ khí duy nhất: Gắn mốc thời gian để lách luật Cache của F5
-                const safeUrl = `${fullUrl}?t=${new Date().getTime()}`;
-
-                // Khóa an toàn 6 giây: Tránh treo vĩnh viễn
                 let isResolved = false;
                 const timeoutId = setTimeout(() => {
                     if (!isResolved) resolve(null);
                 }, 6000);
 
-                // Lệnh fetch TRẦN TRỤI, không cài cắm bất kỳ thông số header nào
-                fetch(safeUrl)
+                // Lệnh FETCH THUẦN KHIẾT NHẤT: Trình duyệt và jsDelivr cực kỳ thích điều này!
+                fetch(fullUrl)
                     .then(res => {
                         if (!res.ok) throw new Error(`HTTP ${res.status}`);
                         return res.json();
