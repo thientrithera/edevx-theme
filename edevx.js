@@ -368,45 +368,34 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ========================================================
-    // --- 9. GITHUB JSON DATABASE ENGINE (V13 KẺ HỦY DIỆT) ---
+    // --- 9. GITHUB JSON DATABASE ENGINE (BẢN CHUẨN GỐC RỄ) ---
     // ========================================================
     (function initGitHubJsonQuizEngine() {
         const containers = document.querySelectorAll('.edevx-quiz-db');
         if (!containers.length) return;
 
-        // Dùng API trực tiếp của GitHub để vượt qua mọi bức tường lửa CORS/Cache
-        const GITHUB_API_URL = 'https://raw.githubusercontent.com/thientrithera/edevx-theme/main/';
+        // 1. TÌM CHÍNH XÁC ĐƯỜNG LINK CHỨA MÃ HASH ĐANG CHẠY TRÊN BLOGGER
+        let baseUrl = 'https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/';
+        const scripts = document.querySelectorAll('script');
+        scripts.forEach(s => {
+            if (s.src && s.src.includes('edevx.js')) {
+                baseUrl = s.src.substring(0, s.src.lastIndexOf('/') + 1);
+            }
+        });
 
-        function loadDataset(src) {
-            return new Promise((resolve) => {
-                const cleanSrc = src.trim();
-                const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${GITHUB_API_URL}${cleanSrc}`;
+        // 2. LỆNH FETCH THUẦN KHIẾT (KHÔNG CÀI CẮM BẤT KỲ THÔNG SỐ NÀO ĐỂ CHỐNG BLOCK)
+        async function loadDataset(src) {
+            const cleanSrc = src.trim();
+            const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${baseUrl}${cleanSrc}`;
 
-                // Vũ khí Kẻ Hủy Diệt: Đuôi thời gian thực + Request trần trụi
-                const safeUrl = `${fullUrl}?cachebreaker=${new Date().getTime()}`;
-
-                let isResolved = false;
-                const timeoutId = setTimeout(() => {
-                    if (!isResolved) resolve(null);
-                }, 8000);
-
-                fetch(safeUrl)
-                    .then(res => {
-                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                        return res.json();
-                    })
-                    .then(data => {
-                        isResolved = true;
-                        clearTimeout(timeoutId);
-                        resolve(data);
-                    })
-                    .catch(err => {
-                        isResolved = true;
-                        clearTimeout(timeoutId);
-                        console.error('[EDEVX JSON Error]:', err);
-                        resolve(null);
-                    });
-            });
+            try {
+                const res = await fetch(fullUrl);
+                if (!res.ok) throw new Error(`Lỗi mạng: ${res.status}`);
+                return await res.json();
+            } catch (err) {
+                console.error('[EDEVX JSON Error]:', err);
+                return null;
+            }
         }
 
         function shuffleArray(arr) { return arr.sort(() => Math.random() - 0.5); }
@@ -430,9 +419,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="p-5 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-3xl text-sm font-bold border border-red-200 dark:border-red-800 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-exclamation-circle text-lg"></i>
-                        <span>Lỗi mạng: Không thể tải file <b>${src}</b>. Trình duyệt đang chặn luồng tải.</span>
+                        <span>Lỗi tải dữ liệu file: <b>${src}</b>.</span>
                     </div>
-                    <button class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-black uppercase tracking-wider shadow hover:bg-red-700 transition" onclick="location.reload()">Thử lại</button>
+                    <button class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-black uppercase tracking-wider shadow hover:bg-red-700 transition" onclick="location.reload()">Tải lại</button>
                 </div>`;
                 return;
             }
@@ -472,18 +461,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
             qList.forEach((q, idx) => {
                 const qId = q.id || `q_${idx}`;
+                const cleanQuestion = q.question.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+                let optionsWithMeta = q.options.map((optText, originalIndex) => {
+                    return { text: optText, isCorrect: originalIndex === q.correct_answer };
+                });
+                optionsWithMeta = shuffleArray(optionsWithMeta);
+
                 htmlHTML += `
                 <div class="quiz-container bg-white dark:bg-zinc-900 border-2 border-zinc-200 dark:border-zinc-800 p-6 rounded-3xl shadow-sm space-y-4" data-quiz-id="${qId}">
                     <div class="font-bold text-zinc-800 dark:text-zinc-100 text-base leading-relaxed flex items-start gap-3">
                         <span class="bg-blue-600 text-white text-xs px-2.5 py-1 rounded-xl font-black shrink-0 mt-0.5">Câu ${idx + 1}</span>
-                        <div class="flex-grow">${q.question}</div>
+                        <div class="flex-grow">${cleanQuestion}</div>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                        ${q.options.map((opt, oIdx) => `
+                        ${optionsWithMeta.map((opt, oIdx) => `
                             <div class="quiz-option p-4 border-2 border-zinc-200 dark:border-zinc-800 rounded-2xl bg-zinc-50/50 dark:bg-zinc-800/50 font-semibold cursor-pointer hover:border-blue-500 text-sm flex items-center justify-between text-zinc-700 dark:text-zinc-300 transition-all" 
-                                 data-correct="${oIdx === q.correct_answer}">
-                                <span><b class="mr-2 text-zinc-400">${String.fromCharCode(65 + oIdx)}.</b> ${opt}</span>
+                                 data-correct="${opt.isCorrect}">
+                                <span><b class="mr-2 text-zinc-400">${String.fromCharCode(65 + oIdx)}.</b> ${opt.text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')}</span>
                             </div>
                         `).join('')}
                     </div>
@@ -494,7 +490,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <i class="fas fa-search-plus"></i> Xem lời giải chi tiết
                         </summary>
                         <div class="pt-3 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm space-y-1">
-                            ${q.explanation}
+                            ${q.explanation.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')}
                         </div>
                     </details>` : ''}
                 </div>`;
