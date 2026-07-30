@@ -371,33 +371,38 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // --- 8. FOCUS WORKSPACE DOCK (POMODORO) ---
+    // --- 8. FOCUS WORKSPACE DOCK (POMODORO 3 MODE) ---
     (function initPomodoro() {
         const panel = document.getElementById('pomo-panel');
+        if(!panel) return;
+
         const toggleBtn = document.getElementById('pomo-toggle');
         const timeDisplay = document.getElementById('pomo-time');
         const startBtn = document.getElementById('pomo-start');
         const resetBtn = document.getElementById('pomo-reset');
         const playIcon = document.getElementById('pomo-play-icon');
-        const btnWork = document.getElementById('mode-work');
-        const btnBreak = document.getElementById('mode-break');
+        
+        // Nhóm các nút chế độ theo thứ tự: 15p - 25p - 5p
+        const modeBtns = [
+            document.getElementById('mode-warmup'),
+            document.getElementById('mode-focus'),
+            document.getElementById('mode-break')
+        ];
 
-        if(!panel) return;
-
-        let timeLeft = 25 * 60; 
+        // Mặc định khởi động là 15 phút (Màu tím)
+        let currentMinutes = 15;
+        let currentColor = 'purple'; 
+        let timeLeft = 15 * 60; 
         let timerId = null;
         let isRunning = false;
-        let isWorkMode = true;
 
         // Bật/Tắt Bảng điều khiển
         toggleBtn.addEventListener('click', () => {
             panel.classList.toggle('hidden');
-            
-            // Nếu đồng hồ đang KHÔNG chạy, ấn nút sẽ làm sáng nút lên
             if (!isRunning) {
                 toggleBtn.classList.toggle('opacity-30');
                 toggleBtn.classList.toggle('opacity-100');
-                toggleBtn.classList.toggle('text-blue-600');
+                toggleBtn.classList.toggle(`text-${currentColor}-600`);
                 toggleBtn.classList.toggle('text-zinc-400');
             }
         });
@@ -413,37 +418,38 @@ document.addEventListener("DOMContentLoaded", function() {
             document.title = isRunning ? `(${formatTime(timeLeft)}) EDEVX Focus` : document.title.split(') ')[1] || document.title;
         };
 
-        const setMode = (workMode) => {
-            isWorkMode = workMode;
-            timeLeft = isWorkMode ? 25 * 60 : 5 * 60;
+        // Động cơ đổi màu & Đổi chế độ
+        const setMode = (btn) => {
+            currentMinutes = parseInt(btn.getAttribute('data-time'));
+            currentColor = btn.getAttribute('data-color');
+            timeLeft = currentMinutes * 60;
             updateDisplay();
             pauseTimer();
             
-            if(isWorkMode) {
-                btnWork.className = 'px-2.5 py-1 text-xs font-bold rounded-md bg-white dark:bg-zinc-700 text-blue-600 shadow-sm transition-all';
-                btnBreak.className = 'px-2.5 py-1 text-xs font-bold rounded-md text-zinc-500 hover:text-emerald-500 transition-all';
-                timeDisplay.classList.replace('text-emerald-500', 'text-zinc-800');
-                startBtn.classList.replace('bg-emerald-500', 'bg-blue-600');
-                startBtn.classList.replace('hover:bg-emerald-600', 'hover:bg-blue-700');
-            } else {
-                btnBreak.className = 'px-2.5 py-1 text-xs font-bold rounded-md bg-white dark:bg-zinc-700 text-emerald-500 shadow-sm transition-all';
-                btnWork.className = 'px-2.5 py-1 text-xs font-bold rounded-md text-zinc-500 hover:text-blue-600 transition-all';
-                timeDisplay.classList.replace('text-zinc-800', 'text-emerald-500');
-                startBtn.classList.replace('bg-blue-600', 'bg-emerald-500');
-                startBtn.classList.replace('hover:bg-blue-700', 'hover:bg-emerald-600');
-            }
+            // Xóa màu active của tất cả các nút
+            modeBtns.forEach(b => {
+                b.className = `px-2.5 py-1 text-xs font-bold rounded-md text-zinc-500 hover:text-${b.getAttribute('data-color')}-500 transition-all`;
+            });
+
+            // Bật màu active cho nút được chọn
+            btn.className = `px-2.5 py-1 text-xs font-bold rounded-md bg-white dark:bg-zinc-700 text-${currentColor}-500 shadow-sm transition-all`;
+            
+            // Đổi màu số và màu nút Start
+            timeDisplay.className = `text-5xl font-black text-center text-${currentColor}-600 dark:text-${currentColor}-500 font-mono tracking-widest mb-6 transition-colors duration-300`;
+            startBtn.className = `w-12 h-12 bg-${currentColor}-600 hover:bg-${currentColor}-700 text-white rounded-full flex items-center justify-center text-lg shadow-lg hover:scale-105 transition-all`;
         };
+
+        // Gắn sự kiện click cho 3 nút
+        modeBtns.forEach(btn => btn.addEventListener('click', () => setMode(btn)));
 
         const startTimer = () => {
             if (isRunning) return;
             isRunning = true;
             playIcon.className = 'fas fa-pause';
             
-            // KHÓA SÁNG: Khi đang chạy, ép nút nổi phải sáng 100%
+            // Khóa sáng nút nổi
             toggleBtn.classList.remove('opacity-30', 'text-zinc-400');
-            toggleBtn.classList.add('opacity-100', 'text-blue-600');
-            
-            // Hiệu ứng nhịp đập tim
+            toggleBtn.classList.add('opacity-100', `text-${currentColor}-600`);
             timeDisplay.classList.add('animate-pulse');
 
             timerId = setInterval(() => {
@@ -451,8 +457,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 updateDisplay();
                 if (timeLeft <= 0) {
                     pauseTimer();
-                    alert(isWorkMode ? "Hết giờ tập trung! Nghỉ giải lao 5 phút thôi con!" : "Hết giờ nghỉ! Quay lại chiến đấu nào!");
-                    setMode(!isWorkMode); 
+                    
+                    // Thông báo thông minh theo số phút
+                    if (currentMinutes === 15) {
+                        alert("Khởi động xuất sắc! Thưởng cho con 5 phút nghỉ ngơi nhé!");
+                        setMode(modeBtns[2]); // Chuyển sang 5p nghỉ
+                    } else if (currentMinutes === 25) {
+                        alert("Tập trung đỉnh cao! Đến lúc xả hơi 5 phút rồi!");
+                        setMode(modeBtns[2]); // Chuyển sang 5p nghỉ
+                    } else {
+                        alert("Hết giờ giải lao! Quay lại bàn học thôi con!");
+                        // Hết 5p nghỉ thì tự quay về mốc 15p cho an toàn
+                        setMode(modeBtns[0]); 
+                    }
                 }
             }, 1000);
         };
@@ -463,17 +480,14 @@ document.addEventListener("DOMContentLoaded", function() {
             clearInterval(timerId);
             timeDisplay.classList.remove('animate-pulse');
             
-            // TRẢ LẠI TRẠNG THÁI MỜ (Nếu đang đóng bảng)
             if (panel.classList.contains('hidden')) {
                 toggleBtn.classList.add('opacity-30', 'text-zinc-400');
-                toggleBtn.classList.remove('opacity-100', 'text-blue-600');
+                toggleBtn.classList.remove('opacity-100', 'text-blue-600', 'text-purple-600', 'text-emerald-600');
             }
         };
 
         startBtn.addEventListener('click', () => isRunning ? pauseTimer() : startTimer());
-        resetBtn.addEventListener('click', () => setMode(isWorkMode));
-        btnWork.addEventListener('click', () => setMode(true));
-        btnBreak.addEventListener('click', () => setMode(false));
+        resetBtn.addEventListener('click', () => setMode(modeBtns.find(b => parseInt(b.getAttribute('data-time')) === currentMinutes)));
     })();
 
 
