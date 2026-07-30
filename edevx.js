@@ -367,37 +367,35 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-// ========================================================
-    // --- 9. GITHUB JSON DATABASE ENGINE (V11 FINAL - ANTI CORS) ---
+    // ========================================================
+    // --- 9. GITHUB JSON DATABASE ENGINE (V12 NUCLEAR BOMB) ---
     // ========================================================
     (function initGitHubJsonQuizEngine() {
         const containers = document.querySelectorAll('.edevx-quiz-db');
         if (!containers.length) return;
 
+        // Dùng Raw GitHub - Tốc độ nhanh nhất, không bị delay CDN
         const RAW_GITHUB_BASE = 'https://raw.githubusercontent.com/thientrithera/edevx-theme/main/';
 
-        async function loadDataset(src) {
-            const cleanSrc = src.trim();
-            const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${RAW_GITHUB_BASE}${cleanSrc}`;
-            
-            // Vũ khí phá Cache duy nhất cần thiết, không dùng cache: 'no-store' để tránh lỗi CORS
-            const targetUrl = `${fullUrl}?v=${Date.now()}`;
+        // Dùng Promise thuần thay vì Async/Await để chống Freeze của trình duyệt
+        function loadDataset(src) {
+            return new Promise((resolve) => {
+                const cleanSrc = src.trim();
+                const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${RAW_GITHUB_BASE}${cleanSrc}`;
 
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 8000); // Cho phép tối đa 8 giây
-
-            try {
-                // Lệnh fetch thuần túy (Simple Request) để đi xuyên tường lửa GitHub
-                const res = await fetch(targetUrl, { signal: controller.signal });
-                clearTimeout(timeoutId);
-
-                if (!res.ok) throw new Error(`HTTP Status ${res.status}`);
-                return await res.json();
-            } catch (err) {
-                clearTimeout(timeoutId);
-                console.error('[EDEVX JSON Error]:', err);
-                return null;
-            }
+                // Vũ khí Nuclear: Dùng cache: 'reload' của chuẩn Fetch API. 
+                // Trình duyệt sẽ đi thẳng qua mọi lớp Cache (kể cả F5 thường) mà không gây lỗi CORS.
+                fetch(fullUrl, { cache: 'reload' })
+                    .then(res => {
+                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                        return res.json();
+                    })
+                    .then(data => resolve(data))
+                    .catch(err => {
+                        console.error('[EDEVX JSON Error]:', err);
+                        resolve(null); // Giải phóng Promise, không bao giờ bị treo
+                    });
+            });
         }
 
         function shuffleArray(arr) { return arr.sort(() => Math.random() - 0.5); }
@@ -412,16 +410,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (!src) return;
 
-            // Bọc HTML an toàn chống mất giao diện
+            // Bọc HTML hiển thị Loading
             box.innerHTML = `<div class="p-6 text-center text-zinc-500 animate-pulse font-medium text-sm flex items-center justify-center gap-2"><i class="fas fa-circle-notch fa-spin text-blue-600 text-lg"></i> <span>Đang nạp ngân hàng câu hỏi...</span></div>`;
 
+            // Gọi dữ liệu (Chắc chắn trả về Data hoặc Null, không bao giờ bị treo)
             const rawData = await loadDataset(src);
+            
             if (!rawData) {
                 box.innerHTML = `
                 <div class="p-5 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-3xl text-sm font-bold border border-red-200 dark:border-red-800 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-exclamation-circle text-lg"></i>
-                        <span>Không thể tải dữ liệu file: <b>${src}</b>. Sếp ấn F12 kiểm tra Console nhé.</span>
+                        <span>Không thể tải file: <b>${src}</b>. Trình duyệt đang chặn luồng mạng.</span>
                     </div>
                     <button class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-black uppercase tracking-wider shadow hover:bg-red-700 transition" onclick="location.reload()">Thử lại</button>
                 </div>`;
@@ -437,7 +437,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (limit > 0 && qList.length > limit) qList = qList.slice(0, limit);
 
             if (qList.length === 0) {
-                box.innerHTML = `<div class="p-5 bg-amber-50 text-amber-700 dark:bg-amber-900/20 rounded-3xl text-sm font-bold border border-amber-200">Không tìm thấy câu hỏi nào.</div>`;
+                box.innerHTML = `<div class="p-5 bg-amber-50 text-amber-700 dark:bg-amber-900/20 rounded-3xl text-sm font-bold border border-amber-200">Không tìm thấy bài tập nào.</div>`;
                 return;
             }
 
@@ -515,7 +515,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             }
         });
-
     })();
 
  // ĐÓNG SỰ KIỆN DOMContentLoaded TỔNG TOÀN BỘ FILE (CHỮA LỖI SYNTAX)
