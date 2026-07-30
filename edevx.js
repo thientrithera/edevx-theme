@@ -370,4 +370,111 @@ document.addEventListener("DOMContentLoaded", function() {
             articleBodyForSlide.innerHTML = articleBodyForSlide.innerHTML.replace(/&nbsp;/g, ' ');
         }
     }
+
+    // --- 8. FOCUS WORKSPACE DOCK (POMODORO) ---
+    (function initPomodoro() {
+        const panel = document.getElementById('pomo-panel');
+        const toggleBtn = document.getElementById('pomo-toggle');
+        const timeDisplay = document.getElementById('pomo-time');
+        const startBtn = document.getElementById('pomo-start');
+        const resetBtn = document.getElementById('pomo-reset');
+        const playIcon = document.getElementById('pomo-play-icon');
+        const btnWork = document.getElementById('mode-work');
+        const btnBreak = document.getElementById('mode-break');
+
+        if(!panel) return;
+
+        let timeLeft = 25 * 60; 
+        let timerId = null;
+        let isRunning = false;
+        let isWorkMode = true;
+
+        // Bật/Tắt Bảng điều khiển
+        toggleBtn.addEventListener('click', () => {
+            panel.classList.toggle('hidden');
+            
+            // Nếu đồng hồ đang KHÔNG chạy, ấn nút sẽ làm sáng nút lên
+            if (!isRunning) {
+                toggleBtn.classList.toggle('opacity-30');
+                toggleBtn.classList.toggle('opacity-100');
+                toggleBtn.classList.toggle('text-blue-600');
+                toggleBtn.classList.toggle('text-zinc-400');
+            }
+        });
+
+        const formatTime = (seconds) => {
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        };
+
+        const updateDisplay = () => {
+            timeDisplay.textContent = formatTime(timeLeft);
+            document.title = isRunning ? `(${formatTime(timeLeft)}) EDEVX Focus` : document.title.split(') ')[1] || document.title;
+        };
+
+        const setMode = (workMode) => {
+            isWorkMode = workMode;
+            timeLeft = isWorkMode ? 25 * 60 : 5 * 60;
+            updateDisplay();
+            pauseTimer();
+            
+            if(isWorkMode) {
+                btnWork.className = 'px-2.5 py-1 text-xs font-bold rounded-md bg-white dark:bg-zinc-700 text-blue-600 shadow-sm transition-all';
+                btnBreak.className = 'px-2.5 py-1 text-xs font-bold rounded-md text-zinc-500 hover:text-emerald-500 transition-all';
+                timeDisplay.classList.replace('text-emerald-500', 'text-zinc-800');
+                startBtn.classList.replace('bg-emerald-500', 'bg-blue-600');
+                startBtn.classList.replace('hover:bg-emerald-600', 'hover:bg-blue-700');
+            } else {
+                btnBreak.className = 'px-2.5 py-1 text-xs font-bold rounded-md bg-white dark:bg-zinc-700 text-emerald-500 shadow-sm transition-all';
+                btnWork.className = 'px-2.5 py-1 text-xs font-bold rounded-md text-zinc-500 hover:text-blue-600 transition-all';
+                timeDisplay.classList.replace('text-zinc-800', 'text-emerald-500');
+                startBtn.classList.replace('bg-blue-600', 'bg-emerald-500');
+                startBtn.classList.replace('hover:bg-blue-700', 'hover:bg-emerald-600');
+            }
+        };
+
+        const startTimer = () => {
+            if (isRunning) return;
+            isRunning = true;
+            playIcon.className = 'fas fa-pause';
+            
+            // KHÓA SÁNG: Khi đang chạy, ép nút nổi phải sáng 100%
+            toggleBtn.classList.remove('opacity-30', 'text-zinc-400');
+            toggleBtn.classList.add('opacity-100', 'text-blue-600');
+            
+            // Hiệu ứng nhịp đập tim
+            timeDisplay.classList.add('animate-pulse');
+
+            timerId = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+                if (timeLeft <= 0) {
+                    pauseTimer();
+                    alert(isWorkMode ? "Hết giờ tập trung! Nghỉ giải lao 5 phút thôi con!" : "Hết giờ nghỉ! Quay lại chiến đấu nào!");
+                    setMode(!isWorkMode); 
+                }
+            }, 1000);
+        };
+
+        const pauseTimer = () => {
+            isRunning = false;
+            playIcon.className = 'fas fa-play';
+            clearInterval(timerId);
+            timeDisplay.classList.remove('animate-pulse');
+            
+            // TRẢ LẠI TRẠNG THÁI MỜ (Nếu đang đóng bảng)
+            if (panel.classList.contains('hidden')) {
+                toggleBtn.classList.add('opacity-30', 'text-zinc-400');
+                toggleBtn.classList.remove('opacity-100', 'text-blue-600');
+            }
+        };
+
+        startBtn.addEventListener('click', () => isRunning ? pauseTimer() : startTimer());
+        resetBtn.addEventListener('click', () => setMode(isWorkMode));
+        btnWork.addEventListener('click', () => setMode(true));
+        btnBreak.addEventListener('click', () => setMode(false));
+    })();
+
+
 });
