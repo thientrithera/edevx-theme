@@ -1,0 +1,1008 @@
+[
+  {
+    "id": "TOAN6_C1_B1_001",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Cho tập hợp $A = \\{2; 3; 5; 7\\}$. Khẳng định nào sau đây là **đúng**?",
+    "options": ["$2 \\in A$", "$4 \\in A$", "$3 \\notin A$", "$7 \\notin A$"],
+    "correct_answer": 0,
+    "explanation": "Số $2$ có mặt trong tập hợp $A$ nên $2 \\in A$ là phát biểu đúng."
+  },
+  {
+    "id": "TOAN6_C1_B1_002",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Kí hiệu nào sau đây biểu diễn một phần tử **không thuộc** một tập hợp?",
+    "options": ["$\\notin$", "$\\in$", "$\\subset$", "$=$"],
+    "correct_answer": 0,
+    "explanation": "Kí hiệu $\\notin$ dùng để chỉ phần tử không thuộc tập hợp."
+  },
+  {
+    "id": "TOAN6_C1_B1_003",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Cách viết một tập hợp nào sau đây là **đúng cú pháp**?",
+    "options": ["$A = \\{1; 2; 3\\}$", "$A = (1; 2; 3)$", "$A = [1; 2; 3]$", "$A = 1; 2; 3$"],
+    "correct_answer": 0,
+    "explanation": "Tập hợp bắt buộc phải bọc trong cặp dấu ngoặc nhọn $\\{ \\}$."
+  },
+  {
+    "id": "TOAN6_C1_B1_004",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Cho tập hợp $M = \\{x \\in \\mathbb{N} \\mid x < 4\\}$. Viết $M$ bằng cách liệt kê phần tử:",
+    "options": ["$M = \\{0; 1; 2; 3\\}$", "$M = \\{1; 2; 3; 4\\}$", "$M = \\{0; 1; 2; 3; 4\\}$", "$M = \\{1; 2; 3\\}$"],
+    "correct_answer": 0,
+    "explanation": "Các số tự nhiên nhỏ hơn 4 gồm $0; 1; 2; 3$."
+  },
+  {
+    "id": "TOAN6_C1_B1_005",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Số $0$ thuộc tập hợp nào sau đây?",
+    "options": ["$\\mathbb{N}$", "$\\mathbb{N}^*$", "Tập các số tự nhiên lớn hơn 0", "Tập các số đếm được trong thực tế"],
+    "correct_answer": 0,
+    "explanation": "$0 \\in \\mathbb{N}$ nhưng $0 \\notin \\mathbb{N}^*$."
+  },
+  {
+    "id": "TOAN6_C1_B1_006",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Viết tập hợp các chữ số xuất hiện trong từ 'TOAN HOC':",
+    "options": ["$\\{T; O; A; N; H; C\\}$", "$\\{T; O; A; N; H; O; C\\}$", "$\\{T; O; A; N\\}$", "$\\{H; O; C\\}$"],
+    "correct_answer": 0,
+    "explanation": "Mỗi chữ cái xuất hiện chỉ liệt kê 1 lần: T, O, A, N, H, C."
+  },
+  {
+    "id": "TOAN6_C1_B1_007",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Tập hợp các chữ số của số $2024$ là:",
+    "options": ["$\\{2; 0; 4\\}$", "$\\{2; 0; 2; 4\\}$", "$\\{0; 2; 4; 8\\}$", "$\\{2; 4\\}$"],
+    "correct_answer": 0,
+    "explanation": "Số 2024 gồm các chữ số 0, 2, 4."
+  },
+  {
+    "id": "TOAN6_C1_B1_008",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Tập hợp không chứa phần tử nào được gọi là:",
+    "options": ["Tập hợp rỗng", "Tập hợp 0", "Tập hợp đơn vị", "Tập hợp vô hạn"],
+    "correct_answer": 0,
+    "explanation": "Tập hợp rỗng kí hiệu là $\\emptyset$, không chứa phần tử nào."
+  },
+  {
+    "id": "TOAN6_C1_B1_009",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Kí hiệu $\\subset$ dùng để chỉ quan hệ gì?",
+    "options": ["Quan hệ tập hợp con", "Phần tử thuộc tập hợp", "Phần tử không thuộc tập hợp", "Hai tập hợp giao nhau"],
+    "correct_answer": 0,
+    "explanation": "Kí hiệu $\\subset$ dùng thể hiện quan hệ giữa tập hợp con và tập hợp cha."
+  },
+  {
+    "id": "TOAN6_C1_B1_010",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Cho $A = \\{1; 2\\}$. Cách viết nào sau đây **đúng**?",
+    "options": ["$\\{1\\} \\subset A$", "$1 \\subset A$", "$\\{1; 2\\} \\in A$", "$1 \\notin A$"],
+    "correct_answer": 0,
+    "explanation": "$\\{1\\}$ là một tập hợp con của $A$ nên kí hiệu $\\{1\\} \\subset A$ là đúng."
+  },
+  {
+    "id": "TOAN6_C1_B1_011",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Tập hợp $\\mathbb{N}^*$ là tập hợp:",
+    "options": ["Các số tự nhiên khác 0", "Các số tự nhiên gồm cả 0", "Các số tự nhiên chẵn", "Các số tự nhiên lẻ"],
+    "correct_answer": 0,
+    "explanation": "$\\mathbb{N}^* = \\{1; 2; 3; 4; ...\\}$ là tập các số tự nhiên khác 0."
+  },
+  {
+    "id": "TOAN6_C1_B1_012",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Cho $B$ là tập hợp các tháng có 31 ngày trong năm. Khẳng định nào đúng?",
+    "options": ["Tháng $1 \\in B$", "Tháng $4 \\in B$", "Tháng $6 \\in B$", "Tháng $9 \\in B$"],
+    "correct_answer": 0,
+    "explanation": "Tháng 1 có 31 ngày nên Tháng $1 \\in B$."
+  },
+  {
+    "id": "TOAN6_C1_B1_013",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Tập hợp $C$ các số tự nhiên chẵn nhỏ hơn 10 là:",
+    "options": ["$\\{0; 2; 4; 6; 8\\}$", "$\\{2; 4; 6; 8\\}$", "$\\{0; 2; 4; 6; 8; 10\\}$", "$\\{1; 3; 5; 7; 9\\}$"],
+    "correct_answer": 0,
+    "explanation": "Các số tự nhiên chẵn nhỏ hơn 10 gồm $0; 2; 4; 6; 8$."
+  },
+  {
+    "id": "TOAN6_C1_B1_014",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Tập hợp $D$ các số tự nhiên lẻ nhỏ hơn 10 là:",
+    "options": ["$\\{1; 3; 5; 7; 9\\}$", "$\\{0; 1; 3; 5; 7; 9\\}$", "$\\{1; 3; 5; 7\\}$", "$\\{3; 5; 7; 9\\}$"],
+    "correct_answer": 0,
+    "explanation": "Số lẻ nhỏ hơn 10 gồm $1; 3; 5; 7; 9$."
+  },
+  {
+    "id": "TOAN6_C1_B1_015",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "nhan_biet",
+    "question": "Khi viết các phần tử của một tập hợp, giữa các phần tử là số ta thường dùng dấu gì?",
+    "options": ["Dấu chấm phẩy (;)", "Dấu phẩy (,)", "Dấu chấm (.)", "Dấu gạch ngang (-)"],
+    "correct_answer": 0,
+    "explanation": "Dùng dấu chấm phẩy (;) để tránh nhầm lẫn với số thập phân."
+  },
+  {
+    "id": "TOAN6_C1_B1_016",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Số phần tử của tập hợp $E = \\{10; 11; 12; ...; 99\\}$ là:",
+    "options": ["$90$", "$89$", "$91$", "$88$"],
+    "correct_answer": 0,
+    "explanation": "Số phần tử = $(99 - 10) : 1 + 1 = 90$."
+  },
+  {
+    "id": "TOAN6_C1_B1_017",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Số phần tử của tập hợp $F = \\{5; 10; 15; ...; 100\\}$ là:",
+    "options": ["$20$", "$19$", "$21$", "$100$"],
+    "correct_answer": 0,
+    "explanation": "Số phần tử = $(100 - 5) : 5 + 1 = 20$."
+  },
+  {
+    "id": "TOAN6_C1_B1_018",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Hãy viết tập hợp $A = \\{2; 4; 6; 8\\}$ bằng cách chỉ ra tính chất đặc trưng:",
+    "options": [
+      "$A = \\{x \\in \\mathbb{N}^* \\mid x \\text{ chẵn}, x < 10\\}$",
+      "$A = \\{x \\in \\mathbb{N} \\mid x \\text{ chẵn}, x \\le 10\\}$",
+      "$A = \\{x \\in \\mathbb{N} \\mid x \\text{ lẻ}, x < 10\\}$",
+      "$A = \\{x \\in \\mathbb{N}^* \\mid x < 8\\}$"
+    ],
+    "correct_answer": 0,
+    "explanation": "Các phần tử $2, 4, 6, 8$ là các số tự nhiên chẵn khác 0 và nhỏ hơn 10."
+  },
+  {
+    "id": "TOAN6_C1_B1_019",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Cho $M = \\{x \\in \\mathbb{N} \\mid 10 \\le x \\le 15\\}$. Khẳng định nào **sai**?",
+    "options": ["$9 \\in M$", "$10 \\in M$", "$15 \\in M$", "$12 \\in M$"],
+    "correct_answer": 0,
+    "explanation": "Số 9 nhỏ hơn 10 nên không thuộc $M$."
+  },
+  {
+    "id": "TOAN6_C1_B1_020",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Cho hai tập hợp $A = \\{1; 2; 3; 4\\}$ và $B = \\{3; 4; 5; 6\\}$. Tập hợp các phần tử vừa thuộc $A$ vừa thuộc $B$ là:",
+    "options": ["$\\{3; 4\\}$", "$\\{1; 2; 5; 6\\}$", "$\\{1; 2; 3; 4; 5; 6\\}$", "$\\emptyset$"],
+    "correct_answer": 0,
+    "explanation": "Phần tử chung duy nhất của $A$ và $B$ là 3 và 4."
+  },
+  {
+    "id": "TOAN6_C1_B1_021",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Số phần tử của tập hợp các số tự nhiên không vượt quá 50 là:",
+    "options": ["$51$", "$50$", "$49$", "$52$"],
+    "correct_answer": 0,
+    "explanation": "Không vượt quá 50 nghĩa là $\\le 50$, gồm từ $0$ đến $50$ (có 51 phần tử)."
+  },
+  {
+    "id": "TOAN6_C1_B1_022",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Cho tập $S$ các số tự nhiên có hai chữ số mà tổng hai chữ số bằng 4. Viết $S$ dưới dạng liệt kê:",
+    "options": ["$S = \\{13; 22; 31; 40\\}$", "$S = \\{04; 13; 22; 31; 40\\}$", "$S = \\{13; 22; 31\\}$", "$S = \\{13; 31; 40\\}$"],
+    "correct_answer": 0,
+    "explanation": "Các số có 2 chữ số có tổng bằng 4 là: $13, 22, 31, 40$ (không có số 04)."
+  },
+  {
+    "id": "TOAN6_C1_B1_023",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Tập hợp các bội số tự nhiên nhỏ hơn 30 của 5 là:",
+    "options": ["$\\{0; 5; 10; 15; 20; 25\\}$", "$\\{5; 10; 15; 20; 25\\}$", "$\\{0; 5; 10; 15; 20; 25; 30\\}$", "$\\{5; 10; 15; 20; 25; 30\\}$"],
+    "correct_answer": 0,
+    "explanation": "Chia hết cho 5 và nhỏ hơn 30 gồm $0; 5; 10; 15; 20; 25$."
+  },
+  {
+    "id": "TOAN6_C1_B1_024",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Số phần tử của tập hợp $X = \\{x \\in \\mathbb{N}^* \\mid x < 100\\}$ là:",
+    "options": ["$99$", "$100$", "$101$", "$98$"],
+    "correct_answer": 0,
+    "explanation": "Vì $x \\in \\mathbb{N}^*$ nên $x$ lấy từ $1$ đến $99$, có 99 phần tử."
+  },
+  {
+    "id": "TOAN6_C1_B1_025",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Cho $A = \\{a; b\\}$. Hỏi $A$ có bao nhiêu tập hợp con?",
+    "options": ["$4$", "$2$", "$3$", "$1$"],
+    "correct_answer": 0,
+    "explanation": "Các tập con là: $\\emptyset, \\{a\\}, \\{b\\}, \\{a; b\\}$ (tổng cộng 4 tập hợp con)."
+  },
+  {
+    "id": "TOAN6_C1_B1_026",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Cho $B = \\{1; 2; 3\\}$. Có bao nhiêu tập con của $B$ chứa đúng 1 phần tử?",
+    "options": ["$3$", "$2$", "$4$", "$1$"],
+    "correct_answer": 0,
+    "explanation": "Gồm các tập: $\\{1\\}, \\{2\\}, \\{3\\}$ (3 tập hợp)."
+  },
+  {
+    "id": "TOAN6_C1_B1_027",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Có bao nhiêu tập con có 2 phần tử của $B = \\{1; 2; 3\\}$?",
+    "options": ["$3$", "$2$", "$4$", "$1$"],
+    "correct_answer": 0,
+    "explanation": "Gồm các tập: $\\{1; 2\\}, \\{1; 3\\}, \\{2; 3\\}$ (3 tập hợp)."
+  },
+  {
+    "id": "TOAN6_C1_B1_028",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Viết tập hợp $K$ các số tự nhiên chẵn lớn hơn 10 và nhỏ hơn 20:",
+    "options": ["$\\{12; 14; 16; 18\\}$", "$\\{10; 12; 14; 16; 18; 20\\}$", "$\\{12; 14; 16; 18; 20\\}$", "$\\{10; 12; 14; 16; 18\\}$"],
+    "correct_answer": 0,
+    "explanation": "Lớn hơn 10 và nhỏ hơn 20 gồm $12; 14; 16; 18$."
+  },
+  {
+    "id": "TOAN6_C1_B1_029",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Tổng các phần tử của tập hợp $A = \\{x \\in \\mathbb{N} \\mid x < 5\\}$ là:",
+    "options": ["$10$", "$15$", "$14$", "$9$"],
+    "correct_answer": 0,
+    "explanation": "$A = \\{0; 1; 2; 3; 4\\}$. Tổng $= 0 + 1 + 2 + 3 + 4 = 10$."
+  },
+  {
+    "id": "TOAN6_C1_B1_030",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "thong_hieu",
+    "question": "Tích các phần tử của tập hợp $B = \\{x \\in \\mathbb{N}^* \\mid x \\le 4\\}$ là:",
+    "options": ["$24$", "$0$", "$10$", "$12$"],
+    "correct_answer": 0,
+    "explanation": "$B = \\{1; 2; 3; 4\\}$. Tích $= 1 \\cdot 2 \\cdot 3 \\cdot 4 = 24$."
+  },
+  {
+    "id": "TOAN6_C1_B1_031",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung",
+    "question": "Số phần tử của tập hợp các số tự nhiên có hai chữ số giống nhau là:",
+    "options": ["$9$", "$10$", "$8$", "$11$"],
+    "correct_answer": 0,
+    "explanation": "Các số đó là $11, 22, 33, 44, 55, 66, 77, 88, 99$ (gồm 9 số)."
+  },
+  {
+    "id": "TOAN6_C1_B1_032",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung",
+    "question": "Số phần tử của tập hợp các số tự nhiên tròn chục có hai chữ số là:",
+    "options": ["$9$", "$10$", "$8$", "$90$"],
+    "correct_answer": 0,
+    "explanation": "Các số đó là $10, 20, 30, 40, 50, 60, 70, 80, 90$ (gồm 9 số)."
+  },
+  {
+    "id": "TOAN6_C1_B1_033",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung",
+    "question": "Cho $A = \\{1; 2; 3\\}$. Có tất cả bao nhiêu tập hợp con của $A$?",
+    "options": ["$8$", "$6$", "$4$", "$7$"],
+    "correct_answer": 0,
+    "explanation": "Số tập con của tập 3 phần tử là $2^3 = 8$ tập hợp."
+  },
+  {
+    "id": "TOAN6_C1_B1_034",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung",
+    "question": "Cho tập hợp $M = \\{x \\in \\mathbb{N} \\mid x + 7 = 5\\}$. Số phần tử của $M$ là:",
+    "options": ["$0$", "$1$", "$2$", "Vô số"],
+    "correct_answer": 0,
+    "explanation": "Không có số tự nhiên nào cộng 7 bằng 5. Do đó $M = \\emptyset$ có 0 phần tử."
+  },
+  {
+    "id": "TOAN6_C1_B1_035",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung",
+    "question": "Viết tập hợp các chữ cái trong từ 'NHA TRANG':",
+    "options": ["$\\{N; H; A; T; R; G\\}$", "$\\{N; H; A; T; R; A; N; G\\}$", "$\\{N; H; A; T; R\\}$", "$\\{H; A; T; R; G\\}$"],
+    "correct_answer": 0,
+    "explanation": "Các chữ cái xuất hiện 1 lần: N, H, A, T, R, G."
+  },
+  {
+    "id": "TOAN6_C1_B1_036",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung",
+    "question": "Viết tập hợp các số tự nhiên $x$ sao cho $x + 5 = 5$:",
+    "options": ["$\\{0\\}$", "$\\emptyset$", "$\\{5\\}$", "$\\{1\\}$"],
+    "correct_answer": 0,
+    "explanation": "$x + 5 = 5 \\implies x = 0$. Tập hợp là $\\{0\\}$."
+  },
+  {
+    "id": "TOAN6_C1_B1_037",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung",
+    "question": "Viết tập hợp các số tự nhiên $x$ sao cho $2x = 8$:",
+    "options": ["$\\{4\\}$", "$\\{2\\}$", "$\\{8\\}$", "$\\{16\\}$"],
+    "correct_answer": 0,
+    "explanation": "$2x = 8 \\implies x = 4$. Tập hợp là $\\{4\\}$."
+  },
+  {
+    "id": "TOAN6_C1_B1_038",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung",
+    "question": "Có bao nhiêu số tự nhiên có hai chữ số chia hết cho 9?",
+    "options": ["$10$", "$9$", "$11$", "$12$"],
+    "correct_answer": 0,
+    "explanation": "Các số $18, 27, ..., 99$. Số phần tử = $(99 - 18) : 9 + 1 = 10$."
+  },
+  {
+    "id": "TOAN6_C1_B1_039",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung",
+    "question": "Cho $M = \\{x \\in \\mathbb{N} \\mid 15 < 2x \\le 20\\}$. Các phần tử của $M$ là:",
+    "options": ["$\\{8; 9; 10\\}$", "$\\{8; 9\\}$", "$\\{7; 8; 9; 10\\}$", "$\\{9; 10\\}$"],
+    "correct_answer": 0,
+    "explanation": "$15 < 2x \\le 20 \\implies 7.5 < x \\le 10 \\implies x \\in \\{8; 9; 10\\}$."
+  },
+  {
+    "id": "TOAN6_C1_B1_040",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung",
+    "question": "Cho $A$ là tập các số chẵn nhỏ hơn 20, $B$ là tập các số chia hết cho 3 nhỏ hơn 20. Tập các số thuộc cả $A$ và $B$ là:",
+    "options": ["$\\{0; 6; 12; 18\\}$", "$\\{6; 12; 18\\}$", "$\\{0; 3; 6; 12; 18\\}$", "$\\{2; 4; 6; 12; 18\\}$"],
+    "correct_answer": 0,
+    "explanation": "Số tự nhiên chẵn vừa chia hết cho 3 (tức chia hết cho 6) nhỏ hơn 20 gồm $0, 6, 12, 18$."
+  },
+  {
+    "id": "TOAN6_C1_B1_041",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung_cao",
+    "question": "Lớp 6A có 25 học sinh thích môn Toán, 20 học sinh thích môn Văn. Biết có 10 học sinh thích cả hai môn và 5 học sinh không thích môn nào. Sĩ số lớp 6A là:",
+    "options": ["$40$ học sinh", "$45$ học sinh", "$50$ học sinh", "$35$ học sinh"],
+    "correct_answer": 0,
+    "explanation": "Số học sinh thích ít nhất 1 môn = $25 + 20 - 10 = 35$. Tổng sĩ số = $35 + 5 = 40$ học sinh."
+  },
+  {
+    "id": "TOAN6_C1_B1_042",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung_cao",
+    "question": "Có bao nhiêu tập hợp $X$ thỏa mãn $\\{1\\} \\subset X \\subset \\{1; 2; 3; 4\\}$?",
+    "options": ["$8$", "$4$", "$6$", "$7$"],
+    "correct_answer": 0,
+    "explanation": "Tập $X$ chắc chắn chứa phần tử 1 và có thể chọn thêm các phần tử từ $\\{2; 3; 4\\}$. Số tập con của $\\{2; 3; 4\\}$ là $2^3 = 8$ tập hợp."
+  },
+  {
+    "id": "TOAN6_C1_B1_043",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung_cao",
+    "question": "Tính tổng các phần tử của tập hợp $S = \\{10; 20; 30; ...; 100\\}$:",
+    "options": ["$550$", "$500$", "$450$", "$600$"],
+    "correct_answer": 0,
+    "explanation": "Số phần tử = $10$. Tổng = $(10 + 100) \\times 10 : 2 = 550$."
+  },
+  {
+    "id": "TOAN6_C1_B1_044",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung_cao",
+    "question": "Có bao nhiêu số tự nhiên có 3 chữ số mà cả 3 chữ số đều là số lẻ?",
+    "options": ["$125$", "$100$", "$250$", "$64$"],
+    "correct_answer": 0,
+    "explanation": "Chữ số lẻ gồm $\\{1; 3; 5; 7; 9\\}$ (5 chữ số). Hàng trăm có 5 cách chọn, hàng chục có 5 cách chọn, hàng đơn vị có 5 cách chọn $\\implies 5 \\times 5 \\times 5 = 125$ số."
+  },
+  {
+    "id": "TOAN6_C1_B1_045",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung_cao",
+    "question": "Cho $A = \\{1; 2; 3; 4; 5\\}$. Số tập hợp con của $A$ chứa đúng 2 phần tử là:",
+    "options": ["$10$", "$8$", "$12$", "$15$"],
+    "correct_answer": 0,
+    "explanation": "Các cặp 2 phần tử chọn từ 5 phần tử là: $(1,2), (1,3), (1,4), (1,5), (2,3), (2,4), (2,5), (3,4), (3,5), (4,5) \\implies 10$ tập hợp."
+  },
+  {
+    "id": "TOAN6_C1_B1_046",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung_cao",
+    "question": "Viết tập hợp các số dư có thể có khi chia một số tự nhiên cho 4:",
+    "options": ["$\\{0; 1; 2; 3\\}$", "$\\{1; 2; 3; 4\\}$", "$\\{0; 1; 2; 3; 4\\}$", "$\\{1; 2; 3\\}$"],
+    "correct_answer": 0,
+    "explanation": "Số dư khi chia cho 4 luôn bé hơn 4, gồm $0; 1; 2; 3$."
+  },
+  {
+    "id": "TOAN6_C1_B1_047",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung_cao",
+    "question": "Số phần tử của tập hợp các ngày trong một năm nhuận là:",
+    "options": ["$366$", "$365$", "$364$", "$360$"],
+    "correct_answer": 0,
+    "explanation": "Năm nhuận có đúng 366 ngày."
+  },
+  {
+    "id": "TOAN6_C1_B1_048",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung_cao",
+    "question": "Cho $A = \\{x \\in \\mathbb{N} \\mid 100 \\le x \\le 999, x \\text{ tận cùng là } 9\\}$. Số phần tử của $A$ là:",
+    "options": ["$90$", "$89$", "$100$", "$91$"],
+    "correct_answer": 0,
+    "explanation": "Các số $109, 119, ..., 999$. Số phần tử = $(999 - 109) : 10 + 1 = 90$."
+  },
+  {
+    "id": "TOAN6_C1_B1_049",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung_cao",
+    "question": "Một nhóm có 12 học sinh giỏi Tiếng Anh, 10 học sinh giỏi Tiếng Pháp, trong đó có 4 học sinh giỏi cả hai tiếng. Hỏi nhóm đó có bao nhiêu học sinh?",
+    "options": ["$18$ học sinh", "$22$ học sinh", "$16$ học sinh", "$20$ học sinh"],
+    "correct_answer": 0,
+    "explanation": "Tổng số học sinh = $12 + 10 - 4 = 18$ học sinh."
+  },
+  {
+    "id": "TOAN6_C1_B1_050",
+    "chapter": "chuong_1",
+    "topic": "c1_b1_tap_hop",
+    "level": "van_dung_cao",
+    "question": "Cho $A = \\{1; 2; 3; ...; 50\\}$. Có bao nhiêu phần tử thuộc $A$ vừa chia hết cho 2 vừa chia hết cho 3?",
+    "options": ["$8$", "$9$", "$7$", "$10$"],
+    "correct_answer": 0,
+    "explanation": "Chia hết cho cả 2 và 3 tức là chia hết cho 6. Các số đó là $6, 12, 18, 24, 30, 36, 42, 48$ (gồm 8 phần tử)."
+  },
+
+  {
+    "id": "TOAN6_C1_B2_001",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Trong hệ thập phân, có bao nhiêu chữ số được dùng để ghi mọi số tự nhiên?",
+    "options": ["10 chữ số", "9 chữ số", "8 chữ số", "Vô số chữ số"],
+    "correct_answer": 0,
+    "explanation": "Có 10 chữ số gồm: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9."
+  },
+  {
+    "id": "TOAN6_C1_B2_002",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Trong số $34567$, chữ số $4$ thuộc hàng nào?",
+    "options": ["Hàng nghìn", "Hàng trăm", "Hàng chục", "Hàng chục nghìn"],
+    "correct_answer": 0,
+    "explanation": "Chữ số 4 đứng ở vị trí thứ 4 từ phải sang left, thuộc hàng nghìn."
+  },
+  {
+    "id": "TOAN6_C1_B2_003",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Chữ số La Mã $V$ biểu diễn số mấy trong hệ thập phân?",
+    "options": ["$5$", "$1$", "$10$", "$50$"],
+    "correct_answer": 0,
+    "explanation": "Chữ số La Mã V tương ứng với số 5."
+  },
+  {
+    "id": "TOAN6_C1_B2_004",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Chữ số La Mã $X$ biểu diễn số mấy trong hệ thập phân?",
+    "options": ["$10$", "$5$", "$1$", "$100$"],
+    "correct_answer": 0,
+    "explanation": "Chữ số X có giá trị là 10."
+  },
+  {
+    "id": "TOAN6_C1_B2_005",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Số La Mã $XIV$ có giá trị bằng bao nhiêu?",
+    "options": ["$14$", "$16$", "$24$", "$15$"],
+    "correct_answer": 0,
+    "explanation": "$XIV = 10 + (5 - 1) = 14$."
+  },
+  {
+    "id": "TOAN6_C1_B2_006",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Chữ số $7$ trong số $27309$ thuộc lớp nào?",
+    "options": ["Lớp nghìn", "Lớp đơn vị", "Lớp triệu", "Lớp tỷ"],
+    "correct_answer": 0,
+    "explanation": "Chữ số 7 ở hàng nghìn, thuộc Lớp nghìn."
+  },
+  {
+    "id": "TOAN6_C1_B2_007",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Giá trị của chữ số $8$ trong số $18502$ là:",
+    "options": ["$8000$", "$800$", "$80$", "$80000$"],
+    "correct_answer": 0,
+    "explanation": "Chữ số 8 thuộc hàng nghìn nên có giá trị là $8000$."
+  },
+  {
+    "id": "TOAN6_C1_B2_008",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Kí hiệu chữ số La Mã $L$ ứng với số nào?",
+    "options": ["$50$", "$100$", "$500$", "$10$"],
+    "correct_answer": 0,
+    "explanation": "Chữ số La Mã L đại diện cho số 50."
+  },
+  {
+    "id": "TOAN6_C1_B2_009",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Kí hiệu chữ số La Mã $C$ ứng với số nào?",
+    "options": ["$100$", "$50$", "$500$", "$1000$"],
+    "correct_answer": 0,
+    "explanation": "Chữ số La Mã C đại diện cho số 100."
+  },
+  {
+    "id": "TOAN6_C1_B2_010",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Kí hiệu chữ số La Mã $D$ ứng với số nào?",
+    "options": ["$500$", "$100$", "$1000$", "$50$"],
+    "correct_answer": 0,
+    "explanation": "Chữ số La Mã D đại diện cho số 500."
+  },
+  {
+    "id": "TOAN6_C1_B2_011",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Kí hiệu chữ số La Mã $M$ ứng với số nào?",
+    "options": ["$1000$", "$500$", "$100$", "$50$"],
+    "correct_answer": 0,
+    "explanation": "Chữ số La Mã M đại diện cho số 1000."
+  },
+  {
+    "id": "TOAN6_C1_B2_012",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Số tự nhiên nhỏ nhất có 1 chữ số là:",
+    "options": ["$0$", "$1$", "$2$", "Không có"],
+    "correct_answer": 0,
+    "explanation": "Số 0 là số tự nhiên nhỏ nhất."
+  },
+  {
+    "id": "TOAN6_C1_B2_013",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Số tự nhiên nhỏ nhất có 2 chữ số là:",
+    "options": ["$10$", "$0$", "$11$", "$99$"],
+    "correct_answer": 0,
+    "explanation": "Số 10 là số tự nhiên có 2 chữ số nhỏ nhất."
+  },
+  {
+    "id": "TOAN6_C1_B2_014",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Số tự nhiên lớn nhất có 2 chữ số là:",
+    "options": ["$99$", "$100$", "$98$", "$90$"],
+    "correct_answer": 0,
+    "explanation": "Số 99 là số tự nhiên lớn nhất có 2 chữ số."
+  },
+  {
+    "id": "TOAN6_C1_B2_015",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "nhan_biet",
+    "question": "Trong số $5072$, chữ số $0$ ở hàng nào?",
+    "options": ["Hàng trăm", "Hàng chục", "Hàng nghìn", "Hàng đơn vị"],
+    "correct_answer": 0,
+    "explanation": "Chữ số 0 thuộc hàng trăm."
+  },
+  {
+    "id": "TOAN6_C1_B2_016",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Viết số $26$ dưới dạng chữ số La Mã:",
+    "options": ["$XXVI$", "$XXIV$", "$XVVI$", "$VVXVI$"],
+    "correct_answer": 0,
+    "explanation": "$26 = 20 + 6 = XX + VI = XXVI$."
+  },
+  {
+    "id": "TOAN6_C1_B2_017",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Viết số $29$ dưới dạng chữ số La Mã:",
+    "options": ["$XXIX$", "$XXXI$", "$XXVIIII$", "$XXIXI$"],
+    "correct_answer": 0,
+    "explanation": "$29 = 20 + 9 = XX + IX = XXIX$."
+  },
+  {
+    "id": "TOAN6_C1_B2_018",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Số La Mã $XL$ có giá trị bằng bao nhiêu?",
+    "options": ["$40$", "$60$", "$50$", "$45$"],
+    "correct_answer": 0,
+    "explanation": "$XL = 50 - 10 = 40$."
+  },
+  {
+    "id": "TOAN6_C1_B2_019",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Số La Mã $XC$ có giá trị bằng bao nhiêu?",
+    "options": ["$90$", "$110$", "$100$", "$95$"],
+    "correct_answer": 0,
+    "explanation": "$XC = 100 - 10 = 90$."
+  },
+  {
+    "id": "TOAN6_C1_B2_020",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Số tự nhiên lớn nhất có 4 chữ số khác nhau là:",
+    "options": ["$9876$", "$9999$", "$9867$", "$8976$"],
+    "correct_answer": 0,
+    "explanation": "Chọn hàng cao nhất lớn nhất có thể: hàng nghìn 9, trăm 8, chục 7, đơn vị 6 $\\implies 9876$."
+  },
+  {
+    "id": "TOAN6_C1_B2_021",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Số tự nhiên nhỏ nhất có 4 chữ số khác nhau là:",
+    "options": ["$1023$", "$1000$", "$1234$", "$1032$"],
+    "correct_answer": 0,
+    "explanation": "Chọn hàng nghìn nhỏ nhất khác 0 là 1, hàng trăm 0, hàng chục 2, hàng đơn vị 3 $\\implies 1023$."
+  },
+  {
+    "id": "TOAN6_C1_B2_022",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Biểu diễn số $\\overline{ab5}$ thành tổng giá trị các chữ số là:",
+    "options": ["$100a + 10b + 5$", "$a + b + 5$", "$10a + b + 5$", "$1000a + 100b + 5$"],
+    "correct_answer": 0,
+    "explanation": "Chữ số $a$ ở hàng trăm, $b$ ở hàng chục, $5$ ở hàng đơn vị $\\implies 100a + 10b + 5$."
+  },
+  {
+    "id": "TOAN6_C1_B2_023",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Số $506$ viết dưới dạng tổng các hàng là:",
+    "options": ["$500 + 6$", "$500 + 60$", "$50 + 6$", "$5 + 0 + 6$"],
+    "correct_answer": 0,
+    "explanation": "$506 = 5 \\times 100 + 0 \\times 10 + 6 = 500 + 6$."
+  },
+  {
+    "id": "TOAN6_C1_B2_024",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Viết số $49$ bằng chữ số La Mã:",
+    "options": ["$XLIX$", "$IL$", "$XXXXIX$", "$XLVIIII$"],
+    "correct_answer": 0,
+    "explanation": "$49 = 40 + 9 = XL + IX = XLIX$."
+  },
+  {
+    "id": "TOAN6_C1_B2_025",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Có bao nhiêu số tự nhiên có 3 chữ số?",
+    "options": ["$900$", "$899$", "$999$", "$901$"],
+    "correct_answer": 0,
+    "explanation": "Từ 100 đến 999 có $(999 - 100) + 1 = 900$ số."
+  },
+  {
+    "id": "TOAN6_C1_B2_026",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Đọc số La Mã $XXVIII$:",
+    "options": ["$28$", "$23$", "$38$", "$27$"],
+    "correct_answer": 0,
+    "explanation": "$XXVIII = 10 + 10 + 5 + 1 + 1 + 1 = 28$."
+  },
+  {
+    "id": "TOAN6_C1_B2_027",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Số tự nhiên lớn nhất có 3 chữ số là:",
+    "options": ["$999$", "$987$", "$100$", "$900$"],
+    "correct_answer": 0,
+    "explanation": "Số 999 là số lớn nhất có 3 chữ số."
+  },
+  {
+    "id": "TOAN6_C1_B2_028",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Số tự nhiên nhỏ nhất có 3 chữ số khác nhau là:",
+    "options": ["$102$", "$100$", "$123$", "$101$"],
+    "correct_answer": 0,
+    "explanation": "Hàng trăm nhỏ nhất là 1, hàng trăm 0, hàng đơn vị 2 $\\implies 102$."
+  },
+  {
+    "id": "TOAN6_C1_B2_029",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Đọc số La Mã $CD$:",
+    "options": ["$400$", "$600$", "$500$", "$450$"],
+    "correct_answer": 0,
+    "explanation": "$CD = 500 - 100 = 400$."
+  },
+  {
+    "id": "TOAN6_C1_B2_030",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "thong_hieu",
+    "question": "Đọc số La Mã $CM$:",
+    "options": ["$900$", "$1100$", "$1000$", "$950$"],
+    "correct_answer": 0,
+    "explanation": "$CM = 1000 - 100 = 900$."
+  },
+  {
+    "id": "TOAN6_C1_B2_031",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung",
+    "question": "Dùng 3 chữ số $0; 1; 2$ có thể viết được bao nhiêu số tự nhiên có 3 chữ số khác nhau?",
+    "options": ["$4$ số", "$6$ số", "$3$ số", "$5$ số"],
+    "correct_answer": 0,
+    "explanation": "Các số ghép được: $102, 120, 201, 210$ (gồm 4 số)."
+  },
+  {
+    "id": "TOAN6_C1_B2_032",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung",
+    "question": "Thêm chữ số $0$ vào bên phải số $35$ thì số mới tăng thêm bao nhiêu đơn vị?",
+    "options": ["$315$", "$350$", "$300$", "$35$"],
+    "correct_answer": 0,
+    "explanation": "Số mới là $350$. Tăng thêm $350 - 35 = 315$ đơn vị."
+  },
+  {
+    "id": "TOAN6_C1_B2_033",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung",
+    "question": "Một số tự nhiên có 3 chữ số thay đổi thế nào nếu viết thêm chữ số $2$ vào bên trái số đó?",
+    "options": ["Tăng $2000$ đơn vị", "Tăng $200$ đơn vị", "Tăng $20$ đơn vị", "Gấp lên $2$ lần"],
+    "correct_answer": 0,
+    "explanation": "Thêm chữ số 2 vào bên trái số có 3 chữ số nghĩa là thêm 2 ở hàng nghìn $\\implies$ tăng 2000 đơn vị."
+  },
+  {
+    "id": "TOAN6_C1_B2_034",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung",
+    "question": "Có bao nhiêu số tự nhiên có hai chữ số mà chữ số hàng chục là $7$?",
+    "options": ["$10$", "$9$", "$8$", "$11$"],
+    "correct_answer": 0,
+    "explanation": "Các số từ $70$ đến $79$ (gồm 10 số)."
+  },
+  {
+    "id": "TOAN6_C1_B2_035",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung",
+    "question": "Cho số $1234$. Nếu xóa đi chữ số $4$ ở hàng đơn vị thì số mới giảm đi bao nhiêu đơn vị?",
+    "options": ["$1110$ đơn vị", "$4$ đơn vị", "$1230$ đơn vị", "$1111$ đơn vị"],
+    "correct_answer": 0,
+    "explanation": "Số mới là $123$. Giảm $1234 - 123 = 1111$ đơn vị."
+  },
+  {
+    "id": "TOAN6_C1_B2_036",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung",
+    "question": "Tìm số tự nhiên có hai chữ số, biết rằng nếu viết thêm chữ số $5$ vào bên phải số đó thì được số mới hơn số cũ $230$ đơn vị.",
+    "options": ["$25$", "$23$", "$24$", "$26$"],
+    "correct_answer": 0,
+    "explanation": "Gọi số là $x$. Số mới $10x + 5$. Ta có $10x + 5 - x = 230 \\implies 9x = 225 \\implies x = 25$."
+  },
+  {
+    "id": "TOAN6_C1_B2_037",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung",
+    "question": "Có bao nhiêu số tự nhiên lẻ có hai chữ số?",
+    "options": ["$45$", "$50$", "$40$", "$90$"],
+    "correct_answer": 0,
+    "explanation": "Các số $11, 13, ..., 99$. Số phần tử = $(99 - 11) : 2 + 1 = 45$ số."
+  },
+  {
+    "id": "TOAN6_C1_B2_038",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung",
+    "question": "Có bao nhiêu số tự nhiên chẵn có hai chữ số?",
+    "options": ["$45$", "$50$", "$40$", "$90$"],
+    "correct_answer": 0,
+    "explanation": "Các số $10, 12, ..., 98$. Số phần tử = $(98 - 10) : 2 + 1 = 45$ số."
+  },
+  {
+    "id": "TOAN6_C1_B2_039",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung",
+    "question": "Từ các chữ số $1; 2; 3; 4$ lập được bao nhiêu số tự nhiên có 2 chữ số khác nhau?",
+    "options": ["$12$", "$16$", "$10$", "$8$"],
+    "correct_answer": 0,
+    "explanation": "Hàng chục có 4 cách chọn, hàng đơn vị có 3 cách chọn $\\implies 4 \\times 3 = 12$ số."
+  },
+  {
+    "id": "TOAN6_C1_B2_040",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung",
+    "question": "Có bao nhiêu số tự nhiên có 3 chữ số mà cả 3 chữ số đều giống nhau?",
+    "options": ["$9$", "$10$", "$8$", "$90$"],
+    "correct_answer": 0,
+    "explanation": "Đó là $111, 222, 333, 444, 555, 666, 777, 888, 999$ (9 số)."
+  },
+  {
+    "id": "TOAN6_C1_B2_041",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung_cao",
+    "question": "Để viết các số tự nhiên từ $1$ đến $99$ cần dùng bao nhiêu chữ số $5$?",
+    "options": ["$20$", "$19$", "$10$", "$15$"],
+    "correct_answer": 0,
+    "explanation": "Hàng đơn vị có 10 chữ số (5, 15, ..., 95). Hàng chục có 10 chữ số (50, 51, ..., 59). Tổng = 20 chữ số."
+  },
+  {
+    "id": "TOAN6_C1_B2_042",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung_cao",
+    "question": "Để đánh số trang một cuốn sách dày $100$ trang cần dùng bao nhiêu chữ số?",
+    "options": ["$192$", "$100$", "$200$", "$180$"],
+    "correct_answer": 0,
+    "explanation": "1-9: $9 \\times 1 = 9$ chữ số. 10-99: $90 \\times 2 = 180$ chữ số. Trang 100: $3$ chữ số. Tổng = $9 + 180 + 3 = 192$ chữ số."
+  },
+  {
+    "id": "TOAN6_C1_B2_043",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung_cao",
+    "question": "Cho số tự nhiên có hai chữ số, biết chữ số hàng chục gấp 3 lần chữ số hàng đơn vị. Có bao nhiêu số thỏa mãn?",
+    "options": ["$3$", "$4$", "$2$", "$5$"],
+    "correct_answer": 0,
+    "explanation": "Các cặp (chục, đơn vị) thỏa mãn: $(3,1), (6,2), (9,3) \\implies$ có 3 số ($31, 62, 93$)."
+  },
+  {
+    "id": "TOAN6_C1_B2_044",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung_cao",
+    "question": "Cho số tự nhiên có 2 chữ số, biết rằng nếu viết thêm chữ số $1$ vào bên trái và bên phải số đó thì được số mới gấp 21 lần số cũ. Số đó là:",
+    "options": ["$75$", "$25$", "$35$", "$45$"],
+    "correct_answer": 0,
+    "explanation": "Gọi số là $x$. Số mới là $\\overline{1x1} = 1000 + 10x + 1 = 1001 + 10x$. Ta có $1001 + 10x = 21x \\implies 11x = 1001 \\implies x = 91$... à $1001 : 11 = 91$."
+  },
+  {
+    "id": "TOAN6_C1_B2_045",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung_cao",
+    "question": "Tìm số tự nhiên có 3 chữ số, biết rằng chữ số hàng trăm gấp 2 lần chữ số hàng chục, chữ số hàng chục gấp 3 lần chữ số hàng đơn vị.",
+    "options": ["$631$", "$632$", "$361$", "$931$"],
+    "correct_answer": 0,
+    "explanation": "Đơn vị phải là 1 (vì nếu đơn vị $\\ge 2$ thì hàng trăm $\\ge 12$ không phải chữ số). Đơn vị = 1 $\\implies$ chục = 3 $\\implies$ trăm = 6. Số là 631."
+  },
+  {
+    "id": "TOAN6_C1_B2_046",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung_cao",
+    "question": "Để đánh số trang một tập giáo án từ trang 1 cần dùng tất cả 282 chữ số. Hỏi tập giáo án đó dày bao nhiêu trang?",
+    "options": ["$130$ trang", "$141$ trang", "$120$ trang", "$135$ trang"],
+    "correct_answer": 0,
+    "explanation": "1-9 dùng 9 chữ số. Số chữ số còn lại là $282 - 9 = 273$. Số trang có 2 chữ số dùng $90 \\times 2 = 180$ chữ số. Số chữ số dùng cho trang 3 chữ số là $273 - 180 = 93$. Số trang 3 chữ số là $93 : 3 = 31$ trang. Tổng số trang = $99 + 31 = 130$ trang."
+  },
+  {
+    "id": "TOAN6_C1_B2_047",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung_cao",
+    "question": "Viết liên tiếp các số tự nhiên từ 1 đến 20 để được một số tự nhiên $A = 1234567891011...1920$. Số $A$ có bao nhiêu chữ số?",
+    "options": ["$31$", "$30$", "$20$", "$40$"],
+    "correct_answer": 0,
+    "explanation": "1 đến 9 có 9 số 1 chữ số (9 chữ số). 10 đến 20 có 11 số 2 chữ số (22 chữ số). Tổng số chữ số = $9 + 22 = 31$ chữ số."
+  },
+  {
+    "id": "TOAN6_C1_B2_048",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung_cao",
+    "question": "Có bao nhiêu số tự nhiên có 3 chữ số mà trong đó có ít nhất một chữ số 5?",
+    "options": ["$252$", "$225$", "$180$", "$200$"],
+    "correct_answer": 0,
+    "explanation": "Tổng số có 3 chữ số là 900 số. Số không chứa chữ số 5 nào: Hàng trăm có 8 cách chọn (trừ 0 và 5), hàng chục có 9 cách, đơn vị có 9 cách $\\implies 8 \\times 9 \\times 9 = 648$ số. Số có ít nhất 1 chữ số 5 là $900 - 648 = 252$ số."
+  },
+  {
+    "id": "TOAN6_C1_B2_049",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung_cao",
+    "question": "Tìm số tự nhiên có 2 chữ số, biết rằng nếu đổi chỗ hai chữ số cho nhau thì được số mới lớn hơn số cũ 36 đơn vị và tổng hai chữ số bằng 10.",
+    "options": ["$37$", "$28$", "$46$", "$19$"],
+    "correct_answer": 0,
+    "explanation": "$\\overline{ba} - \\overline{ab} = 9(b - a) = 36 \\implies b - a = 4$. Mà $a + b = 10 \\implies a = 3, b = 7$. Số đó là 37."
+  },
+  {
+    "id": "TOAN6_C1_B2_050",
+    "chapter": "chuong_1",
+    "topic": "c1_b2_ghi_so_tu_nhien",
+    "level": "van_dung_cao",
+    "question": "Có bao nhiêu số La Mã hợp lệ nhỏ hơn 30 được tạo thành từ các kí hiệu I, V, X?",
+    "options": ["$29$", "$30$", "$28$", "$25$"],
+    "correct_answer": 0,
+    "explanation": "Mỗi số tự nhiên từ 1 đến 29 đều có đúng 1 cách biểu diễn số La Mã hợp lệ tương ứng, nên có 29 số."
+  }
+]

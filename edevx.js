@@ -140,19 +140,14 @@ document.addEventListener("DOMContentLoaded", function() {
         loadScript('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js');
     }
     
-    // [ĐÃ FIX]: Quét toàn bộ thẻ Body để phát hiện dấu $ ở cả Trang chủ lẫn Trang con
-    if (document.body && (document.body.innerText.includes('$$') || document.body.innerText.includes('$'))) {
+    if (articleBody && (articleBody.innerText.includes('$$') || articleBody.innerText.includes('$'))) {
         loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css');
         (async () => {
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js');
             
-            // Xử lý xuống dòng cho công thức
             document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
-            
-            // Render toàn bộ trang
             renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false });
-            
             if(tocContainer) setTimeout(() => tocbot.refresh(), 500);
         })();
     }
@@ -371,124 +366,121 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // --- 8. FOCUS WORKSPACE DOCK (POMODORO 3 MODE) ---
-    (function initPomodoro() {
-        const panel = document.getElementById('pomo-panel');
-        if(!panel) return;
+    // ========================================================
+    // --- 9. GITHUB JSON DATABASE ENGINE (TRẮC NGHIỆM ĐỘNG) ---
+    // ========================================================
+    (function initGitHubJsonQuizEngine() {
+        const containers = document.querySelectorAll('.edevx-quiz-db');
+        if (!containers.length) return;
 
-        const toggleBtn = document.getElementById('pomo-toggle');
-        const timeDisplay = document.getElementById('pomo-time');
-        const startBtn = document.getElementById('pomo-start');
-        const resetBtn = document.getElementById('pomo-reset');
-        const playIcon = document.getElementById('pomo-play-icon');
+        // Bộ nhớ đệm Cache tránh tải lại file JSON nhiều lần
+        const jsonCache = {};
         
-        // Nhóm các nút chế độ theo thứ tự: 15p - 25p - 5p
-        const modeBtns = [
-            document.getElementById('mode-warmup'),
-            document.getElementById('mode-focus'),
-            document.getElementById('mode-break')
-        ];
+        // TỰ ĐỘNG ĐỌC BASE URL TỪ THẺ SCRIPT TRÊN XML BLOGGER (0 CONFIG)
+        const selfScript = document.currentScript || Array.from(document.scripts).find(s => s.src && s.src.includes('edevx.js'));
+        const GITHUB_RAW_BASE = selfScript ? selfScript.src.substring(0, selfScript.src.lastIndexOf('/') + 1) : 'https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/';
 
-        // Mặc định khởi động là 15 phút (Màu tím)
-        let currentMinutes = 15;
-        let currentColor = 'purple'; 
-        let timeLeft = 15 * 60; 
-        let timerId = null;
-        let isRunning = false;
+        async function loadDataset(src) {
+            const fullUrl = src.startsWith('http') ? src : `${GITHUB_RAW_BASE}${src}`;
+            if (jsonCache[fullUrl]) return jsonCache[fullUrl];
 
-        // Bật/Tắt Bảng điều khiển
-        toggleBtn.addEventListener('click', () => {
-            panel.classList.toggle('hidden');
-            if (!isRunning) {
-                toggleBtn.classList.toggle('opacity-30');
-                toggleBtn.classList.toggle('opacity-100');
-                toggleBtn.classList.toggle(`text-${currentColor}-600`);
-                toggleBtn.classList.toggle('text-zinc-400');
+            try {
+                const res = await fetch(fullUrl);
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                const data = await res.json();
+                jsonCache[fullUrl] = data;
+                return data;
+            } catch (err) {
+                console.error('[EDEVX JSON Engine] Lỗi nạp file:', src, err);
+                return null;
+            }
+        }
+
+        function shuffleArray(arr) {
+            return arr.sort(() => Math.random() - 0.5);
+        }
+
+        containers.forEach(async (box) => {
+            const src = box.getAttribute('data-source');
+            const topic = box.getAttribute('data-topic');
+            const chapter = box.getAttribute('data-chapter');
+            const level = box.getAttribute('data-level');
+            const limit = parseInt(box.getAttribute('data-limit')) || 0;
+            const isRandom = box.getAttribute('data-random') === 'true';
+
+            if (!src) return;
+
+            // Hiệu ứng Loading
+            box.innerHTML = `<div class="p-6 text-center text-zinc-500 animate-pulse font-medium text-sm"><i class="fas fa-circle-notch fa-spin text-blue-600 mr-2"></i> Đang nạp ngân hàng câu hỏi từ GitHub...</div>`;
+
+            const rawData = await loadDataset(src);
+            if (!rawData) {
+                box.innerHTML = `<div class="p-4 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-2xl text-sm font-bold border border-red-200 dark:border-red-800">⚠️ Không thể tải dữ liệu câu hỏi (${src}). Vui lòng kiểm tra lại file trên GitHub.</div>`;
+                return;
+            }
+
+            // Lấy danh sách câu hỏi (xử lý cả dạng Mảng lẫn dạng Đối tượng có trường questions)
+            let qList = Array.isArray(rawData) ? rawData : (rawData.questions || []);
+
+            // Lọc dữ liệu theo topic, chapter, level
+            if (topic) qList = qList.filter(q => q.topic === topic);
+            if (chapter) qList = qList.filter(q => q.chapter === chapter);
+            if (level) qList = qList.filter(q => q.level === level);
+
+            // Ngẫu nhiên hóa nếu có data-random
+            if (isRandom) qList = shuffleArray([...qList]);
+
+            // Giới hạn số câu nếu có data-limit
+            if (limit > 0 && qList.length > limit) qList = qList.slice(0, limit);
+
+            if (qList.length === 0) {
+                box.innerHTML = `<div class="p-4 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400 rounded-2xl text-sm font-bold border border-amber-200 dark:border-amber-800">Chưa có câu hỏi nào thuộc chủ đề này.</div>`;
+                return;
+            }
+
+            // Dựng giao diện danh sách câu hỏi
+            let htmlHTML = `<div class="space-y-6">`;
+            qList.forEach((q, idx) => {
+                const qId = q.id || `q_${idx}`;
+                htmlHTML += `
+                <div class="quiz-container bg-white dark:bg-zinc-900 border-2 border-zinc-200 dark:border-zinc-800 p-6 rounded-3xl shadow-sm space-y-4" data-quiz-id="${qId}">
+                    <div class="font-bold text-zinc-800 dark:text-zinc-100 text-base leading-relaxed flex items-start gap-3">
+                        <span class="bg-blue-600 text-white text-xs px-2.5 py-1 rounded-xl font-black shrink-0 mt-0.5">Câu ${idx + 1}</span>
+                        <div>${q.question}</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                        ${q.options.map((opt, oIdx) => `
+                            <div class="quiz-option p-4 border-2 border-zinc-200 dark:border-zinc-800 rounded-2xl bg-zinc-50/50 dark:bg-zinc-800/50 font-semibold cursor-pointer hover:border-blue-500 text-sm flex items-center justify-between text-zinc-700 dark:text-zinc-300 transition-all" 
+                                 data-correct="${oIdx === q.correct_answer}">
+                                <span><b class="mr-2 text-zinc-400">${String.fromCharCode(65 + oIdx)}.</b> ${opt}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${q.explanation ? `
+                    <details class="text-sm mt-3 pt-2 border-t border-zinc-100 dark:border-zinc-800">
+                        <summary class="font-bold text-blue-600 dark:text-blue-400 cursor-pointer text-xs">🔍 Xem lời giải chi tiết</summary>
+                        <div class="pt-3 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm space-y-1">
+                            ${q.explanation}
+                        </div>
+                    </details>` : ''}
+                </div>`;
+            });
+            htmlHTML += `</div>`;
+
+            box.innerHTML = htmlHTML;
+
+            // Re-render KaTeX cho các câu hỏi mới nạp động
+            if (window.renderMathInElement) {
+                renderMathInElement(box, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
             }
         });
-
-        const formatTime = (seconds) => {
-            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-            const s = (seconds % 60).toString().padStart(2, '0');
-            return `${m}:${s}`;
-        };
-
-        const updateDisplay = () => {
-            timeDisplay.textContent = formatTime(timeLeft);
-            document.title = isRunning ? `(${formatTime(timeLeft)}) EDEVX Focus` : document.title.split(') ')[1] || document.title;
-        };
-
-        // Động cơ đổi màu & Đổi chế độ
-        const setMode = (btn) => {
-            currentMinutes = parseInt(btn.getAttribute('data-time'));
-            currentColor = btn.getAttribute('data-color');
-            timeLeft = currentMinutes * 60;
-            updateDisplay();
-            pauseTimer();
-            
-            // Xóa màu active của tất cả các nút
-            modeBtns.forEach(b => {
-                b.className = `px-2.5 py-1 text-xs font-bold rounded-md text-zinc-500 hover:text-${b.getAttribute('data-color')}-500 transition-all`;
-            });
-
-            // Bật màu active cho nút được chọn
-            btn.className = `px-2.5 py-1 text-xs font-bold rounded-md bg-white dark:bg-zinc-700 text-${currentColor}-500 shadow-sm transition-all`;
-            
-            // Đổi màu số và màu nút Start
-            timeDisplay.className = `text-5xl font-black text-center text-${currentColor}-600 dark:text-${currentColor}-500 font-mono tracking-widest mb-6 transition-colors duration-300`;
-            startBtn.className = `w-12 h-12 bg-${currentColor}-600 hover:bg-${currentColor}-700 text-white rounded-full flex items-center justify-center text-lg shadow-lg hover:scale-105 transition-all`;
-        };
-
-        // Gắn sự kiện click cho 3 nút
-        modeBtns.forEach(btn => btn.addEventListener('click', () => setMode(btn)));
-
-        const startTimer = () => {
-            if (isRunning) return;
-            isRunning = true;
-            playIcon.className = 'fas fa-pause';
-            
-            // Khóa sáng nút nổi
-            toggleBtn.classList.remove('opacity-30', 'text-zinc-400');
-            toggleBtn.classList.add('opacity-100', `text-${currentColor}-600`);
-            timeDisplay.classList.add('animate-pulse');
-
-            timerId = setInterval(() => {
-                timeLeft--;
-                updateDisplay();
-                if (timeLeft <= 0) {
-                    pauseTimer();
-                    
-                    // Thông báo thông minh theo số phút
-                    if (currentMinutes === 15) {
-                        alert("Khởi động xuất sắc! Thưởng cho con 5 phút nghỉ ngơi nhé!");
-                        setMode(modeBtns[2]); // Chuyển sang 5p nghỉ
-                    } else if (currentMinutes === 25) {
-                        alert("Tập trung đỉnh cao! Đến lúc xả hơi 5 phút rồi!");
-                        setMode(modeBtns[2]); // Chuyển sang 5p nghỉ
-                    } else {
-                        alert("Hết giờ giải lao! Quay lại bàn học thôi con!");
-                        // Hết 5p nghỉ thì tự quay về mốc 15p cho an toàn
-                        setMode(modeBtns[0]); 
-                    }
-                }
-            }, 1000);
-        };
-
-        const pauseTimer = () => {
-            isRunning = false;
-            playIcon.className = 'fas fa-play';
-            clearInterval(timerId);
-            timeDisplay.classList.remove('animate-pulse');
-            
-            if (panel.classList.contains('hidden')) {
-                toggleBtn.classList.add('opacity-30', 'text-zinc-400');
-                toggleBtn.classList.remove('opacity-100', 'text-blue-600', 'text-purple-600', 'text-emerald-600');
-            }
-        };
-
-        startBtn.addEventListener('click', () => isRunning ? pauseTimer() : startTimer());
-        resetBtn.addEventListener('click', () => setMode(modeBtns.find(b => parseInt(b.getAttribute('data-time')) === currentMinutes)));
     })();
-
-
 });
