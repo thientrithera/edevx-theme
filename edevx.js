@@ -366,40 +366,35 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // ========================================================
-    // --- 9. GITHUB JSON DATABASE ENGINE (BULLETPROOF V10 MAX) ---
+// ========================================================
+    // --- 9. GITHUB JSON DATABASE ENGINE (V11 FINAL - ANTI CORS) ---
     // ========================================================
     (function initGitHubJsonQuizEngine() {
         const containers = document.querySelectorAll('.edevx-quiz-db');
         if (!containers.length) return;
 
-        // BÍ QUYẾT TỐI ƯU NHẤT: DÙNG TRỰC TIẾP RAW GITHUB CHO FILE JSON (BỎ QUA JSDELIVR)
-        // Điều này giúp sếp đổi JSON không cần đổi mã HASH JS, và F5 không bao giờ bị đơ!
         const RAW_GITHUB_BASE = 'https://raw.githubusercontent.com/thientrithera/edevx-theme/main/';
 
         async function loadDataset(src) {
             const cleanSrc = src.trim();
             const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${RAW_GITHUB_BASE}${cleanSrc}`;
             
-            // ÉP TRÌNH DUYỆT TẢI MỚI 100% MỖI KHI F5 BẰNG CACHE BUSTER
+            // Vũ khí phá Cache duy nhất cần thiết, không dùng cache: 'no-store' để tránh lỗi CORS
             const targetUrl = `${fullUrl}?v=${Date.now()}`;
 
-            // Bảo vệ mạng: Tự động ngắt nếu mạng lag quá 5 giây
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 5000);
+            const timeoutId = setTimeout(() => controller.abort(), 8000); // Cho phép tối đa 8 giây
 
             try {
-                const res = await fetch(targetUrl, { 
-                    signal: controller.signal,
-                    cache: 'no-store' // Cấm trình duyệt lưu đĩa
-                });
+                // Lệnh fetch thuần túy (Simple Request) để đi xuyên tường lửa GitHub
+                const res = await fetch(targetUrl, { signal: controller.signal });
                 clearTimeout(timeoutId);
 
                 if (!res.ok) throw new Error(`HTTP Status ${res.status}`);
                 return await res.json();
             } catch (err) {
                 clearTimeout(timeoutId);
-                console.error('[EDEVX Engine Error]:', cleanSrc, err);
+                console.error('[EDEVX JSON Error]:', err);
                 return null;
             }
         }
@@ -416,6 +411,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (!src) return;
 
+            // Bọc HTML an toàn chống mất giao diện
             box.innerHTML = `<div class="p-6 text-center text-zinc-500 animate-pulse font-medium text-sm flex items-center justify-center gap-2"><i class="fas fa-circle-notch fa-spin text-blue-600 text-lg"></i> <span>Đang nạp ngân hàng câu hỏi...</span></div>`;
 
             const rawData = await loadDataset(src);
@@ -424,7 +420,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="p-5 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-3xl text-sm font-bold border border-red-200 dark:border-red-800 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-exclamation-circle text-lg"></i>
-                        <span>Không thể tải dữ liệu file: <b>${src}</b>.</span>
+                        <span>Không thể tải dữ liệu file: <b>${src}</b>. Sếp ấn F12 kiểm tra Console nhé.</span>
                     </div>
                     <button class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-black uppercase tracking-wider shadow hover:bg-red-700 transition" onclick="location.reload()">Thử lại</button>
                 </div>`;
@@ -440,7 +436,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (limit > 0 && qList.length > limit) qList = qList.slice(0, limit);
 
             if (qList.length === 0) {
-                box.innerHTML = `<div class="p-5 bg-amber-50 text-amber-700 dark:bg-amber-900/20 rounded-3xl text-sm font-bold border border-amber-200">Không tìm thấy câu hỏi cho chủ đề: <b>${topic || chapter || 'Tất cả'}</b>.</div>`;
+                box.innerHTML = `<div class="p-5 bg-amber-50 text-amber-700 dark:bg-amber-900/20 rounded-3xl text-sm font-bold border border-amber-200">Không tìm thấy câu hỏi nào.</div>`;
                 return;
             }
 
@@ -518,4 +514,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             }
         });
+
     })();
+
+ // ĐÓNG SỰ KIỆN DOMContentLoaded TỔNG TOÀN BỘ FILE (CHỮA LỖI SYNTAX)
+
+});
