@@ -367,23 +367,19 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ========================================================
-    // --- 9. GITHUB JSON DATABASE ENGINE (TRẮC NGHIỆM ĐỘNG) ---
+    // --- 9. GITHUB JSON DATABASE ENGINE (TRẮC NGHIỆM ĐỘNG + CHẤM ĐIỂM) ---
     // ========================================================
     (function initGitHubJsonQuizEngine() {
         const containers = document.querySelectorAll('.edevx-quiz-db');
         if (!containers.length) return;
 
-        // Bộ nhớ đệm Cache tránh tải lại file JSON nhiều lần
         const jsonCache = {};
-        
-        // TỰ ĐỘNG ĐỌC BASE URL TỪ THẺ SCRIPT TRÊN XML BLOGGER (0 CONFIG)
         const selfScript = document.currentScript || Array.from(document.scripts).find(s => s.src && s.src.includes('edevx.js'));
         const GITHUB_RAW_BASE = selfScript ? selfScript.src.substring(0, selfScript.src.lastIndexOf('/') + 1) : 'https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/';
 
         async function loadDataset(src) {
             const fullUrl = src.startsWith('http') ? src : `${GITHUB_RAW_BASE}${src}`;
             if (jsonCache[fullUrl]) return jsonCache[fullUrl];
-
             try {
                 const res = await fetch(fullUrl);
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
@@ -396,9 +392,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        function shuffleArray(arr) {
-            return arr.sort(() => Math.random() - 0.5);
-        }
+        function shuffleArray(arr) { return arr.sort(() => Math.random() - 0.5); }
 
         containers.forEach(async (box) => {
             const src = box.getAttribute('data-source');
@@ -410,35 +404,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (!src) return;
 
-            // Hiệu ứng Loading
-            box.innerHTML = `<div class="p-6 text-center text-zinc-500 animate-pulse font-medium text-sm"><i class="fas fa-circle-notch fa-spin text-blue-600 mr-2"></i> Đang nạp ngân hàng câu hỏi từ GitHub...</div>`;
+            box.innerHTML = `<div class="p-6 text-center text-zinc-500 animate-pulse font-medium text-sm"><i class="fas fa-circle-notch fa-spin text-blue-600 mr-2"></i> Đang nạp ngân hàng câu hỏi...</div>`;
 
             const rawData = await loadDataset(src);
             if (!rawData) {
-                box.innerHTML = `<div class="p-4 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-2xl text-sm font-bold border border-red-200 dark:border-red-800">⚠️ Không thể tải dữ liệu câu hỏi (${src}). Vui lòng kiểm tra lại file trên GitHub.</div>`;
+                box.innerHTML = `<div class="p-4 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-2xl text-sm font-bold border border-red-200">⚠️ Không thể tải dữ liệu câu hỏi (${src}).</div>`;
                 return;
             }
 
-            // Lấy danh sách câu hỏi (xử lý cả dạng Mảng lẫn dạng Đối tượng có trường questions)
             let qList = Array.isArray(rawData) ? rawData : (rawData.questions || []);
-
-            // Lọc dữ liệu theo topic, chapter, level
             if (topic) qList = qList.filter(q => q.topic === topic);
             if (chapter) qList = qList.filter(q => q.chapter === chapter);
             if (level) qList = qList.filter(q => q.level === level);
 
-            // Ngẫu nhiên hóa nếu có data-random
             if (isRandom) qList = shuffleArray([...qList]);
-
-            // Giới hạn số câu nếu có data-limit
             if (limit > 0 && qList.length > limit) qList = qList.slice(0, limit);
 
             if (qList.length === 0) {
-                box.innerHTML = `<div class="p-4 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400 rounded-2xl text-sm font-bold border border-amber-200 dark:border-amber-800">Chưa có câu hỏi nào thuộc chủ đề này.</div>`;
+                box.innerHTML = `<div class="p-4 bg-amber-50 text-amber-700 dark:bg-amber-900/20 rounded-2xl text-sm font-bold border border-amber-200">Chưa có câu hỏi nào thuộc chủ đề này.</div>`;
                 return;
             }
 
-            // Dựng giao diện danh sách câu hỏi
             let htmlHTML = `<div class="space-y-6">`;
             qList.forEach((q, idx) => {
                 const qId = q.id || `q_${idx}`;
@@ -467,17 +453,40 @@ document.addEventListener("DOMContentLoaded", function() {
                     </details>` : ''}
                 </div>`;
             });
-            htmlHTML += `</div>`;
+
+            // THANH BẢNG ĐIỂM CHẤM ĐIỂM TỰ ĐỘNG TẠI ĐÂY
+            htmlHTML += `
+            <div class="p-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-3xl shadow-lg flex items-center justify-between text-sm sm:text-base font-bold mt-8">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-trophy text-amber-300 text-2xl"></i>
+                    <span class="quiz-score-display">Hãy hoàn thành các câu hỏi trên...</span>
+                </div>
+                <button class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all" onclick="location.reload()">Làm lại bài</button>
+            </div></div>`;
 
             box.innerHTML = htmlHTML;
 
-            // Re-render KaTeX cho các câu hỏi mới nạp động
+            // Xử lý tính điểm tự động khi click
+            const totalQ = qList.length;
+            const scoreDisplay = box.querySelector('.quiz-score-display');
+            
+            box.addEventListener('click', (e) => {
+                if (e.target.closest('.quiz-option')) {
+                    setTimeout(() => {
+                        const answered = box.querySelectorAll('.quiz-container.answered').length;
+                        const correct = box.querySelectorAll('.quiz-option.correct').length;
+                        const score = ((correct / totalQ) * 10).toFixed(1);
+                        
+                        if (scoreDisplay) {
+                            scoreDisplay.innerHTML = `Kết quả: <b class="text-amber-300 text-lg mx-1">${correct}/${totalQ}</b> câu đúng (${score} điểm) ${answered === totalQ ? '🎉 Hoàn thành!' : ''}`;
+                        }
+                    }, 50);
+                }
+            });
+
             if (window.renderMathInElement) {
                 renderMathInElement(box, {
-                    delimiters: [
-                        {left: '$$', right: '$$', display: true},
-                        {left: '$', right: '$', display: false}
-                    ],
+                    delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
                     throwOnError: false
                 });
             }
