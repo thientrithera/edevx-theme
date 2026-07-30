@@ -368,13 +368,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ========================================================
-    // --- 9. GITHUB JSON DATABASE ENGINE (BẢN CHUẨN GỐC RỄ) ---
+    // --- 9. GITHUB JSON DATABASE ENGINE (BẤT TỬ VỚI SESSION CACHE) ---
     // ========================================================
     (function initGitHubJsonQuizEngine() {
         const containers = document.querySelectorAll('.edevx-quiz-db');
         if (!containers.length) return;
 
-        // 1. TÌM CHÍNH XÁC ĐƯỜNG LINK CHỨA MÃ HASH ĐANG CHẠY TRÊN BLOGGER
         let baseUrl = 'https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/';
         const scripts = document.querySelectorAll('script');
         scripts.forEach(s => {
@@ -383,15 +382,31 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        // 2. LỆNH FETCH THUẦN KHIẾT (KHÔNG CÀI CẮM BẤT KỲ THÔNG SỐ NÀO ĐỂ CHỐNG BLOCK)
+        // HÀM TẢI DỮ LIỆU CÓ SỬ DỤNG BỘ NHỚ RAM (SESSION STORAGE)
         async function loadDataset(src) {
             const cleanSrc = src.trim();
             const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${baseUrl}${cleanSrc}`;
 
+            // 1. Kiểm tra xem RAM trình duyệt đã có file này chưa?
+            const cachedData = sessionStorage.getItem(fullUrl);
+            if (cachedData) {
+                try {
+                    return JSON.parse(cachedData); // Lấy từ RAM ra ngay lập tức (0 giây)
+                } catch (e) {
+                    sessionStorage.removeItem(fullUrl);
+                }
+            }
+
+            // 2. Nếu RAM chưa có (Lần đầu mở web), mới lên mạng tải 1 lần duy nhất
             try {
                 const res = await fetch(fullUrl);
                 if (!res.ok) throw new Error(`Lỗi mạng: ${res.status}`);
-                return await res.json();
+                const data = await res.json();
+                
+                // Lưu vào RAM ngay để các lần F5 sau không phải tải mạng nữa
+                sessionStorage.setItem(fullUrl, JSON.stringify(data));
+                
+                return data;
             } catch (err) {
                 console.error('[EDEVX JSON Error]:', err);
                 return null;
@@ -419,7 +434,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <div class="p-5 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-3xl text-sm font-bold border border-red-200 dark:border-red-800 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-exclamation-circle text-lg"></i>
-                        <span>Lỗi tải dữ liệu file: <b>${src}</b>.</span>
+                        <span>Lỗi tải dữ liệu. Cáp mạng bị nghẽn!</span>
                     </div>
                     <button class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-black uppercase tracking-wider shadow hover:bg-red-700 transition" onclick="location.reload()">Tải lại</button>
                 </div>`;
@@ -431,6 +446,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (chapter) qList = qList.filter(q => q.chapter === chapter);
             if (level) qList = qList.filter(q => q.level === level);
 
+            // Dù lấy từ RAM ra, JS vẫn xáo trộn câu hỏi ngẫu nhiên cho sếp!
             if (isRandom) qList = shuffleArray([...qList]);
             if (limit > 0 && qList.length > limit) qList = qList.slice(0, limit);
 
