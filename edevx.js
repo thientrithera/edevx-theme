@@ -379,12 +379,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         async function loadDataset(src) {
             const fullUrl = src.startsWith('http') ? src : `${GITHUB_RAW_BASE}${src}`;
-            if (jsonCache[fullUrl]) return jsonCache[fullUrl];
+            
+            // ⚠️ THÊM MÃ CACHE BUSTER THỜI GIAN THỰC ĐỂ F5 THƯỜNG KHÔNG BỊ ĐƠ DISK CACHE
+            const cacheBusterUrl = `${fullUrl}?t=${Date.now()}`;
+            if (jsonCache[cacheBusterUrl]) return jsonCache[cacheBusterUrl];
+
             try {
-                const res = await fetch(fullUrl);
+                // Ép fetch không lưu Disk Cache cũ khi F5 thường
+                const res = await fetch(cacheBusterUrl, { cache: 'no-cache' });
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 const data = await res.json();
-                jsonCache[fullUrl] = data;
+                jsonCache[cacheBusterUrl] = data;
                 return data;
             } catch (err) {
                 console.error('[EDEVX JSON Engine] Lỗi nạp file:', src, err);
