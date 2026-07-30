@@ -367,31 +367,39 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ========================================================
-    // --- 9. GITHUB JSON DATABASE ENGINE (TRẮC NGHIỆM + CHẤM ĐIỂM AUTO) ---
+    // --- 9. GITHUB JSON DATABASE ENGINE (BULLETPROOF V10 MAX) ---
     // ========================================================
     (function initGitHubJsonQuizEngine() {
         const containers = document.querySelectorAll('.edevx-quiz-db');
         if (!containers.length) return;
 
-        const jsonCache = {};
-        const selfScript = document.currentScript || Array.from(document.scripts).find(s => s.src && s.src.includes('edevx.js'));
-        const GITHUB_RAW_BASE = selfScript ? selfScript.src.substring(0, selfScript.src.lastIndexOf('/') + 1) : 'https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/';
+        // BÍ QUYẾT TỐI ƯU NHẤT: DÙNG TRỰC TIẾP RAW GITHUB CHO FILE JSON (BỎ QUA JSDELIVR)
+        // Điều này giúp sếp đổi JSON không cần đổi mã HASH JS, và F5 không bao giờ bị đơ!
+        const RAW_GITHUB_BASE = 'https://raw.githubusercontent.com/thientrithera/edevx-theme/main/';
 
         async function loadDataset(src) {
             const cleanSrc = src.trim();
-            const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${GITHUB_RAW_BASE}${cleanSrc}`;
-            const cacheBusterUrl = `${fullUrl}?v=${Date.now()}`;
+            const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${RAW_GITHUB_BASE}${cleanSrc}`;
             
-            if (jsonCache[fullUrl]) return jsonCache[fullUrl];
+            // ÉP TRÌNH DUYỆT TẢI MỚI 100% MỖI KHI F5 BẰNG CACHE BUSTER
+            const targetUrl = `${fullUrl}?v=${Date.now()}`;
+
+            // Bảo vệ mạng: Tự động ngắt nếu mạng lag quá 5 giây
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
 
             try {
-                const res = await fetch(cacheBusterUrl, { cache: 'no-store' });
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-                const data = await res.json();
-                jsonCache[fullUrl] = data;
-                return data;
+                const res = await fetch(targetUrl, { 
+                    signal: controller.signal,
+                    cache: 'no-store' // Cấm trình duyệt lưu đĩa
+                });
+                clearTimeout(timeoutId);
+
+                if (!res.ok) throw new Error(`HTTP Status ${res.status}`);
+                return await res.json();
             } catch (err) {
-                console.error('[EDEVX JSON Engine] Lỗi nạp file:', cleanSrc, err);
+                clearTimeout(timeoutId);
+                console.error('[EDEVX Engine Error]:', cleanSrc, err);
                 return null;
             }
         }
@@ -412,7 +420,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const rawData = await loadDataset(src);
             if (!rawData) {
-                box.innerHTML = `<div class="p-5 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-3xl text-sm font-bold border border-red-200 flex items-center gap-2"><i class="fas fa-exclamation-triangle"></i><span>Không thể tải file: <b>${src}</b>. Kiểm tra lại đường dẫn trên GitHub.</span></div>`;
+                box.innerHTML = `
+                <div class="p-5 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-3xl text-sm font-bold border border-red-200 dark:border-red-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-exclamation-circle text-lg"></i>
+                        <span>Không thể tải dữ liệu file: <b>${src}</b>.</span>
+                    </div>
+                    <button class="px-4 py-2 bg-red-600 text-white rounded-xl text-xs font-black uppercase tracking-wider shadow hover:bg-red-700 transition" onclick="location.reload()">Thử lại</button>
+                </div>`;
                 return;
             }
 
@@ -431,7 +446,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const totalQ = qList.length;
 
-            // DỰNG BẢNG ĐIỂM NỔI BẬT Ở TRÊN CÙNG
             let htmlHTML = `
             <div class="space-y-6">
                 <div class="p-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white rounded-3xl shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-400/30">
@@ -483,7 +497,6 @@ document.addEventListener("DOMContentLoaded", function() {
             htmlHTML += `</div>`;
             box.innerHTML = htmlHTML;
 
-            // BỘ TÍNH ĐIỂM THỜI GIAN THỰC
             const scoreText = box.querySelector('.quiz-score-text');
             box.addEventListener('click', (e) => {
                 if (e.target.closest('.quiz-option')) {
@@ -491,7 +504,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         const answeredCount = box.querySelectorAll('.quiz-container.answered').length;
                         const correctCount = box.querySelectorAll('.quiz-option.correct').length;
                         const score = ((correctCount / totalQ) * 10).toFixed(1);
-
                         if (scoreText) {
                             scoreText.innerHTML = `Đúng: <b class="text-amber-300 text-lg mx-1">${correctCount}/${totalQ}</b> câu (<b class="text-amber-300 text-lg">${score} điểm</b>) ${answeredCount === totalQ ? '🎉 Hoàn thành bài thi!' : ''}`;
                         }
@@ -507,4 +519,3 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     })();
-});
