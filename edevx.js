@@ -367,7 +367,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // ========================================================
-    // --- 9. GITHUB JSON DATABASE ENGINE (TRẮC NGHIỆM ĐỘNG + CHẤM ĐIỂM) ---
+    // --- 9. GITHUB JSON DATABASE ENGINE (TRẮC NGHIỆM + CHẤM ĐIỂM AUTO) ---
     // ========================================================
     (function initGitHubJsonQuizEngine() {
         const containers = document.querySelectorAll('.edevx-quiz-db');
@@ -378,21 +378,20 @@ document.addEventListener("DOMContentLoaded", function() {
         const GITHUB_RAW_BASE = selfScript ? selfScript.src.substring(0, selfScript.src.lastIndexOf('/') + 1) : 'https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/';
 
         async function loadDataset(src) {
-            const fullUrl = src.startsWith('http') ? src : `${GITHUB_RAW_BASE}${src}`;
+            const cleanSrc = src.trim();
+            const fullUrl = cleanSrc.startsWith('http') ? cleanSrc : `${GITHUB_RAW_BASE}${cleanSrc}`;
+            const cacheBusterUrl = `${fullUrl}?v=${Date.now()}`;
             
-            // ⚠️ THÊM MÃ CACHE BUSTER THỜI GIAN THỰC ĐỂ F5 THƯỜNG KHÔNG BỊ ĐƠ DISK CACHE
-            const cacheBusterUrl = `${fullUrl}?t=${Date.now()}`;
-            if (jsonCache[cacheBusterUrl]) return jsonCache[cacheBusterUrl];
+            if (jsonCache[fullUrl]) return jsonCache[fullUrl];
 
             try {
-                // Ép fetch không lưu Disk Cache cũ khi F5 thường
-                const res = await fetch(cacheBusterUrl, { cache: 'no-cache' });
+                const res = await fetch(cacheBusterUrl, { cache: 'no-store' });
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 const data = await res.json();
-                jsonCache[cacheBusterUrl] = data;
+                jsonCache[fullUrl] = data;
                 return data;
             } catch (err) {
-                console.error('[EDEVX JSON Engine] Lỗi nạp file:', src, err);
+                console.error('[EDEVX JSON Engine] Lỗi nạp file:', cleanSrc, err);
                 return null;
             }
         }
@@ -409,11 +408,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (!src) return;
 
-            box.innerHTML = `<div class="p-6 text-center text-zinc-500 animate-pulse font-medium text-sm"><i class="fas fa-circle-notch fa-spin text-blue-600 mr-2"></i> Đang nạp ngân hàng câu hỏi...</div>`;
+            box.innerHTML = `<div class="p-6 text-center text-zinc-500 animate-pulse font-medium text-sm flex items-center justify-center gap-2"><i class="fas fa-circle-notch fa-spin text-blue-600 text-lg"></i> <span>Đang nạp ngân hàng câu hỏi...</span></div>`;
 
             const rawData = await loadDataset(src);
             if (!rawData) {
-                box.innerHTML = `<div class="p-4 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-2xl text-sm font-bold border border-red-200">⚠️ Không thể tải dữ liệu câu hỏi (${src}).</div>`;
+                box.innerHTML = `<div class="p-5 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 rounded-3xl text-sm font-bold border border-red-200 flex items-center gap-2"><i class="fas fa-exclamation-triangle"></i><span>Không thể tải file: <b>${src}</b>. Kiểm tra lại đường dẫn trên GitHub.</span></div>`;
                 return;
             }
 
@@ -426,18 +425,38 @@ document.addEventListener("DOMContentLoaded", function() {
             if (limit > 0 && qList.length > limit) qList = qList.slice(0, limit);
 
             if (qList.length === 0) {
-                box.innerHTML = `<div class="p-4 bg-amber-50 text-amber-700 dark:bg-amber-900/20 rounded-2xl text-sm font-bold border border-amber-200">Chưa có câu hỏi nào thuộc chủ đề này.</div>`;
+                box.innerHTML = `<div class="p-5 bg-amber-50 text-amber-700 dark:bg-amber-900/20 rounded-3xl text-sm font-bold border border-amber-200">Không tìm thấy câu hỏi cho chủ đề: <b>${topic || chapter || 'Tất cả'}</b>.</div>`;
                 return;
             }
 
-            let htmlHTML = `<div class="space-y-6">`;
+            const totalQ = qList.length;
+
+            // DỰNG BẢNG ĐIỂM NỔI BẬT Ở TRÊN CÙNG
+            let htmlHTML = `
+            <div class="space-y-6">
+                <div class="p-5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white rounded-3xl shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 border border-blue-400/30">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
+                            <i class="fas fa-trophy text-amber-300 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs uppercase tracking-wider text-blue-200 font-bold">Bảng Điểm Tự Động</div>
+                            <div class="quiz-score-text font-black text-base sm:text-lg">Hãy chọn đáp án bên dưới...</div>
+                        </div>
+                    </div>
+                    <button class="bg-white/20 hover:bg-white/30 text-white px-5 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all active:scale-95 shrink-0" onclick="location.reload()">
+                        <i class="fas fa-redo-alt mr-1.5"></i> Làm lại bài
+                    </button>
+                </div>
+            `;
+
             qList.forEach((q, idx) => {
                 const qId = q.id || `q_${idx}`;
                 htmlHTML += `
                 <div class="quiz-container bg-white dark:bg-zinc-900 border-2 border-zinc-200 dark:border-zinc-800 p-6 rounded-3xl shadow-sm space-y-4" data-quiz-id="${qId}">
                     <div class="font-bold text-zinc-800 dark:text-zinc-100 text-base leading-relaxed flex items-start gap-3">
                         <span class="bg-blue-600 text-white text-xs px-2.5 py-1 rounded-xl font-black shrink-0 mt-0.5">Câu ${idx + 1}</span>
-                        <div>${q.question}</div>
+                        <div class="flex-grow">${q.question}</div>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
@@ -451,7 +470,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     ${q.explanation ? `
                     <details class="text-sm mt-3 pt-2 border-t border-zinc-100 dark:border-zinc-800">
-                        <summary class="font-bold text-blue-600 dark:text-blue-400 cursor-pointer text-xs">🔍 Xem lời giải chi tiết</summary>
+                        <summary class="font-bold text-blue-600 dark:text-blue-400 cursor-pointer text-xs flex items-center gap-1.5">
+                            <i class="fas fa-search-plus"></i> Xem lời giải chi tiết
+                        </summary>
                         <div class="pt-3 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm space-y-1">
                             ${q.explanation}
                         </div>
@@ -459,31 +480,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>`;
             });
 
-            // THANH BẢNG ĐIỂM CHẤM ĐIỂM TỰ ĐỘNG TẠI ĐÂY
-            htmlHTML += `
-            <div class="p-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-3xl shadow-lg flex items-center justify-between text-sm sm:text-base font-bold mt-8">
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-trophy text-amber-300 text-2xl"></i>
-                    <span class="quiz-score-display">Hãy hoàn thành các câu hỏi trên...</span>
-                </div>
-                <button class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all" onclick="location.reload()">Làm lại bài</button>
-            </div></div>`;
-
+            htmlHTML += `</div>`;
             box.innerHTML = htmlHTML;
 
-            // Xử lý tính điểm tự động khi click
-            const totalQ = qList.length;
-            const scoreDisplay = box.querySelector('.quiz-score-display');
-            
+            // BỘ TÍNH ĐIỂM THỜI GIAN THỰC
+            const scoreText = box.querySelector('.quiz-score-text');
             box.addEventListener('click', (e) => {
                 if (e.target.closest('.quiz-option')) {
                     setTimeout(() => {
-                        const answered = box.querySelectorAll('.quiz-container.answered').length;
-                        const correct = box.querySelectorAll('.quiz-option.correct').length;
-                        const score = ((correct / totalQ) * 10).toFixed(1);
-                        
-                        if (scoreDisplay) {
-                            scoreDisplay.innerHTML = `Kết quả: <b class="text-amber-300 text-lg mx-1">${correct}/${totalQ}</b> câu đúng (${score} điểm) ${answered === totalQ ? '🎉 Hoàn thành!' : ''}`;
+                        const answeredCount = box.querySelectorAll('.quiz-container.answered').length;
+                        const correctCount = box.querySelectorAll('.quiz-option.correct').length;
+                        const score = ((correctCount / totalQ) * 10).toFixed(1);
+
+                        if (scoreText) {
+                            scoreText.innerHTML = `Đúng: <b class="text-amber-300 text-lg mx-1">${correctCount}/${totalQ}</b> câu (<b class="text-amber-300 text-lg">${score} điểm</b>) ${answeredCount === totalQ ? '🎉 Hoàn thành bài thi!' : ''}`;
                         }
                     }, 50);
                 }
