@@ -18,12 +18,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const mobileMenu = document.getElementById('mobile-menu');
     if(mobileBtn && mobileMenu) mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-    // XÓA BỎ SERVICE WORKER (THỦ PHẠM ĐÁNH CHẶN F5 GÂY TREO JSON)
+    // PWA Service Worker Inline
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function(registrations) {
-            for(let registration of registrations) {
-                registration.unregister();
-            }
+        window.addEventListener('load', () => {
+            const swCode = `const CACHE_NAME='edevx-offline-v1';self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>e.waitUntil(clients.claim()));self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(res=>{const resClone=res.clone();caches.open(CACHE_NAME).then(c=>c.put(e.request,resClone));return res;}).catch(()=>caches.match(e.request)));});`;
+            try { navigator.serviceWorker.register(URL.createObjectURL(new Blob([swCode], {type: 'text/javascript'}))).catch(()=>{}); } catch(e){}
         });
     }
 
@@ -141,14 +140,19 @@ document.addEventListener("DOMContentLoaded", function() {
         loadScript('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js');
     }
     
-    if (articleBody && (articleBody.innerText.includes('$$') || articleBody.innerText.includes('$'))) {
+    // [ĐÃ FIX]: Quét toàn bộ thẻ Body để phát hiện dấu $ ở cả Trang chủ lẫn Trang con
+    if (document.body && (document.body.innerText.includes('$$') || document.body.innerText.includes('$'))) {
         loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css');
         (async () => {
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js');
             
+            // Xử lý xuống dòng cho công thức
             document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
+            
+            // Render toàn bộ trang
             renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false });
+            
             if(tocContainer) setTimeout(() => tocbot.refresh(), 500);
         })();
     }
@@ -367,6 +371,126 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // --- 8. FOCUS WORKSPACE DOCK (POMODORO 3 MODE) ---
+    (function initPomodoro() {
+        const panel = document.getElementById('pomo-panel');
+        if(!panel) return;
+
+        const toggleBtn = document.getElementById('pomo-toggle');
+        const timeDisplay = document.getElementById('pomo-time');
+        const startBtn = document.getElementById('pomo-start');
+        const resetBtn = document.getElementById('pomo-reset');
+        const playIcon = document.getElementById('pomo-play-icon');
+        
+        // Nhóm các nút chế độ theo thứ tự: 15p - 25p - 5p
+        const modeBtns = [
+            document.getElementById('mode-warmup'),
+            document.getElementById('mode-focus'),
+            document.getElementById('mode-break')
+        ];
+
+        // Mặc định khởi động là 15 phút (Màu tím)
+        let currentMinutes = 15;
+        let currentColor = 'purple'; 
+        let timeLeft = 15 * 60; 
+        let timerId = null;
+        let isRunning = false;
+
+        // Bật/Tắt Bảng điều khiển
+        toggleBtn.addEventListener('click', () => {
+            panel.classList.toggle('hidden');
+            if (!isRunning) {
+                toggleBtn.classList.toggle('opacity-30');
+                toggleBtn.classList.toggle('opacity-100');
+                toggleBtn.classList.toggle(`text-${currentColor}-600`);
+                toggleBtn.classList.toggle('text-zinc-400');
+            }
+        });
+
+        const formatTime = (seconds) => {
+            const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const s = (seconds % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
+        };
+
+        const updateDisplay = () => {
+            timeDisplay.textContent = formatTime(timeLeft);
+            document.title = isRunning ? `(${formatTime(timeLeft)}) EDEVX Focus` : document.title.split(') ')[1] || document.title;
+        };
+
+        // Động cơ đổi màu & Đổi chế độ
+        const setMode = (btn) => {
+            currentMinutes = parseInt(btn.getAttribute('data-time'));
+            currentColor = btn.getAttribute('data-color');
+            timeLeft = currentMinutes * 60;
+            updateDisplay();
+            pauseTimer();
+            
+            // Xóa màu active của tất cả các nút
+            modeBtns.forEach(b => {
+                b.className = `px-2.5 py-1 text-xs font-bold rounded-md text-zinc-500 hover:text-${b.getAttribute('data-color')}-500 transition-all`;
+            });
+
+            // Bật màu active cho nút được chọn
+            btn.className = `px-2.5 py-1 text-xs font-bold rounded-md bg-white dark:bg-zinc-700 text-${currentColor}-500 shadow-sm transition-all`;
+            
+            // Đổi màu số và màu nút Start
+            timeDisplay.className = `text-5xl font-black text-center text-${currentColor}-600 dark:text-${currentColor}-500 font-mono tracking-widest mb-6 transition-colors duration-300`;
+            startBtn.className = `w-12 h-12 bg-${currentColor}-600 hover:bg-${currentColor}-700 text-white rounded-full flex items-center justify-center text-lg shadow-lg hover:scale-105 transition-all`;
+        };
+
+        // Gắn sự kiện click cho 3 nút
+        modeBtns.forEach(btn => btn.addEventListener('click', () => setMode(btn)));
+
+        const startTimer = () => {
+            if (isRunning) return;
+            isRunning = true;
+            playIcon.className = 'fas fa-pause';
+            
+            // Khóa sáng nút nổi
+            toggleBtn.classList.remove('opacity-30', 'text-zinc-400');
+            toggleBtn.classList.add('opacity-100', `text-${currentColor}-600`);
+            timeDisplay.classList.add('animate-pulse');
+
+            timerId = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+                if (timeLeft <= 0) {
+                    pauseTimer();
+                    
+                    // Thông báo thông minh theo số phút
+                    if (currentMinutes === 15) {
+                        alert("Khởi động xuất sắc! Thưởng cho con 5 phút nghỉ ngơi nhé!");
+                        setMode(modeBtns[2]); // Chuyển sang 5p nghỉ
+                    } else if (currentMinutes === 25) {
+                        alert("Tập trung đỉnh cao! Đến lúc xả hơi 5 phút rồi!");
+                        setMode(modeBtns[2]); // Chuyển sang 5p nghỉ
+                    } else {
+                        alert("Hết giờ giải lao! Quay lại bàn học thôi con!");
+                        // Hết 5p nghỉ thì tự quay về mốc 15p cho an toàn
+                        setMode(modeBtns[0]); 
+                    }
+                }
+            }, 1000);
+        };
+
+        const pauseTimer = () => {
+            isRunning = false;
+            playIcon.className = 'fas fa-play';
+            clearInterval(timerId);
+            timeDisplay.classList.remove('animate-pulse');
+            
+            if (panel.classList.contains('hidden')) {
+                toggleBtn.classList.add('opacity-30', 'text-zinc-400');
+                toggleBtn.classList.remove('opacity-100', 'text-blue-600', 'text-purple-600', 'text-emerald-600');
+            }
+        };
+
+        startBtn.addEventListener('click', () => isRunning ? pauseTimer() : startTimer());
+        resetBtn.addEventListener('click', () => setMode(modeBtns.find(b => parseInt(b.getAttribute('data-time')) === currentMinutes)));
+    })();
+
+
     // ========================================================
     // --- 9. GITHUB JSON DATABASE ENGINE (BẤT TỬ VỚI SESSION CACHE) ---
     // ========================================================
@@ -539,5 +663,6 @@ document.addEventListener("DOMContentLoaded", function() {
     })();
 
  // ĐÓNG SỰ KIỆN DOMContentLoaded TỔNG TOÀN BỘ FILE (CHỮA LỖI SYNTAX)
+
 
 });
