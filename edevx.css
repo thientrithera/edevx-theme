@@ -1,6 +1,53 @@
 /* ======================================================== */
 /* EDUCATION DEVX - CORE STYLESHEET (MASTER FINAL)          */
+/* REPOSITORY: thientrithera/edevx-theme                     */
 /* ======================================================== */
+
+/* ==========================================================================
+   0. MODULE FONT TẬP VIẾT TIỂU HỌC, ĐỘ NGHIÊNG & VỞ Ô LY 4 LY CHUẨN BỘ GD
+   ========================================================================== */
+@font-face {
+  font-family: 'HP001';
+  src: url('https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/fonts/HP001_tieuhoc.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Lớp Font cơ bản HP001 */
+.font-hp001, .font-tapviet {
+  font-family: 'HP001', cursive, sans-serif !important;
+  display: inline-block;
+}
+
+/* Các lớp tùy chỉnh độ nghiêng chữ theo góc độ */
+.font-nghieng-10 { transform: skewX(-10deg) !important; } /* Nghiêng nhẹ (10 độ) */
+.font-nghieng-12 { transform: skewX(-12deg) !important; } /* CHUẨN BỘ GD&ĐT (12 độ) */
+.font-nghieng-15 { transform: skewX(-15deg) !important; } /* Nghiêng vừa (15 độ) */
+.font-nghieng-20 { transform: skewX(-20deg) !important; } /* Nghiêng đậm (20 độ) */
+
+/* Khung Vở Ô Ly 4 Ly có lề đỏ chuẩn Vở Hải Tiến Tiểu Học */
+.vo-oly-container, .bg-oly-word {
+  background-size: 8mm 8mm;
+  background-image: 
+    linear-gradient(to right, rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+  background-color: #fdfbf7;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #ef4444 !important;
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+  margin: 1.5rem 0;
+  line-height: 2.27rem !important;
+}
+
+.dark .vo-oly-container, .dark .bg-oly-word {
+  background-color: #18181b;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  border-color: #27272a;
+}
 
 /* 1. ROOT & CORE TYPOGRAPHY */
 :root { --article-font-size: 1.05rem; }
@@ -194,10 +241,48 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
     page-break-inside: avoid !important; break-inside: avoid !important; 
     page-break-after: always !important; break-after: page !important;
     overflow: hidden !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;
-    border: none !important; border-radius: 0 !important; box-shadow: none !important; box-sizing: border-box !important; 
+    border: none !important; border-radius: 0 !important; shadow: none !important; box-sizing: border-box !important; 
   }
   
   /* Xử lý ngắt trang */
   body.has-slide .slide-container:first-of-type { page-break-before: avoid !important; }
   body.has-slide .slide-container:last-of-type, body.has-slide .slide-container:last-child { page-break-after: auto !important; break-after: auto !important; }
+
+
+  /* ==========================================================================
+     [BỔ SUNG IN ẤN]: HỖ TRỢ IN ĐỀ THI LATEX & VỞ Ô LY KHÔNG BỊ XÓA NỀN
+     ========================================================================== */
+
+  /* 1. ÉP TRÌNH DUYỆT PHẢI IN ĐƯỜNG KẺ Ô LY & ĐƯỜNG LỀ ĐỎ (CHỐNG MẤT KẺ) */
+  .vo-oly-container, .bg-oly-word {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    border-left: 3px solid #ef4444 !important; /* Giữ lề đỏ chuẩn Vở Hải Tiến */
+    background-color: #ffffff !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* 2. CHỐNG CẮT ĐÔI CÔNG THỨC TOÁN KATEX & BÀI TẬP KHI CHUYỂN TRANG PDF */
+  .katex-display, .katex, .exercise-item, .quiz-container, .edevx-quiz-db, .cornell-game-wrapper {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* 3. KHUNG TIÊU ĐỀ ĐỀ THI / BÀI TẬP CHUẨN LATEX KHI XUẤT PDF */
+  .exam-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    border-bottom: 2px solid #000000 !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 20px !important;
+    font-family: 'Inter', sans-serif !important;
+  }
+
+
+
 }
+
+
