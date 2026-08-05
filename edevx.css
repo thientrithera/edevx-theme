@@ -1,5 +1,54 @@
 /* ======================================================== */
-/* EDUCATION DEVX - CORE STYLESHEET (V1.0 MASTER)           */
+/* EDUCATION DEVX - CORE STYLESHEET (MASTER FINAL V2.0)     */
+/* REPOSITORY: thientrithera/edevx-theme                     */
+/* ======================================================== */
+
+/* ==========================================================================
+   0. MODULE FONT TẬP VIẾT TIỂU HỌC, ĐỘ NGHIÊNG & VỞ Ô LY 4 LY
+   ========================================================================== */
+@font-face {
+  font-family: 'HP001';
+  src: url('https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/fonts/HP001_tieuhoc.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-hp001, .font-tapviet {
+  font-family: 'HP001', cursive, sans-serif !important;
+  display: inline-block;
+}
+
+.font-nghieng-10 { transform: skewX(-10deg) !important; }
+.font-nghieng-12 { transform: skewX(-12deg) !important; }
+.font-nghieng-15 { transform: skewX(-15deg) !important; }
+.font-nghieng-20 { transform: skewX(-20deg) !important; }
+
+/* Khung Vở Ô Ly 4 Ly có lề đỏ chuẩn Vở Hải Tiến */
+.vo-oly-container, .bg-oly-word {
+  background-size: 8mm 8mm;
+  background-image: 
+    linear-gradient(to right, rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+  background-color: #fdfbf7;
+  border: 1px solid #e2e8f0;
+  border-left: 3px solid #ef4444 !important;
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+  margin: 1.5rem 0;
+  line-height: 2.27rem !important;
+}
+
+.dark .vo-oly-container, .dark .bg-oly-word {
+  background-color: #18181b;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  border-color: #27272a;
+}
+
+/* ======================================================== */
+/* BỘ CSS LÕI NGUYÊN BẢN CỦA EDEVX (GIỮ NGUYÊN 100%)        */
 /* ======================================================== */
 
 /* 1. ROOT & CORE TYPOGRAPHY */
@@ -8,7 +57,7 @@
 body { animation: fadeIn 0.6s ease-out forwards; }
 @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
 
-/* 2. CSS SCROLL-DRIVEN ANIMATION (Thanh tiến độ không cần JS) */
+/* 2. CSS SCROLL-DRIVEN ANIMATION */
 #reading-progress { transform-origin: left; animation: progress-grow auto linear; animation-timeline: scroll(root); }
 @keyframes progress-grow { 0% { width: 0%; } 100% { width: 100%; } }
 
@@ -21,6 +70,11 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .prose img { border-radius: 0.75rem; margin: 2rem auto; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); cursor: zoom-in; }
 .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; line-height: 1.8; }
 .prose { word-wrap: break-word; overflow-wrap: break-word; }
+
+/* BẢO VỆ CHỮ TRONG LƯỚI THẺ BÀI Ở CHẾ ĐỘ DARK MODE */
+.dark .prose div[class*="bg-"][class*="border"] { background-color: rgba(39, 39, 42, 0.4) !important; border-color: rgba(82, 82, 91, 0.5) !important; }
+.dark .prose div[class*="bg-"][class*="border"] h4 { color: #f4f4f5 !important; }
+.dark .prose div[class*="bg-"][class*="border"] p, .dark .prose div[class*="bg-"][class*="border"] div { color: #a1a1aa !important; }
 
 /* 4. EDTECH: CODE GEMINI STYLE */
 .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.5rem 0; }
@@ -43,7 +97,6 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .flashcard-wrapper.is-flipped .flashcard-inner { transform: rotateY(180deg); }
 .prose .flashcard-front, .prose .flashcard-back { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; -webkit-backface-visibility: hidden !important; backface-visibility: hidden !important; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; border-radius: 1rem; margin: 0 !important; }
 .prose .flashcard-back { transform: rotateY(180deg); }
-
 .quiz-option { transition: all 0.2s; position: relative; overflow: hidden; cursor: pointer;}
 .quiz-option.correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
 .quiz-option.incorrect { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; animation: shake 0.4s; }
@@ -51,7 +104,6 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .dark .quiz-option.incorrect { background-color: #7f1d1d !important; color: #f87171 !important; }
 .quiz-container:has(.answered) { pointer-events: none; }
 @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-
 .prose details { background: #f0fdf4; padding: 1rem 1.2rem; border-radius: 0.75rem; border-left: 4px solid #22c55e; margin: 1.5rem 0; cursor: pointer; transition: all 0.3s; }
 .dark .prose details { background: #14532d30; border-color: #4ade80; }
 .prose summary { font-weight: 700; color: #166534; outline: none; list-style: none; display: flex; align-items: center; user-select: none; }
@@ -69,7 +121,6 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .is-active-link { color: #18181b !important; font-weight: 700; border-left: 2px solid #18181b; padding-left: 0.5rem; }
 .dark .is-active-link { color: #ffffff !important; border-color: #ffffff; }
 .toc-link::before { display: none !important; }
-
 .sidebar-widgets .widget.BlogArchive ul { list-style: none !important; padding: 0 !important; margin: 0 !important; display: flex; flex-direction: column; gap: 0; }
 .sidebar-widgets .widget.BlogArchive li { display: flex !important; align-items: center; justify-content: space-between; padding: 0.8rem 0 !important; border-bottom: 1px dashed rgba(228,228,231,0.8); }
 .dark .sidebar-widgets .widget.BlogArchive li { border-color: rgba(39,39,42,0.8); }
@@ -77,26 +128,25 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .sidebar-widgets .widget.BlogArchive li a::before { content: '\f073'; font-family: 'Font Awesome 6 Free'; font-weight: 400; margin-right: 0.6rem; color: #3b82f6; }
 .post-count { background: #f4f4f5; color: #71717a; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 9999px; font-family: 'JetBrains Mono', monospace; }
 .dark .post-count { background: #27272a; color: #a1a1aa; }
-
 .sidebar-widgets .widget.Label ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .sidebar-widgets .widget.Label ul li { padding: 0; border: none; }
 .sidebar-widgets .widget.Label ul li a { display: inline-block; padding: 0.4rem 0.8rem; background: #f4f4f5; border-radius: 99px; font-size: 0.75rem; color: #52525b; transition: all 0.2s; font-weight: 600; text-decoration: none; }
 .dark .sidebar-widgets .widget.Label ul li a { background: #27272a; color: #a1a1aa; }
 .sidebar-widgets .widget.Label ul li a:hover { background: #3b82f6; color: #ffffff; }
 .sidebar-widgets .widget.Label .label-count { display: none; }
-
 .loader { border: 2px solid rgba(228,228,231,0.5); border-top: 2px solid #3b82f6; border-radius: 50%; width: 16px; height: 16px; animation: spin 1s linear infinite; display: none; }
 .dark .loader { border-color: rgba(39,39,42,0.5); border-top-color: #60a5fa; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 /* ========================================== */
 /* [MODULE 7]: CSS SLIDE MODE PRO TOÀN MÀN HÌNH */
-/* (BẢN GỐC CHUẨN NGUYÊN BẢN CỦA SẾP)          */
 /* ========================================== */
 body.has-slide { background-color: #0b0f19 !important; overflow-x: hidden !important; }
+
+/* Ẩn UI Blogger mặc định */
 body.has-slide header, body.has-slide footer, body.has-slide aside, body.has-slide #reading-progress, body.has-slide .post-header, body.has-slide .nextprev, body.has-slide .flex.flex-wrap, body.has-slide .mt-16.pt-8, body.has-slide .post-content h1:first-child { display: none !important; }
 
-/* [ĐÃ FIX TRIỆT ĐỂ]: ẨN SẠCH VĂN BẢN/THẺ <P> GIỚI THIỆU CỦA <!--MORE--> TRÊN MÀN HÌNH WEB */
+/* ẨN THẺ <P> GIỚI THIỆU CỦA <!--MORE--> TRÊN MÀN HÌNH WEB */
 body.has-slide #article-body-content *:not(.slide-container):not(.slide-container *) { display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
 
 body.has-slide .grid.lg\:grid-cols-12 { display: block !important; }
@@ -106,7 +156,7 @@ body.has-slide article.post-content { padding: 0 !important; border: none !impor
 body.has-slide .slide-container { margin: 3rem auto !important; color: #27272a !important; }
 html.dark body.has-slide .slide-container [class*="dark:text-"] { color: inherit !important; }
 
-/* Khóa vỡ khung Responsive */
+/* Khóa vỡ khung Responsive cho Bài học bình thường */
 body:not(.has-slide) .post-content * { min-width: 0 !important; }
 body:not(.has-slide) .post-content div, body:not(.has-slide) .post-content section, body:not(.has-slide) .post-content blockquote, body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content ul, body:not(.has-slide) .post-content ol, body:not(.has-slide) .post-content li { max-width: 100% !important; box-sizing: border-box !important; }
 @media (max-width: 639px) {
@@ -117,43 +167,84 @@ body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content li, bod
 body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content video, body:not(.has-slide) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
 
 /* ======================================================== */
-/* [MODULE 8]: CSS IN ẤN ĐỀ THI / GIÁO ÁN (A4 LANDSCAPE)    */
-/* BẢN HOÀN HẢO: KẾT HỢP CODE GỐC CỦA SẾP + BẢO VỆ MODE 1   */
+/* [MODULE 9]: CSS MÀN HÌNH TRÌNH DUYỆT CHO MODE 2B (PDF LATEX) */
+/* ======================================================== */
+html.pdf-mode-active, body.pdf-mode-active { background-color: #323639 !important; margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
+#edevx-pdf-workspace { position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; background-color: #323639 !important; z-index: 9999999 !important; display: flex !important; flex-direction: column !important; align-items: center !important; padding-top: 90px !important; padding-bottom: 50px !important; min-height: 100vh !important; }
+.pdf-toolbar { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 60px !important; background-color: #202124 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important; z-index: 99999999 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 0 24px !important; font-family: sans-serif !important; }
+.a4-page-demo { width: 794px !important; height: 1123px !important; background-color: #ffffff !important; margin: 0 auto 30px auto !important; padding: 15mm 18mm !important; box-shadow: 0 5px 25px rgba(0,0,0,0.8) !important; box-sizing: border-box !important; position: relative !important; display: block !important; text-align: left !important; overflow: hidden !important; font-family: 'Times New Roman', Times, serif !important; font-size: 14.5px !important; line-height: 1.45 !important; color: #000000 !important; }
+.a4-page-demo *, .a4-page-demo p, .a4-page-demo div, .a4-page-demo span, .a4-page-demo td { color: #000000 !important; font-family: 'Times New Roman', Times, serif !important; }
+.a4-page-demo h1 { font-size: 22px !important; font-weight: 900 !important; line-height: 1.2 !important; margin-bottom: 5px !important;}
+.a4-page-demo h2 { font-size: 16px !important; font-weight: 900 !important; }
+.a4-footer { position: absolute !important; bottom: 12mm !important; left: 18mm !important; right: 18mm !important; text-align: center !important; font-size: 12px !important; font-weight: bold !important; border-top: 1px solid #94a3b8 !important; padding-top: 8px !important; }
+.latex-box { border: 1px solid #475569 !important; background-color: #f8fafc !important; border-radius: 6px !important; padding: 10px 14px !important; margin-bottom: 12px !important; }
+.latex-box-title { font-weight: bold !important; font-size: 16px !important; margin-bottom: 4px !important; }
+.dotted-line { border-bottom: 1px dotted #64748b !important; min-height: 24px !important; width: 100% !important; margin-top: 4px !important; }
+
+/* ======================================================== */
+/* [MODULE 8]: CSS IN ẤN TỔNG HỢP (DUAL-MODE + MODE 2B)     */
 /* ======================================================== */
 @media print { 
-  /* 1. KÍCH THƯỚC GIẤY CHUẨN A4 VÀ ẨN RÁC */
-  @page { size: 297mm 210mm; margin: 0 !important; }
-  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
-  #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { display: none !important; }
-
-  /* ======================================================== */
-  /* 🟣 MODE 2 (SLIDE): BẢN GỐC CỦA SẾP GIỮ NGUYÊN 100%       */
-  /* ======================================================== */
+  /* 1. KHÔNG LỀ MẶC ĐỊNH */
+  @page { margin: 0 !important; }
   
-  /* Khóa cứng chiều cao 210mm và Ép nền trắng tuyệt đối để CHỐNG DẢI ĐEN */
+  /* 2. CHỐNG DẢI ĐEN CHÍ MẠNG */
   html, body, body.has-slide { 
-    width: 297mm !important;
-    height: 210mm !important;
+    background-color: #ffffff !important; 
     background: #ffffff !important; 
-    margin: 0 !important; 
-    padding: 0 !important; 
+    width: 100% !important;
+    height: auto !important; 
     -webkit-print-color-adjust: exact !important; 
     print-color-adjust: exact !important; 
   }
   
-  body.has-slide .max-w-7xl, body.has-slide main, body.has-slide article.post-content, body.has-slide .prose, body.has-slide #article-body-content, body.has-slide .lesson-container {
-    display: block !important; 
-    width: 100% !important; max-width: 100% !important; 
-    padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important;
-    background: #ffffff !important; /* Quét sơn trắng mọi lớp bọc */
+  /* 3. ẨN RÁC GIAO DIỆN BLOGGER */
+  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
+  #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { display: none !important; }
+
+  /* 4. DẬP PHẲNG & SƠN TRẮNG MỌI LỚP BỌC CỦA BLOGGER */
+  .max-w-7xl, main, article.post-content, .prose, #article-body-content, .lesson-container {
+    display: block !important; width: 100% !important; max-width: none !important; 
+    padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important; 
+    background: #ffffff !important;
   }
 
-  /* ẨN SẠCH RÁC HTML THỪA VÀ THẺ <!--more--> */
-  body.has-slide #article-body-content > *:not(.slide-container) {
-    display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important;
+  /* ======================================================== */
+  /* 🟢 MODE 1: BÀI HỌC BÌNH THƯỜNG TRÊN BLOG                 */
+  /* ======================================================== */
+  body:not(.has-slide):not(.pdf-mode-active) { padding: 15mm !important; }
+  body:not(.has-slide):not(.pdf-mode-active) h2, body:not(.has-slide):not(.pdf-mode-active) h3 { page-break-after: avoid !important; break-after: avoid !important; }
+  body:not(.has-slide):not(.pdf-mode-active) img, body:not(.has-slide):not(.pdf-mode-active) svg, body:not(.has-slide):not(.pdf-mode-active) li, body:not(.has-slide):not(.pdf-mode-active) blockquote, body:not(.has-slide):not(.pdf-mode-active) details, body:not(.has-slide):not(.pdf-mode-active) .quiz-container, body:not(.has-slide):not(.pdf-mode-active) .code-wrapper, body:not(.has-slide):not(.pdf-mode-active) .lesson-container > div, body:not(.has-slide):not(.pdf-mode-active) .prose > div { 
+    page-break-inside: avoid !important; break-inside: avoid !important; 
   }
+  body:not(.has-slide):not(.pdf-mode-active) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
+  body:not(.has-slide):not(.pdf-mode-active) a { text-decoration: none !important; color: black !important; }
 
-  /* Khóa toàn bộ Grid của sếp */
+  /* Ép 3D thành 2D phẳng, chống ngược chữ cho Flashcard */
+  body:not(.has-slide):not(.pdf-mode-active) .flashcard-wrapper { perspective: none !important; height: auto !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  body:not(.has-slide):not(.pdf-mode-active) .flashcard-inner { transform: none !important; transform-style: flat !important; height: auto !important; }
+  body:not(.has-slide):not(.pdf-mode-active) .flashcard-front, body:not(.has-slide):not(.pdf-mode-active) .flashcard-back { position: static !important; transform: none !important; backface-visibility: visible !important; height: auto !important; padding: 1rem !important; box-shadow: none !important; border: 1px solid #e2e8f0 !important;}
+  body:not(.has-slide):not(.pdf-mode-active) .flashcard-front { border-radius: 1rem 1rem 0 0 !important; border-bottom: 1px dashed #cbd5e1 !important; }
+  body:not(.has-slide):not(.pdf-mode-active) .flashcard-back { border-radius: 0 0 1rem 1rem !important; border-top: none !important; }
+  body:not(.has-slide):not(.pdf-mode-active) .speak-btn { display: none !important; } 
+
+  /* 1. ÉP TRÌNH DUYỆT PHẢI IN ĐƯỜNG KẺ Ô LY & ĐƯỜNG LỀ ĐỎ (CHỐNG MẤT KẺ) */
+  .vo-oly-container, .bg-oly-word {
+    -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important;
+    border-left: 3px solid #ef4444 !important; background-color: #ffffff !important;
+    page-break-inside: avoid !important; break-inside: avoid !important;
+  }
+  /* 2. CHỐNG CẮT ĐÔI CÔNG THỨC TOÁN KATEX & BÀI TẬP */
+  .katex-display, .katex, .exercise-item, .quiz-container, .edevx-quiz-db, .cornell-game-wrapper { page-break-inside: avoid !important; break-inside: avoid !important; }
+  
+  .exam-header { display: flex !important; justify-content: space-between !important; align-items: flex-start !important; border-bottom: 2px solid #000000 !important; padding-bottom: 12px !important; margin-bottom: 20px !important; font-family: 'Inter', sans-serif !important; }
+  .exam-footer { display: flex !important; justify-content: space-between !important; align-items: center !important; border-top: 1px dashed #cbd5e1 !important; padding-top: 10px !important; margin-top: 30px !important; font-size: 0.8rem !important; color: #64748b !important; font-family: 'Inter', sans-serif !important; page-break-inside: avoid !important; }
+
+  /* ======================================================== */
+  /* 🟣 MODE 2: TRÌNH CHIẾU SLIDE 16:9                        */
+  /* ======================================================== */
+  
+  body.has-slide #article-body-content > *:not(.slide-container) { display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
   body.has-slide .grid { display: grid !important; }
   body.has-slide .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   body.has-slide .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
@@ -162,50 +253,23 @@ body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content vi
   body.has-slide .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
   body.has-slide .flex-wrap { flex-wrap: nowrap !important; }
 
-  /* ÉP VỪA KHÍT A4 LANDSCAPE (PADDING 14-20 CỦA SẾP) */
   body.has-slide .slide-container { 
-    width: 297mm !important; height: 210mm !important; 
-    max-width: 297mm !important; max-height: 210mm !important;
-    margin: 0 auto !important; padding: 14mm 20mm !important; transform: none !important;
-    page-break-inside: avoid !important; break-inside: avoid !important;
+    width: 297mm !important; height: 210mm !important; max-width: none !important; max-height: none !important; 
+    margin: 0 !important; padding: 14mm 20mm !important; transform: none !important; 
+    background-color: #ffffff !important; background: #ffffff !important;
+    page-break-inside: avoid !important; break-inside: avoid !important; 
     page-break-after: always !important; break-after: page !important;
     overflow: hidden !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;
     border: none !important; border-radius: 0 !important; box-shadow: none !important; box-sizing: border-box !important; 
   }
-  
-  body.has-slide .slide-container:last-of-type, body.has-slide .slide-container:last-child { 
-    page-break-after: auto !important; break-after: auto !important; 
-  }
+  body.has-slide .slide-container:first-of-type { page-break-before: avoid !important; }
+  body.has-slide .slide-container:last-of-type, body.has-slide .slide-container:last-child { page-break-after: auto !important; break-after: auto !important; }
 
   /* ======================================================== */
-  /* 🟢 MODE 1 (BÀI THƯỜNG): GHI ĐÈ LỆNH ĐỂ CUỘN DỌC MƯỢT MÀ  */
+  /* 🟡 MODE 2B: IN ẤN TRÌNH XEM PDF A4 (PORTRAIT)            */
   /* ======================================================== */
-  
-  /* Bẻ gãy lệnh height: 210mm ở trên để bài dài 11 trang chảy mượt */
-  body:not(.has-slide) { 
-    background: #ffffff !important; width: 100% !important; height: auto !important; padding: 15mm !important;
-    -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; 
-  }
-  
-  body:not(.has-slide) .max-w-7xl, body:not(.has-slide) main, body:not(.has-slide) article.post-content, body:not(.has-slide) .prose, body:not(.has-slide) #article-body-content, body:not(.has-slide) .lesson-container {
-    display: block !important; width: 100% !important; max-width: none !important; 
-    padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important; background: #ffffff !important;
-  }
-
-  /* CHỐNG CẮT ĐÔI KHỐI BÀI TẬP/NỘI DUNG */
-  body:not(.has-slide) h2, body:not(.has-slide) h3 { page-break-after: avoid !important; break-after: avoid !important; }
-  body:not(.has-slide) img, body:not(.has-slide) svg, body:not(.has-slide) li, body:not(.has-slide) blockquote, body:not(.has-slide) details, body:not(.has-slide) .quiz-container, body:not(.has-slide) .code-wrapper, body:not(.has-slide) .lesson-container > div, body:not(.has-slide) .prose > div { 
-    page-break-inside: avoid !important; break-inside: avoid !important; 
-  }
-
-  body:not(.has-slide) .code-wrapper { border: 1px solid #ccc; background: transparent; }
-  body:not(.has-slide) a { text-decoration: none !important; color: black !important; }
-
-  /* Ép 3D thành 2D phẳng, chống ngược chữ cho Flashcard */
-  body:not(.has-slide) .flashcard-wrapper { perspective: none !important; height: auto !important; page-break-inside: avoid !important; break-inside: avoid !important; }
-  body:not(.has-slide) .flashcard-inner { transform: none !important; transform-style: flat !important; height: auto !important; }
-  body:not(.has-slide) .flashcard-front, body:not(.has-slide) .flashcard-back { position: static !important; transform: none !important; backface-visibility: visible !important; height: auto !important; padding: 1rem !important; box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
-  body:not(.has-slide) .flashcard-front { border-radius: 1rem 1rem 0 0 !important; border-bottom: 1px dashed #cbd5e1 !important; }
-  body:not(.has-slide) .flashcard-back { border-radius: 0 0 1rem 1rem !important; border-top: none !important; }
-  body:not(.has-slide) .speak-btn { display: none !important; }
+  html.pdf-mode-active, body.pdf-mode-active, #edevx-pdf-workspace { background: #ffffff !important; margin: 0 !important; padding: 0 !important; width: 210mm !important; display: block !important; }
+  .pdf-toolbar { display: none !important; }
+  .a4-page-demo { width: 210mm !important; height: 297mm !important; margin: 0 !important; padding: 15mm 18mm !important; box-shadow: none !important; border: none !important; page-break-after: always !important; page-break-inside: avoid !important; }
+  .a4-page-demo:last-of-type { page-break-after: auto !important; }
 }
