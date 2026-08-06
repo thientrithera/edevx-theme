@@ -157,6 +157,17 @@ document.addEventListener("DOMContentLoaded", function() {
         })();
     }
 
+
+    // =======================================================
+    // [BỔ SUNG MỚI]: LAZY LOAD SƠ ĐỒ TƯ DUY MARKMAP
+    // =======================================================
+    if (document.querySelector('.markmap')) {
+        // Tải Autoloader của Markmap (Nó sẽ tự tìm class .markmap và biến text thành SVG)
+        loadScript('https://cdn.jsdelivr.net/npm/markmap-autoloader@0.17.0');
+    }
+
+
+    
     // --- 6. EDTECH COMPONENTS (Global Event Delegation) ---
     function decodeHTML(html) { var t = document.createElement("textarea"); t.innerHTML = html; return t.value; }
     
@@ -661,6 +672,74 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     })();
+
+
+    // =========================================================================
+    // --- 10. EDEVX VECTOR ENGINE (MODE 2C - DUAL FONT & PURE GRID) ---
+    // Động cơ vẽ chữ luyện viết toàn cầu, sẵn sàng phục vụ mọi bài học Blogger
+    // =========================================================================
+    window.EdevxVectorEngine = {
+        fontBold: null, fontNormal: null,
+
+        // 1. Tàng hình Blogger & Thiết lập Workspace
+        setupWorkspace: function(workspaceId) {
+            const ws = document.getElementById(workspaceId);
+            if (!ws) return;
+            document.body.appendChild(ws);
+            document.documentElement.classList.remove('dark'); localStorage.setItem('theme', 'light');
+            document.documentElement.classList.add('pdf-mode-active'); document.body.classList.add('pdf-mode-active');
+            Array.from(document.body.children).forEach(child => {
+                if (child.id !== workspaceId && !['SCRIPT', 'STYLE', 'LINK'].includes(child.tagName)) {
+                    child.style.display = 'none'; child.style.height = '0'; child.style.margin = '0'; child.style.padding = '0';
+                }
+            });
+        },
+
+        // 2. Vẽ lưới 100% Vector
+        drawGrid: function(svgId) {
+            const svg = document.getElementById(svgId); if (!svg) return;
+            const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            for (let y = 0; y <= 1123; y += 10) {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', '0'); line.setAttribute('y1', y); line.setAttribute('x2', '794'); line.setAttribute('y2', y);
+                line.setAttribute('stroke', y % 40 === 0 ? '#3b82f6' : '#94a3b8'); line.setAttribute('stroke-width', y % 40 === 0 ? '1.4' : '0.8');
+                group.appendChild(line);
+            }
+            for (let x = 0; x <= 794; x += 10) {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', x); line.setAttribute('y1', '0'); line.setAttribute('x2', x); line.setAttribute('y2', '1123');
+                line.setAttribute('stroke', x % 40 === 0 ? '#3b82f6' : '#94a3b8'); line.setAttribute('stroke-width', x % 40 === 0 ? '1.4' : '0.8');
+                group.appendChild(line);
+            }
+            const r1 = document.createElementNS('http://www.w3.org/2000/svg', 'line'); r1.setAttribute('x1', '80'); r1.setAttribute('y1', '0'); r1.setAttribute('x2', '80'); r1.setAttribute('y2', '1123'); r1.setAttribute('stroke', '#ef4444'); r1.setAttribute('stroke-width', '1.8'); group.appendChild(r1);
+            const r2 = document.createElementNS('http://www.w3.org/2000/svg', 'line'); r2.setAttribute('x1', '83'); r2.setAttribute('y1', '0'); r2.setAttribute('x2', '83'); r2.setAttribute('y2', '1123'); r2.setAttribute('stroke', '#ef4444'); r2.setAttribute('stroke-width', '1.8'); group.appendChild(r2);
+            svg.insertBefore(group, svg.firstChild);
+        },
+
+        // 3. Nạp Dual-Font từ GitHub CDN
+        initFonts: async function() {
+            if (!window.opentype) {
+                await new Promise((res, rej) => { const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js'; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+            }
+            const load = url => new Promise((res, rej) => window.opentype.load(url, (e, f) => e ? rej(e) : res(f)));
+            [this.fontBold, this.fontNormal] = await Promise.all([
+                load('https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/fonts/HP001_4H_Bold.ttf'),
+                load('https://cdn.jsdelivr.net/gh/thientrithera/edevx-theme@main/fonts/HP001_4H_Nomal.ttf')
+            ]);
+        },
+
+        _draw: function(gId, text, x, y, fSize, fObj, fill, stroke, sWidth) {
+            const group = document.getElementById(gId); if (!group || !fObj) return;
+            const bbox = fObj.getPath('x', 0, 0, fSize).getBoundingBox();
+            const p = fObj.getPath(text, x, y - bbox.y2, fSize).toDOMElement(4);
+            p.setAttribute('fill', fill); if(stroke) { p.setAttribute('stroke', stroke); p.setAttribute('stroke-width', sWidth); } p.removeAttribute('fill-opacity');
+            group.appendChild(p);
+        },
+
+        // 4. Các lệnh vẽ API phơi bày ra ngoài cho Sếp dùng
+        drawBold: function(gId, text, x, y, size = 25) { this._draw(gId, text, x, y, size, this.fontBold, '#000000', '#000000', '0.4'); },
+        drawTrace: function(gId, text, x, y, size = 25) { this._draw(gId, text, x, y, size, this.fontNormal, '#475569', '#475569', '0.25'); }
+    };
 
  // ĐÓNG SỰ KIỆN DOMContentLoaded TỔNG TOÀN BỘ FILE (CHỮA LỖI SYNTAX)
 

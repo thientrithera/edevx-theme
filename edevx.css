@@ -1,5 +1,5 @@
 /* ======================================================== */
-/* EDUCATION DEVX - CORE STYLESHEET (MASTER FINAL V2.0)     */
+/* EDUCATION DEVX - CORE STYLESHEET (MASTER FINAL V3.0)     */
 /* REPOSITORY: thientrithera/edevx-theme                     */
 /* ======================================================== */
 
@@ -14,42 +14,14 @@
   font-display: swap;
 }
 
-.font-hp001, .font-tapviet {
-  font-family: 'HP001', cursive, sans-serif !important;
-  display: inline-block;
-}
-
+.font-hp001, .font-tapviet { font-family: 'HP001', cursive, sans-serif !important; display: inline-block; }
 .font-nghieng-10 { transform: skewX(-10deg) !important; }
 .font-nghieng-12 { transform: skewX(-12deg) !important; }
 .font-nghieng-15 { transform: skewX(-15deg) !important; }
 .font-nghieng-20 { transform: skewX(-20deg) !important; }
 
-/* Khung Vở Ô Ly 4 Ly có lề đỏ chuẩn Vở Hải Tiến */
-.vo-oly-container, .bg-oly-word {
-  background-size: 8mm 8mm;
-  background-image: 
-    linear-gradient(to right, rgba(59, 130, 246, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
-  background-color: #fdfbf7;
-  border: 1px solid #e2e8f0;
-  border-left: 3px solid #ef4444 !important;
-  border-radius: 0.75rem;
-  padding: 1.5rem 1.5rem 1.5rem 2.5rem;
-  margin: 1.5rem 0;
-  line-height: 2.27rem !important;
-}
-
-.dark .vo-oly-container, .dark .bg-oly-word {
-  background-color: #18181b;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  border-color: #27272a;
-}
-
-/* ======================================================== */
-/* BỘ CSS LÕI NGUYÊN BẢN CỦA EDEVX (GIỮ NGUYÊN 100%)        */
-/* ======================================================== */
+.vo-oly-container, .bg-oly-word { background-size: 8mm 8mm; background-image: linear-gradient(to right, rgba(59, 130, 246, 0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(59, 130, 246, 0.15) 1px, transparent 1px); background-color: #fdfbf7; border: 1px solid #e2e8f0; border-left: 3px solid #ef4444 !important; border-radius: 0.75rem; padding: 1.5rem 1.5rem 1.5rem 2.5rem; margin: 1.5rem 0; line-height: 2.27rem !important; }
+.dark .vo-oly-container, .dark .bg-oly-word { background-color: #18181b; background-image: linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px); border-color: #27272a; }
 
 /* 1. ROOT & CORE TYPOGRAPHY */
 :root { --article-font-size: 1.05rem; }
@@ -71,7 +43,6 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; line-height: 1.8; }
 .prose { word-wrap: break-word; overflow-wrap: break-word; }
 
-/* BẢO VỆ CHỮ TRONG LƯỚI THẺ BÀI Ở CHẾ ĐỘ DARK MODE */
 .dark .prose div[class*="bg-"][class*="border"] { background-color: rgba(39, 39, 42, 0.4) !important; border-color: rgba(82, 82, 91, 0.5) !important; }
 .dark .prose div[class*="bg-"][class*="border"] h4 { color: #f4f4f5 !important; }
 .dark .prose div[class*="bg-"][class*="border"] p, .dark .prose div[class*="bg-"][class*="border"] div { color: #a1a1aa !important; }
@@ -113,6 +84,35 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 .prose details[open] summary::before { transform: rotate(90deg); }
 .prose details[open] summary { margin-bottom: 1rem; border-bottom: 1px dashed rgba(34,197,94,0.3); padding-bottom: 0.5rem; }
 
+/* ======================================================== */
+/* MINDMAP SƠ ĐỒ TƯ DUY (MARKMAP)                           */
+/* ======================================================== */
+.markmap-wrapper {
+  background-color: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+/* Ép chiều cao tối thiểu cho bản đồ để không bị bẹp */
+.markmap {
+  width: 100%;
+  min-height: 400px !important; 
+}
+
+.dark .markmap-wrapper {
+  background-color: #09090b; /* Màu nền Dark Mode */
+  border-color: #27272a;
+}
+
+/* Đổi màu chữ Mindmap trên Dark Mode cho dễ nhìn */
+.dark .markmap svg text {
+  fill: #e4e4e7 !important; 
+}
+
 /* 6. SIDEBAR WIDGETS & TOCBOT */
 .toc-list { list-style: none; padding-left: 1rem; }
 .toc-link { color: #71717a; text-decoration: none; display: block; padding: 0.35rem 0; font-size: 0.9rem; transition: 0.2s; }
@@ -142,13 +142,8 @@ body { animation: fadeIn 0.6s ease-out forwards; }
 /* [MODULE 7]: CSS SLIDE MODE PRO TOÀN MÀN HÌNH */
 /* ========================================== */
 body.has-slide { background-color: #0b0f19 !important; overflow-x: hidden !important; }
-
-/* Ẩn UI Blogger mặc định */
 body.has-slide header, body.has-slide footer, body.has-slide aside, body.has-slide #reading-progress, body.has-slide .post-header, body.has-slide .nextprev, body.has-slide .flex.flex-wrap, body.has-slide .mt-16.pt-8, body.has-slide .post-content h1:first-child { display: none !important; }
-
-/* ẨN THẺ <P> GIỚI THIỆU CỦA <!--MORE--> TRÊN MÀN HÌNH WEB */
 body.has-slide #article-body-content *:not(.slide-container):not(.slide-container *) { display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
-
 body.has-slide .grid.lg\:grid-cols-12 { display: block !important; }
 body.has-slide .max-w-7xl { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
 body.has-slide main.lg\:col-span-9 { width: 100% !important; max-width: 100% !important; display: block !important; }
@@ -156,7 +151,6 @@ body.has-slide article.post-content { padding: 0 !important; border: none !impor
 body.has-slide .slide-container { margin: 3rem auto !important; color: #27272a !important; }
 html.dark body.has-slide .slide-container [class*="dark:text-"] { color: inherit !important; }
 
-/* Khóa vỡ khung Responsive cho Bài học bình thường */
 body:not(.has-slide) .post-content * { min-width: 0 !important; }
 body:not(.has-slide) .post-content div, body:not(.has-slide) .post-content section, body:not(.has-slide) .post-content blockquote, body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content ul, body:not(.has-slide) .post-content ol, body:not(.has-slide) .post-content li { max-width: 100% !important; box-sizing: border-box !important; }
 @media (max-width: 639px) {
@@ -167,11 +161,20 @@ body:not(.has-slide) .post-content p, body:not(.has-slide) .post-content li, bod
 body:not(.has-slide) .post-content iframe, body:not(.has-slide) .post-content video, body:not(.has-slide) .post-content embed { width: 100% !important; max-width: 100% !important; height: auto !important; aspect-ratio: 16/9 !important; display: block !important; margin: 1.5rem auto !important; border-radius: 0.75rem !important; }
 
 /* ======================================================== */
-/* [MODULE 9]: CSS MÀN HÌNH TRÌNH DUYỆT CHO MODE 2B (PDF LATEX) */
+/* [MODULE 9]: CSS MÀN HÌNH TRÌNH DUYỆT (MODE 2B + 2C PDF)  */
 /* ======================================================== */
 html.pdf-mode-active, body.pdf-mode-active { background-color: #323639 !important; margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
 #edevx-pdf-workspace { position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; background-color: #323639 !important; z-index: 9999999 !important; display: flex !important; flex-direction: column !important; align-items: center !important; padding-top: 90px !important; padding-bottom: 50px !important; min-height: 100vh !important; }
-.pdf-toolbar { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 60px !important; background-color: #202124 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important; z-index: 99999999 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; padding: 0 24px !important; font-family: sans-serif !important; }
+
+/* Toolbar gộp của Mode 2B & 2C (Glassmorphism) */
+#edevx-pdf-workspace .pdf-toolbar, .pdf-toolbar { 
+  position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 64px !important; 
+  background: rgba(15, 23, 42, 0.92) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important; 
+  z-index: 99999999 !important; display: flex !important; justify-content: space-between !important; align-items: center !important; 
+  padding: 0 28px !important; font-family: 'Inter', sans-serif !important; 
+}
+
 .a4-page-demo { width: 794px !important; height: 1123px !important; background-color: #ffffff !important; margin: 0 auto 30px auto !important; padding: 15mm 18mm !important; box-shadow: 0 5px 25px rgba(0,0,0,0.8) !important; box-sizing: border-box !important; position: relative !important; display: block !important; text-align: left !important; overflow: hidden !important; font-family: 'Times New Roman', Times, serif !important; font-size: 14.5px !important; line-height: 1.45 !important; color: #000000 !important; }
 .a4-page-demo *, .a4-page-demo p, .a4-page-demo div, .a4-page-demo span, .a4-page-demo td { color: #000000 !important; font-family: 'Times New Roman', Times, serif !important; }
 .a4-page-demo h1 { font-size: 22px !important; font-weight: 900 !important; line-height: 1.2 !important; margin-bottom: 5px !important;}
@@ -181,46 +184,25 @@ html.pdf-mode-active, body.pdf-mode-active { background-color: #323639 !importan
 .latex-box-title { font-weight: bold !important; font-size: 16px !important; margin-bottom: 4px !important; }
 .dotted-line { border-bottom: 1px dotted #64748b !important; min-height: 24px !important; width: 100% !important; margin-top: 4px !important; }
 
+/* Mode 2C: Trang A4 Tràn viền (Không Padding) */
+#edevx-pdf-workspace .a4-page-3page { width: 794px !important; height: 1123px !important; margin: 0 auto 35px auto !important; padding: 0 !important; box-shadow: 0 10px 35px rgba(0,0,0,0.8) !important; box-sizing: border-box !important; position: relative !important; overflow: hidden !important; background-color: #ffffff !important; display: block !important; }
+
 /* ======================================================== */
-/* [MODULE 8]: CSS IN ẤN TỔNG HỢP (DUAL-MODE + MODE 2B)     */
+/* [MODULE 8]: CSS IN ẤN TỔNG HỢP (DUAL-MODE + MODE 2B/2C)  */
 /* ======================================================== */
 @media print { 
-  /* 1. KHÔNG LỀ MẶC ĐỊNH */
   @page { margin: 0 !important; }
   
-  /* 2. CHỐNG DẢI ĐEN CHÍ MẠNG */
-  html, body, body.has-slide { 
-    background-color: #ffffff !important; 
-    background: #ffffff !important; 
-    width: 100% !important;
-    height: auto !important; 
-    -webkit-print-color-adjust: exact !important; 
-    print-color-adjust: exact !important; 
-  }
-  
-  /* 3. ẨN RÁC GIAO DIỆN BLOGGER */
-  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, 
-  #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { display: none !important; }
+  html, body, body.has-slide { background-color: #ffffff !important; background: #ffffff !important; width: 100% !important; height: auto !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  header, aside, footer, #reading-progress, .nextprev, .post-share-buttons, #comments, .js-toc, #back-to-top, #open-toc-mobile, .no-print, .slide-decor, .post-header { display: none !important; }
+  .max-w-7xl, main, article.post-content, .prose, #article-body-content, .lesson-container { display: block !important; width: 100% !important; max-width: none !important; padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important; background: #ffffff !important; }
 
-  /* 4. DẬP PHẲNG & SƠN TRẮNG MỌI LỚP BỌC CỦA BLOGGER */
-  .max-w-7xl, main, article.post-content, .prose, #article-body-content, .lesson-container {
-    display: block !important; width: 100% !important; max-width: none !important; 
-    padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important; 
-    background: #ffffff !important;
-  }
-
-  /* ======================================================== */
-  /* 🟢 MODE 1: BÀI HỌC BÌNH THƯỜNG TRÊN BLOG                 */
-  /* ======================================================== */
+  /* 🟢 MODE 1: BÀI HỌC BÌNH THƯỜNG TRÊN BLOG */
   body:not(.has-slide):not(.pdf-mode-active) { padding: 15mm !important; }
   body:not(.has-slide):not(.pdf-mode-active) h2, body:not(.has-slide):not(.pdf-mode-active) h3 { page-break-after: avoid !important; break-after: avoid !important; }
-  body:not(.has-slide):not(.pdf-mode-active) img, body:not(.has-slide):not(.pdf-mode-active) svg, body:not(.has-slide):not(.pdf-mode-active) li, body:not(.has-slide):not(.pdf-mode-active) blockquote, body:not(.has-slide):not(.pdf-mode-active) details, body:not(.has-slide):not(.pdf-mode-active) .quiz-container, body:not(.has-slide):not(.pdf-mode-active) .code-wrapper, body:not(.has-slide):not(.pdf-mode-active) .lesson-container > div, body:not(.has-slide):not(.pdf-mode-active) .prose > div { 
-    page-break-inside: avoid !important; break-inside: avoid !important; 
-  }
+  body:not(.has-slide):not(.pdf-mode-active) img, body:not(.has-slide):not(.pdf-mode-active) svg, body:not(.has-slide):not(.pdf-mode-active) li, body:not(.has-slide):not(.pdf-mode-active) blockquote, body:not(.has-slide):not(.pdf-mode-active) details, body:not(.has-slide):not(.pdf-mode-active) .quiz-container, body:not(.has-slide):not(.pdf-mode-active) .code-wrapper, body:not(.has-slide):not(.pdf-mode-active) .lesson-container > div, body:not(.has-slide):not(.pdf-mode-active) .prose > div { page-break-inside: avoid !important; break-inside: avoid !important; }
   body:not(.has-slide):not(.pdf-mode-active) .code-wrapper { break-inside: avoid; border: 1px solid #ccc; background: transparent; }
   body:not(.has-slide):not(.pdf-mode-active) a { text-decoration: none !important; color: black !important; }
-
-  /* Ép 3D thành 2D phẳng, chống ngược chữ cho Flashcard */
   body:not(.has-slide):not(.pdf-mode-active) .flashcard-wrapper { perspective: none !important; height: auto !important; page-break-inside: avoid !important; break-inside: avoid !important; }
   body:not(.has-slide):not(.pdf-mode-active) .flashcard-inner { transform: none !important; transform-style: flat !important; height: auto !important; }
   body:not(.has-slide):not(.pdf-mode-active) .flashcard-front, body:not(.has-slide):not(.pdf-mode-active) .flashcard-back { position: static !important; transform: none !important; backface-visibility: visible !important; height: auto !important; padding: 1rem !important; box-shadow: none !important; border: 1px solid #e2e8f0 !important;}
@@ -228,22 +210,12 @@ html.pdf-mode-active, body.pdf-mode-active { background-color: #323639 !importan
   body:not(.has-slide):not(.pdf-mode-active) .flashcard-back { border-radius: 0 0 1rem 1rem !important; border-top: none !important; }
   body:not(.has-slide):not(.pdf-mode-active) .speak-btn { display: none !important; } 
 
-  /* 1. ÉP TRÌNH DUYỆT PHẢI IN ĐƯỜNG KẺ Ô LY & ĐƯỜNG LỀ ĐỎ (CHỐNG MẤT KẺ) */
-  .vo-oly-container, .bg-oly-word {
-    -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important;
-    border-left: 3px solid #ef4444 !important; background-color: #ffffff !important;
-    page-break-inside: avoid !important; break-inside: avoid !important;
-  }
-  /* 2. CHỐNG CẮT ĐÔI CÔNG THỨC TOÁN KATEX & BÀI TẬP */
+  .vo-oly-container, .bg-oly-word { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; border-left: 3px solid #ef4444 !important; background-color: #ffffff !important; page-break-inside: avoid !important; break-inside: avoid !important; }
   .katex-display, .katex, .exercise-item, .quiz-container, .edevx-quiz-db, .cornell-game-wrapper { page-break-inside: avoid !important; break-inside: avoid !important; }
-  
   .exam-header { display: flex !important; justify-content: space-between !important; align-items: flex-start !important; border-bottom: 2px solid #000000 !important; padding-bottom: 12px !important; margin-bottom: 20px !important; font-family: 'Inter', sans-serif !important; }
   .exam-footer { display: flex !important; justify-content: space-between !important; align-items: center !important; border-top: 1px dashed #cbd5e1 !important; padding-top: 10px !important; margin-top: 30px !important; font-size: 0.8rem !important; color: #64748b !important; font-family: 'Inter', sans-serif !important; page-break-inside: avoid !important; }
 
-  /* ======================================================== */
-  /* 🟣 MODE 2: TRÌNH CHIẾU SLIDE 16:9                        */
-  /* ======================================================== */
-  
+  /* 🟣 MODE 2: TRÌNH CHIẾU SLIDE 16:9 */
   body.has-slide #article-body-content > *:not(.slide-container) { display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
   body.has-slide .grid { display: grid !important; }
   body.has-slide .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
@@ -253,23 +225,18 @@ html.pdf-mode-active, body.pdf-mode-active { background-color: #323639 !importan
   body.has-slide .grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
   body.has-slide .flex-wrap { flex-wrap: nowrap !important; }
 
-  body.has-slide .slide-container { 
-    width: 297mm !important; height: 210mm !important; max-width: none !important; max-height: none !important; 
-    margin: 0 !important; padding: 14mm 20mm !important; transform: none !important; 
-    background-color: #ffffff !important; background: #ffffff !important;
-    page-break-inside: avoid !important; break-inside: avoid !important; 
-    page-break-after: always !important; break-after: page !important;
-    overflow: hidden !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important;
-    border: none !important; border-radius: 0 !important; box-shadow: none !important; box-sizing: border-box !important; 
-  }
+  body.has-slide .slide-container { width: 297mm !important; height: 210mm !important; max-width: none !important; max-height: none !important; margin: 0 !important; padding: 14mm 20mm !important; transform: none !important; background-color: #ffffff !important; background: #ffffff !important; page-break-inside: avoid !important; break-inside: avoid !important; page-break-after: always !important; break-after: page !important; overflow: hidden !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; border: none !important; border-radius: 0 !important; box-shadow: none !important; box-sizing: border-box !important; }
   body.has-slide .slide-container:first-of-type { page-break-before: avoid !important; }
   body.has-slide .slide-container:last-of-type, body.has-slide .slide-container:last-child { page-break-after: auto !important; break-after: auto !important; }
 
-  /* ======================================================== */
-  /* 🟡 MODE 2B: IN ẤN TRÌNH XEM PDF A4 (PORTRAIT)            */
-  /* ======================================================== */
-  html.pdf-mode-active, body.pdf-mode-active, #edevx-pdf-workspace { background: #ffffff !important; margin: 0 !important; padding: 0 !important; width: 210mm !important; display: block !important; }
-  .pdf-toolbar { display: none !important; }
+  /* 🟡 MODE 2B & 2C: IN ẤN TRÌNH XEM PDF A4 (PORTRAIT) */
+  @page { size: A4 portrait !important; }
+  html.pdf-mode-active, body.pdf-mode-active, body #edevx-pdf-workspace, #edevx-pdf-workspace { background: #ffffff !important; margin: 0 !important; padding: 0 !important; padding-top: 0 !important; width: 210mm !important; display: block !important; }
+  body #edevx-pdf-workspace .pdf-toolbar, #edevx-pdf-workspace .pdf-toolbar, .pdf-toolbar { display: none !important; visibility: hidden !important; opacity: 0 !important; height: 0 !important; width: 0 !important; }
+  
   .a4-page-demo { width: 210mm !important; height: 297mm !important; margin: 0 !important; padding: 15mm 18mm !important; box-shadow: none !important; border: none !important; page-break-after: always !important; page-break-inside: avoid !important; }
   .a4-page-demo:last-of-type { page-break-after: auto !important; }
+
+  #edevx-pdf-workspace .a4-page-3page { width: 210mm !important; height: 297mm !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; border: none !important; page-break-after: always !important; page-break-inside: avoid !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  #edevx-pdf-workspace .a4-page-3page:last-of-type { page-break-after: auto !important; }
 }
