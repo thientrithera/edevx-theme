@@ -1,0 +1,904 @@
+[
+  {
+    "id": "van6_t1_b1_q01",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Truyện đồng thoại là thể loại văn học được viết dành riêng cho đối tượng nào?",
+    "options": [
+      "A. Người lớn",
+      "B. Trẻ em",
+      "C. Người cao tuổi",
+      "D. Bất kỳ ai"
+    ],
+    "correct_answer": 1,
+    "explanation": "Truyện đồng thoại là thể loại truyện viết cho trẻ em, có nhân vật thường là loài vật hoặc đồ vật được nhân hóa."
+  },
+  {
+    "id": "van6_t1_b1_q02",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Đặc điểm nổi bật nhất của nhân vật trong truyện đồng thoại là gì?",
+    "options": [
+      "A. Giữ nguyên hoàn toàn đặc tính tự nhiên của loài vật",
+      "B. Vừa mang đặc tính vốn có của loài vật, vừa mang đặc điểm của con người",
+      "C. Hoàn toàn biến thành con người và không còn dấu vết loài vật",
+      "D. Là những nhân vật thần tiên có phép thuật biến hóa"
+    ],
+    "correct_answer": 1,
+    "explanation": "Nhân vật trong truyện đồng thoại vừa mang những đặc tính vốn có của loài vật (như ngoại hình, tập tính), vừa mang những đặc điểm của con người (như suy nghĩ, ngôn ngữ, cảm xúc)."
+  },
+  {
+    "id": "van6_t1_b1_q03",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Cốt truyện là gì?",
+    "options": [
+      "A. Bối cảnh không gian và thời gian diễn ra sự việc",
+      "B. Yếu tố quan trọng gồm các sự kiện chính được sắp xếp theo một trật tự nhất định",
+      "C. Lời đối thoại trực tiếp giữa các nhân vật trong tác phẩm",
+      "D. Bài học rút ra sau khi đọc xong tác phẩm văn học"
+    ],
+    "correct_answer": 1,
+    "explanation": "Cốt truyện là yếu tố quan trọng của truyện kể, gồm các sự kiện chính được sắp xếp theo một trật tự nhất định: mở đầu, diễn biến và kết thúc."
+  },
+  {
+    "id": "van6_t1_b1_q04",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Khi người kể chuyện xưng 'tôi' trong tác phẩm, đó là người kể chuyện theo ngôi thứ mấy?",
+    "options": [
+      "A. Ngôi thứ nhất",
+      "B. Ngôi thứ hai",
+      "C. Ngôi thứ ba",
+      "D. Ngôi gián tiếp"
+    ],
+    "correct_answer": 0,
+    "explanation": "Người kể chuyện xưng 'tôi' là người kể chuyện ngôi thứ nhất, trực tiếp xuất hiện và tham gia vào câu chuyện."
+  },
+  {
+    "id": "van6_t1_b1_q05",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Ưu điểm lớn nhất của việc kể chuyện theo ngôi thứ nhất là gì?",
+    "options": [
+      "A. Biết hết mọi việc xảy ra với tất cả các nhân vật khác",
+      "B. Tạo nên sự tin cậy, giãi bày trực tiếp suy nghĩ, cảm xúc của nhân vật kể chuyện",
+      "C. Đảm bảo tính khách quan hoàn toàn khi nhận xét sự việc",
+      "D. Dễ dàng miêu tả những sự việc diễn ra ở những không gian xa nhau cùng lúc"
+    ],
+    "correct_answer": 1,
+    "explanation": "Kể theo ngôi thứ nhất giúp nhân vật trực tiếp giãi bày tâm tư, cảm xúc và suy nghĩ, tạo ra sự chân thực, gần gũi và tin cậy cho người đọc."
+  },
+  {
+    "id": "van6_t1_b1_q06",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Thế nào là lời nhân vật trong tác phẩm truyện?",
+    "options": [
+      "A. Lời miêu tả bối cảnh không gian của tác giả",
+      "B. Lời thuật lại các sự kiện của người kể chuyện",
+      "C. Lời nói trực tiếp của nhân vật (đối thoại hoặc độc thoại)",
+      "D. Lời bình luận của người đọc về tác phẩm"
+    ],
+    "correct_answer": 2,
+    "explanation": "Lời nhân vật là lời nói trực tiếp của nhân vật (có thể là đối thoại giữa các nhân vật hoặc độc thoại nội tâm), thường được trình bày tách riêng hoặc đặt trong dấu ngoặc kép."
+  },
+  {
+    "id": "van6_t1_b1_q07",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Trong truyện, người kể chuyện ngôi thứ ba có đặc điểm nào sau đây?",
+    "options": [
+      "A. Xưng 'tôi' và trực tiếp tham gia vào cốt truyện",
+      "B. Giấu mình, gọi tên các nhân vật và có khả năng 'biết hết' mọi chuyện",
+      "C. Là một nhân vật phụ trong câu chuyện",
+      "D. Chỉ xuất hiện ở phần kết thúc của câu chuyện"
+    ],
+    "correct_answer": 1,
+    "explanation": "Người kể chuyện ngôi thứ ba giấu mình, không xưng 'tôi', gọi tên các nhân vật bằng tên gọi của chúng và có thể quan sát, biết hết mọi diễn biến."
+  },
+  {
+    "id": "van6_t1_b1_q08",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Yếu tố nào giúp tác giả xây dựng thành công hình ảnh chú Dế Mèn vừa giống con dế thật vừa giống một thanh niên loài người?",
+    "options": [
+      "A. Biện pháp so sánh và ẩn dụ",
+      "B. Nghệ thuật nhân hóa kết hợp với quan sát tinh tế tập tính loài vật",
+      "C. Thể thơ tự do kết hợp với nhịp điệu dồn dập",
+      "D. Lời kể khách quan của người kể chuyện ngôi thứ ba"
+    ],
+    "correct_answer": 1,
+    "explanation": "Tô Hoài đã sử dụng nghệ thuật nhân hóa tài tình kết hợp với việc quan sát cực kỳ tỉ mỉ tập tính sinh học của loài dế để tạo nên nhân vật Dế Mèn."
+  },
+  {
+    "id": "van6_t1_b1_q09",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Đoạn trích 'Bài học đường đời đầu tiên' được trích từ tác phẩm nào của nhà văn Tô Hoài?",
+    "options": [
+      "A. Dế Mèn phiêu lưu ký",
+      "B. Võ sĩ Bọ Ngựa",
+      "C. O Chuột",
+      "D. Đảo Hoang"
+    ],
+    "correct_answer": 0,
+    "explanation": "Đoạn trích 'Bài học đường đời đầu tiên' nằm ở Chương I của tác phẩm 'Dế Mèn phiêu lưu ký' (xuất bản lần đầu năm 1941)."
+  },
+  {
+    "id": "van6_t1_b1_q10",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Người kể chuyện trong đoạn trích 'Bài học đường đời đầu tiên' là ai?",
+    "options": [
+      "A. Nhà văn Tô Hoài",
+      "B. Dế Choắt",
+      "C. Dế Mèn (xưng 'tôi')",
+      "D. Chị Cốc"
+    ],
+    "correct_answer": 2,
+    "explanation": "Đoạn trích được kể theo ngôi thứ nhất, do chính nhân vật Dế Mèn xưng 'tôi' kể lại câu chuyện của mình."
+  },
+  {
+    "id": "van6_t1_b1_q11",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Chi tiết nào miêu tả ngoại hình cường tráng của Dế Mèn?",
+    "options": [
+      "A. Người gầy gò và dài lêu nghêu như một gã nghiện thuốc phiện",
+      "B. Đôi càng mẫm bóng, những cái vuốt ở chân, ở khoeo cứ cứng dần và nhọn hoắt",
+      "C. Mánh cánh ngắn ngủn đến giữa lưng, hở cả mạng sườn",
+      "D. Mặt mũi lúc nào cũng ngơ ngơ ngác ngác"
+    ],
+    "correct_answer": 1,
+    "explanation": "Dế Mèn tự hào miêu tả: 'Bởi tôi ăn uống điều độ... Đôi càng tôi mẫm bóng. Những cái vuốt ở chân, ở khoeo cứ cứng dần và nhọn hoắt.'"
+  },
+  {
+    "id": "van6_t1_b1_q12",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Thái độ của Dế Mèn đối với các hàng xóm trong xóm đầm rạ là gì?",
+    "options": [
+      "A. Tôn trọng, yêu thương và luôn giúp đỡ mọi người",
+      "B. Kính trọng người già, nhường nhủ trẻ em",
+      "C. Xem thường, kiêu ngạo, cà khịa và bắt nạt tất cả mọi người",
+      "D. Sợ hãi, trốn tránh không dám giao tiếp với ai"
+    ],
+    "correct_answer": 2,
+    "explanation": "Vì cậy mình khỏe mạnh, Dế Mèn đâm ra kiêu ngạo, coi thường mọi người: 'Tôi tợn lắm... Tôi cà khịa với tất cả mọi người trong xóm...'"
+  },
+  {
+    "id": "van6_t1_b1_q13",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Tên gọi 'Dế Choắt' là do ai đặt cho chú dế hàng xóm?",
+    "options": [
+      "A. Do mẹ của Dế Choắt đặt",
+      "B. Do Dế Mèn chế giễu đặt cho",
+      "C. Do chị Cốc đặt",
+      "D. Do dân làng xóm đầm rạ gọi"
+    ],
+    "correct_answer": 1,
+    "explanation": "Dế Mèn coi thường ngoại hình yếu ớt của người bạn hàng xóm nên đã đặt tên chế giễu là 'Dế Choắt'."
+  },
+  {
+    "id": "van6_t1_b1_q14",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Ngoại hình của Dế Choắt được Dế Mèn miêu tả như thế nào?",
+    "options": [
+      "A. Khỏe mạnh, cơ bắp, cánh dài tận chấm đuôi",
+      "B. Béo tròn, nước da nâu bóng mượt",
+      "C. Gầy gò, dài lêu nghêu, cánh ngắn ngủn, râu một bên ngắn một bên cụt",
+      "D. Nhỏ nhắn, nhanh nhẹn và có tiếng hát rất hay"
+    ],
+    "correct_answer": 2,
+    "explanation": "Dế Choắt có thân hình gầy gò, trần như gã nghiện thuốc phiện, cánh ngắn ngủn hở cả mạng sườn, mặt mũi ốm yếu ngơ ngác."
+  },
+  {
+    "id": "van6_t1_b1_q15",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Khi Dế Choắt nhờ Dế Mèn ĐÀO GIÚP MỘT CÁI NGÁCH sang nhà Mèn để phòng khi có kẻ bắt nạt, Dế Mèn đã phản ứng ra sao?",
+    "options": [
+      "A. Vui vẻ đồng ý và đào giúp ngay lập tức",
+      "B. Bĩu môi, hếch răng lên xỉa xói, mắng Dế Choắt hôi như cú rồi quẩy đuôi đi về",
+      "C. Âm thầm sang đào ngách giúp bạn vào đêm khuya",
+      "D. Khuyên Dế Choắt nên tự lực gánh sinh"
+    ],
+    "correct_answer": 1,
+    "explanation": "Dế Mèn không những không giúp mà còn ích kỷ xỉa xói: 'Thông ngách sang nhà ta? Dễ nghe nhỉ! Chú mày hôi như cú... Thôi, im cái điệu hát mưa dầm sụt sùi ấy đi.'"
+  },
+  {
+    "id": "van6_t1_b1_q16",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Dế Mèn đã bày trò trêu chọc ai để tỏ ra mình giỏi giang?",
+    "options": [
+      "A. Anh Càng Kềnh",
+      "B. Chị Cốc",
+      "C. Chị Cào Cào",
+      "D. Bọ Ngựa"
+    ],
+    "correct_answer": 1,
+    "explanation": "Dế Mèn thấy chị Cốc đang đứng rỉa lông bên đầm nước liền nảy ra ý định rủ Dế Choắt trêu chị Cốc để chứng tỏ mình không sợ ai."
+  },
+  {
+    "id": "van6_t1_b1_q17",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Hành động của Dế Mèn SAU KHI hát bài hát trêu chị Cốc là gì?",
+    "options": [
+      "A. Đứng lại nghênh ngang thách thức chị Cốc",
+      "B. Chui tọt vào hang sâu nằm khểnh bắt chân chữ ngũ",
+      "C. Chạy sang giấu mình trong hang Dế Choắt",
+      "D. Quỳ xuống xin lỗi chị Cốc"
+    ],
+    "correct_answer": 1,
+    "explanation": "Sau khi cất tiếng hát trêu chọc chị Cốc, Dế Mèn khiêu khích rồi chui tọt vào hang mình nằm núp, bỏ mặc Dế Choắt ở bên ngoài."
+  },
+  {
+    "id": "van6_t1_b1_q18",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Chị Cốc đã trút giận lên ai vì nghĩ đó là kẻ đã hát trêu mình?",
+    "options": [
+      "A. Dế Mèn",
+      "B. Dế Choắt",
+      "C. Nhện già",
+      "D. Cào cào"
+    ],
+    "correct_answer": 1,
+    "explanation": "Chị Cốc không thấy Dế Mèn nhưng lại thấy Dế Choắt đang loay hoay trước cửa hang liền lao xuống giáng những cú mỏ như sắt đập vào Dế Choắt."
+  },
+  {
+    "id": "van6_t1_b1_q19",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Thái độ của Dế Mèn khi nằm trong hang nghe tiếng chị Cốc giáng mỏ đập Dế Choắt là gì?",
+    "options": [
+      "A. Dũng cảm lao ra đánh nhau với chị Cốc",
+      "B. Mở cửa hang gào khóc xin chị Cốc tha cho bạn",
+      "C. Núp xó hang, nằm im thít, sợ hãi không dám thò đầu ra",
+      "D. Hả hê sung sướng vì Dế Choắt bị phạt"
+    ],
+    "correct_answer": 2,
+    "explanation": "Khi nghe trận đòn nát xương của chị Cốc giáng xuống Dế Choắt, Dế Mèn hoảng sợ vãi mồ hôi, 'núp tận đáy đất, nằm im thít'."
+  },
+  {
+    "id": "van6_t1_b1_q20",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Trước khi chết, Dế Choắt đã nói với Dế Mèn lời khuyên chân thành nào?",
+    "options": [
+      "A. 'Anh hãy trả thù chị Cốc giúp tôi!'",
+      "B. 'Ở đời mà có hông hung hách, có óc mà không biết nghĩ, sớm muộn rồi cũng mang vạ vào mình đấy.'",
+      "C. 'Anh hãy bỏ xóm đầm rạ này đi thật xa!'",
+      "D. 'Tôi không trách anh, anh hãy tiếp tục sống kiêu hãnh nhé!'"
+    ],
+    "correct_answer": 1,
+    "explanation": "Lời trăn trối của Dế Choắt chứa đựng bài học sâu sắc: 'Ở đời mà có thói hung hăng hống hách, có óc mà không biết nghĩ, sớm muộn rồi cũng mang vạ vào mình đấy.'"
+  },
+  {
+    "id": "van6_t1_b1_q21",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Hành động 'đứng lặng giờ lâu trước mộ Dế Choắt' của Dế Mèn thể hiện tâm trạng gì?",
+    "options": [
+      "A. Sự tiếc nuối vì mất đi một người oshin sai vặt",
+      "B. Sự hối hận chân thành, ăn ăn sâu sắc về tội lỗi do thói xốc nổi của mình gây ra",
+      "C. Sự tức giận đối với chị Cốc",
+      "D. Sự do dự không biết nên đi phiêu lưu hay ở lại"
+    ],
+    "correct_answer": 1,
+    "explanation": "Hình ảnh đứng lặng trước mộ thể hiện sự thức tỉnh nhận thức, lòng ăn ăn hối hận chân thành và lời hứa thay đổi bản thân của Dế Mèn."
+  },
+  {
+    "id": "van6_t1_b1_q22",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Bài học quan trọng nhất mà bản thân em rút ra được qua nhân vật Dế Mèn là gì?",
+    "options": [
+      "A. Cần phải tập luyện thể thao để có thân hình khỏe mạnh",
+      "B. Không được kiêu ngạo, hung hăng, cần biết suy nghĩ trước khi hành động để không làm hại người khác",
+      "C. Phải biết đào hang thật sâu để trốn tránh nguy hiểm",
+      "D. Không nên kết bạn với những người yếu ớt hơn mình"
+    ],
+    "correct_answer": 1,
+    "explanation": "Bài học lớn nhất là cách ứng xử: Không được cậy sức kiêu ngạo, ngông cuồng, cần biết kiềm chế và suy nghĩ chín chắn trước mỗi hành động."
+  },
+  {
+    "id": "van6_t1_b1_q23",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Văn bản 'Nếu cậu muốn có một người bạn...' được trích từ kiệt tác nào của tác giả Ăng-toan đơ Xanh-tơ Ê-xu-pe-ri?",
+    "options": [
+      "A. Bay đêm",
+      "B. Cõi người ta",
+      "C. Hoàng tử bé",
+      "D. Phi công chiến đấu"
+    ],
+    "correct_answer": 2,
+    "explanation": "Đoạn trích thuộc Chương XXI của cuốn tiểu thuyết nổi tiếng thế giới 'Hoàng tử bé' (Le Petit Prince) xuất bản năm 1943."
+  },
+  {
+    "id": "van6_t1_b1_q24",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Tác giả Ăng-toan đơ Xanh-tơ Ê-xu-pe-ri mang quốc tịch nào và làm nghề gì bên cạnh viết văn?",
+    "options": [
+      "A. Quốc tịch Anh - Họa sĩ",
+      "B. Quốc tịch Pháp - Phi công",
+      "C. Quốc tịch Mỹ - Bác sĩ",
+      "D. Quốc tịch Đức - Nhạc sĩ"
+    ],
+    "correct_answer": 1,
+    "explanation": "Tác giả là nhà văn nổi tiếng người Pháp, đồng thời là một phi công quả cảm từng tham gia Chiến tranh thế giới thứ hai."
+  },
+  {
+    "id": "van6_t1_b1_q25",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Hai nhân vật thực hiện cuộc trò chuyện trong đoạn trích 'Nếu cậu muốn có một người bạn...' là những ai?",
+    "options": [
+      "A. Hoàng tử bé và Bông hoa hồng",
+      "B. Hoàng tử bé và Con Cáo",
+      "C. Con Cáo và Người phi công",
+      "D. Hoàng tử bé và Con rắn"
+    ],
+    "correct_answer": 1,
+    "explanation": "Đoạn trích kể về cuộc gặp gỡ và trò chuyện xúc động giữa Hoàng tử bé (đến từ hành tinh B612) và con Cáo trên Trái Đất."
+  },
+  {
+    "id": "van6_t1_b1_q26",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Theo lời giải thích của Cáo, khái niệm 'cảm hóa' có nghĩa là gì?",
+    "options": [
+      "A. Bắt một ai đó phải vặt lông gà cho mình",
+      "B. Dùng phép thuật để biến đổi hình dạng người khác",
+      "C. Tạo dựng các mối liên kết, gắn kết tình cảm giữa hai đối tượng",
+      "D. Mua bán hàng hóa trên thị trường"
+    ],
+    "correct_answer": 2,
+    "explanation": "Cáo định nghĩa đơn giản mà sâu sắc: 'Cảm hóa' có nghĩa là 'tạo dựng các mối liên kết' gắn bó thân thiết giữa hai cá thể."
+  },
+  {
+    "id": "van6_t1_b1_q27",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Trước khi được 'cảm hóa', đối với Cáo, Hoàng tử bé chỉ là một cậu bé như thế nào?",
+    "options": [
+      "A. Một người bạn thân thiết nhất đời",
+      "B. Một kẻ thù đáng sợ cầm súng săn đuổi mình",
+      "C. Chỉ là một cậu bé giống như trăm ngàn cậu bé khác và Cáo không hề cần đến cậu",
+      "D. Một vị thần từ trên trời rơi xuống"
+    ],
+    "correct_answer": 2,
+    "explanation": "Cáo nói: 'Đối với mình, bạn mới chỉ là một cậu bé giống như trăm ngàn cậu bé khác. Và mình không cần gì ở bạn. Bạn cũng chẳng cần gì ở mình.'"
+  },
+  {
+    "id": "van6_t1_b1_q28",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Khi đã được cảm hóa, hình ảnh cánh đồng lúa mì vàng óng sẽ gợi cho Cáo nhớ đến chi tiết nào của Hoàng tử bé?",
+    "options": [
+      "A. Đôi mắt xanh trong của Hoàng tử bé",
+      "B. Mái tóc màu vàng óng như lúa mì của Hoàng tử bé",
+      "C. Tiếng cười trong trẻo như chuông ngân",
+      "D. Chiếc khăn quàng cổ màu đỏ"
+    ],
+    "correct_answer": 1,
+    "explanation": "Cáo chia sẻ: 'Màu vàng của lúa mì sẽ nhắc mình nhớ đến bạn. Và mình sẽ yêu tiếng gió reo trong lúa mì...' vì Hoàng tử bé có mái tóc màu vàng."
+  },
+  {
+    "id": "van6_t1_b1_q29",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Để 'cảm hóa' một ai đó, Cáo đòi hỏi người đó cần phải có tố chất quan trọng nào?",
+    "options": [
+      "A. Phải có thật nhiều tiền bạc và thức ăn",
+      "B. Phải rất kiên nhẫn, ngồi xa ra một chút rồi mỗi ngày lại gần hơn một chút",
+      "C. Phải nói thật nhiều và hứa hẹn thật nhiều",
+      "D. Phải chạy thật nhanh để đuổi kịp đối phương"
+    ],
+    "correct_answer": 1,
+    "explanation": "Cáo dạy bài học về sự kiên nhẫn: 'Cần phải rất kiên nhẫn... Mỗi ngày bạn ngồi dịch lại gần hơn một chút... Lời nói là nguồn gốc của mọi sự hiểu lầm.'"
+  },
+  {
+    "id": "van6_t1_b1_q30",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Bí mật mà Cáo dành tặng cho Hoàng tử bé trước khi chia tay là gì?",
+    "options": [
+      "A. 'Muốn bắt gà thì phải rình vào ban đêm.'",
+      "B. 'Người ta chỉ thấy rõ bằng trái tim. Điều cốt lõi vô hình trong mắt trần.'",
+      "C. 'Hãy quay trở về hành tinh của bạn ngay lập tức.'",
+      "D. 'Bông hoa hồng của bạn là bông hoa xấu nhất thế giới.'"
+    ],
+    "correct_answer": 1,
+    "explanation": "Bí mật đắt giá nhất của Cáo: 'Người ta chỉ thấy rõ bằng trái tim. Điều cốt lõi vô hình trong mắt trần' - tình cảm chân thành chỉ cảm nhận được bằng tâm hồn."
+  },
+
+  {
+    "id": "van6_t1_b1_q31",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Vì sao bông hoa hồng trên hành tinh B612 lại trở nên duy nhất và quan trọng nhất đối với Hoàng tử bé?",
+    "options": [
+      "A. Vì đó là bông hoa hồng duy nhất tồn tại trong vũ trụ",
+      "B. Vì Hoàng tử bé đã dành thời gian chăm sóc, tưới nước, che chắn và cảm hóa bông hoa đó",
+      "C. Vì bông hoa đó có khả năng phát ra ánh sáng kỳ diệu",
+      "D. Vì con Cáo đã bảo Hoàng tử bé phải bảo vệ nó"
+    ],
+    "correct_answer": 1,
+    "explanation": "Chính thời gian, công sức và tình cảm mà Hoàng tử bé bỏ ra để chăm sóc bông hoa đã làm cho bông hoa ấy trở nên đặc biệt và duy nhất đối với cậu."
+  },
+  {
+    "id": "van6_t1_b1_q32",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Thông điệp sâu sắc nhất về TÌNH BẠN mà đoạn trích 'Nếu cậu muốn có một người bạn...' gửi gắm là gì?",
+    "options": [
+      "A. Tình bạn cần được xây dựng dựa trên sự kiên nhẫn, thấu hiểu, tình cảm chân thành và trách nhiệm với nhau",
+      "B. Muốn có bạn tốt thì phải tặng họ thật nhiều quà cáp có giá trị",
+      "C. Tình bạn chỉ tồn tại khi hai người có cùng sở thích ăn uống",
+      "D. Không nên kết bạn với những người sống ở xa mình"
+    ],
+    "correct_answer": 0,
+    "explanation": "Tình bạn chân chính đòi hỏi sự kiên nhẫn cảm hóa, thấu hiểu bằng trái tim và trách nhiệm gắn bó lâu dài giữa hai người."
+  },
+  {
+    "id": "van6_t1_b1_q33",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Nhân vật Cáo trong đoạn trích đóng vai trò gì đối với Hoàng tử bé?",
+    "options": [
+      "A. Là một kẻ thù đáng sợ chuyên đi săn gà",
+      "B. Là một người thầy, người bạn thông thái đã truyền dạy bài học ý nghĩa về tình bạn và cuộc sống",
+      "C. Là một sinh vật tội nghiệp cần được cứu giúp",
+      "D. Là nhân vật phản diện cản trở Hoàng tử bé trở về nhà"
+    ],
+    "correct_answer": 1,
+    "explanation": "Cáo tuy là một sinh vật hoang dã nhưng lại mang trí tuệ sâu sắc, đóng vai trò như người thầy định hướng và dạy cho Hoàng tử bé bài học về tình yêu thương."
+  },
+  {
+    "id": "van6_t1_b1_q34",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Tác giả của bài thơ 'Bắt nạt' trong SGK Ngữ văn 6 là ai?",
+    "options": [
+      "A. Nguyễn Khoa Điềm",
+      "B. Nguyễn Thế Hoàng Linh",
+      "C. Trần Đăng Khoa",
+      "D. Lâm Thị Mỹ Dạ"
+    ],
+    "correct_answer": 1,
+    "explanation": "Bài thơ 'Bắt nạt' do nhà thơ Nguyễn Thế Hoàng Linh sáng tác, trích trong tập thơ 'Ra vườn nhặt nắng'."
+  },
+  {
+    "id": "van6_t1_b1_q35",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Bài thơ 'Bắt nạt' được viết theo thể thơ nào?",
+    "options": [
+      "A. Thể thơ Lục bát",
+      "B. Thể thơ Bốn chữ (4 chữ)",
+      "C. Thể thơ Năm chữ (5 chữ)",
+      "D. Thể thơ Tự do"
+    ],
+    "correct_answer": 2,
+    "explanation": "Bài thơ 'Bắt nạt' gồm nhiều khổ thơ, mỗi dòng thơ có 5 tiếng (thể thơ 5 chữ) với nhịp điệu hồn nhiên, trong sáng."
+  },
+  {
+    "id": "van6_t1_b1_q36",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Thái độ xuyên suốt của nhân vật 'tớ' trong bài thơ đối với hành vi bắt nạt là gì?",
+    "options": [
+      "A. Đồng tình và ủng hộ việc bắt nạt những bạn yếu hơn",
+      "B. Phê phán, dứt khoát phủ định hành vi bắt nạt và coi đó là thói xấu cần loại bỏ",
+      "C. Thờ ơ, không quan tâm vì không liên quan đến mình",
+      "D. Sợ hãi và lẩn tránh những kẻ hay bắt nạt"
+    ],
+    "correct_answer": 1,
+    "explanation": "Nhân vật 'tớ' khẳng định thẳng thắn ngay từ đầu: 'Bắt nạt là xấu lắm / Đừng bắt nạt, bạn ơi' và liên tục phê phán thói xấu này."
+  },
+  {
+    "id": "van6_t1_b1_q37",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Trong bài thơ, nhân vật 'tớ' đã khuyên không nên bắt nạt những đối tượng nào?",
+    "options": [
+      "A. Chỉ có các bạn học sinh trong lớp",
+      "B. Bạn bè, trẻ con, người lớn, mèo, chó, cái cây...",
+      "C. Chỉ có những loài động vật nhỏ bé",
+      "D. Những kẻ mạnh hơn mình"
+    ],
+    "correct_answer": 1,
+    "explanation": "Bài thơ mở rộng đối tượng không được bắt nạt từ con người (bạn bè, trẻ con, người lớn) đến cả thiên nhiên, loài vật (mèo, chó, cái cây)."
+  },
+  {
+    "id": "van6_t1_b1_q38",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Yếu tố hài hước, hóm hỉnh trong bài thơ 'Bắt nạt' thể hiện qua chi tiết nào?",
+    "options": [
+      "A. Lời thách thức 'Thử ăn mù tạt' hoặc 'Thử nhảy híp-hóp cho hay'",
+      "B. Lời đe dọa sẽ đánh nhau với kẻ bắt nạt",
+      "C. Việc mời kẻ bắt nạt đến nhà ăn cơm",
+      "D. Hình ảnh chú thỏ con ngơ ngác"
+    ],
+    "correct_answer": 0,
+    "explanation": "Góc nhìn ngộ nghĩnh trẻ thơ thể hiện qua những gợi ý hóm hỉnh như: Thay vì bắt nạt thì hãy thử ăn mù tạt, hát ca hoặc nhảy híp-hóp."
+  },
+  {
+    "id": "van6_t1_b1_q39",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Biện pháp tu từ ĐIỆP NGỮ 'Đừng bắt nạt...' được lặp lại nhiều lần trong bài thơ có tác dụng gì?",
+    "options": [
+      "A. Làm cho bài thơ dài thêm để đủ dung lượng",
+      "B. Nhấn mạnh thông điệp từ bỏ thói bắt nạt, tạo nhịp điệu dồn dập, tha thiết cho bài thơ",
+      "C. Tăng tính biểu cảm cho việc miêu tả thiên nhiên",
+      "D. Bộc lộ sự sợ hãi của tác giả đối với bạo lực"
+    ],
+    "correct_answer": 1,
+    "explanation": "Điệp từ 'Đừng bắt nạt' lặp đi lặp lại có tác dụng nhắc nhở, dặn dò mạnh mẽ, nhấn mạnh thái độ kiên quyết từ bỏ thói xấu này."
+  },
+  {
+    "id": "van6_t1_b1_q40",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Thông điệp nhân văn nhất mà bài thơ 'Bắt nạt' muốn truyền tải đến lứa tuổi học sinh là gì?",
+    "options": [
+      "A. Hãy luyện tập võ thuật để sẵn sàng đánh lại kẻ bắt nạt mình",
+      "B. Hãy sống hòa đồng, trân trọng tôn trọng người khác, xây dựng môi trường học đường yêu thương và không bạo lực",
+      "C. Nên tránh xa những bạn nhút nhát trong lớp",
+      "D. Chỉ nên bảo vệ các loài động vật nuôi trong nhà"
+    ],
+    "correct_answer": 1,
+    "explanation": "Bài thơ kêu gọi xây dựng lối sống văn minh, chan hòa, nhân ái, biết tôn trọng sự khác biệt và bảo vệ những người yếu thế."
+  },
+  {
+    "id": "van6_t1_b1_q41",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Từ đơn là gì?",
+    "options": [
+      "A. Từ chỉ gồm một tiếng tạo thành",
+      "B. Từ do hai tiếng trở lên tạo thành",
+      "C. Từ do các tiếng có âm đầu lặp lại tạo thành",
+      "D. Từ có nghĩa giống nhau nhưng cách phát âm khác nhau"
+    ],
+    "correct_answer": 0,
+    "explanation": "Từ đơn là từ chỉ do một tiếng tạo thành (VD: *xe, nhà, đi, đẹp, trời*)."
+  },
+  {
+    "id": "van6_t1_b1_q42",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Từ phức là từ như thế nào?",
+    "options": [
+      "A. Từ chỉ gồm một tiếng duy nhất",
+      "B. Từ do hai hoặc nhiều tiếng tạo thành",
+      "C. Từ chỉ dùng trong văn bản cổ",
+      "D. Từ vay mượn của tiếng nước ngoài"
+    ],
+    "correct_answer": 1,
+    "explanation": "Từ phức là từ gồm có hai hoặc nhiều tiếng tạo thành (VD: *bàn ghế, học hành, ngơ ngác, nho nhỏ*)."
+  },
+  {
+    "id": "van6_t1_b1_q43",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Từ phức được chia thành hai loại chính nào?",
+    "options": [
+      "A. Từ thuần Việt và Từ Hán Việt",
+      "B. Từ ghép và Từ láy",
+      "C. Danh từ và Động từ",
+      "D. Từ đồng nghĩa và Từ trái nghĩa"
+    ],
+    "correct_answer": 1,
+    "explanation": "Dựa vào phương thức cấu tạo, từ phức được chia làm 2 loại: Từ ghép (các tiếng có quan hệ về nghĩa) và Từ láy (các tiếng có quan hệ về âm)."
+  },
+  {
+    "id": "van6_t1_b1_q44",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Điểm khác nhau cơ bản giữa Từ ghép và Từ láy là gì?",
+    "options": [
+      "A. Từ ghép gồm 1 tiếng, từ láy gồm 2 tiếng",
+      "B. Từ ghép được tạo ra bằng cách ghép các tiếng có quan hệ về nghĩa; Từ láy được tạo ra bằng cách lặp lại âm đầu, vần hoặc toàn bộ tiếng",
+      "C. Từ ghép chỉ dùng trong văn viết, từ láy chỉ dùng trong văn nói",
+      "D. Từ ghép luôn có nghĩa tiêu cực, từ láy luôn có nghĩa tích cực"
+    ],
+    "correct_answer": 1,
+    "explanation": "Từ ghép được tạo nên nhờ quan hệ ý nghĩa giữa các tiếng; Từ láy tạo nên nhờ sự lặp lại (ngẫu nhiên hoặc cố ý) về mặt ngữ âm."
+  },
+  {
+    "id": "van6_t1_b1_q45",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Trong các từ sau: 'xanh trong, mây, trôi, đẹp đẽ', từ nào là TỪ ĐƠN?",
+    "options": [
+      "A. xanh trong, đẹp đẽ",
+      "B. mây, trôi",
+      "C. đẹp đẽ, mây",
+      "D. xanh trong, trôi"
+    ],
+    "correct_answer": 1,
+    "explanation": "'mây' và 'trôi' là hai từ đơn (mỗi từ do 1 tiếng tạo thành); 'xanh trong' là từ ghép, 'đẹp đẽ' là từ láy."
+  },
+  {
+    "id": "van6_t1_b1_q46",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Dãy từ nào sau đây HOÀN TOÀN là TỪ GHÉP?",
+    "options": [
+      "A. áo quần, quần áo, học sinh, nhà cửa",
+      "B. nho nhỏ, lêu nghêu, vần vũ, lung linh",
+      "C. nắn nót, xinh xắn, xanh xao, học hành",
+      "D. ăn uống, đi đứng, rì rào, xù xì"
+    ],
+    "correct_answer": 0,
+    "explanation": "Dãy A gồm các từ ghép (*áo quần, quần áo, học sinh, nhà cửa*) vì các tiếng hợp lại đều có quan hệ chặt chẽ về nghĩa."
+  },
+  {
+    "id": "van6_t1_b1_q47",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Trong câu: 'Tôi đi bách bộ thì cả người tôi rung rinh một màu nâu bóng mỡ soi gương được', từ nào là TỪ LÁY?",
+    "options": [
+      "A. bách bộ",
+      "B. rung rinh",
+      "C. bóng mỡ",
+      "D. soi gương"
+    ],
+    "correct_answer": 1,
+    "explanation": "'rung rinh' là từ láy lặp lại phụ âm đầu 'r' có tác dụng gợi tả sự chuyển động nhẹ nhàng, nhịp nhàng."
+  },
+  {
+    "id": "van6_t1_b1_q48",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Các từ láy 'vắt vưởng, ngơ ngác, sụt sùi' trong văn bản có tác dụng nghệ thuật nổi bật gì?",
+    "options": [
+      "A. Tăng tính chính xác cho các số liệu thống kê",
+      "B. Bộc lộ cảm xúc, gợi hình ảnh sinh động và tăng giá trị biểu cảm cho lời văn",
+      "C. Làm cho câu văn ngắn gọn hơn",
+      "D. Giúp người đọc dễ nhớ tên nhân vật"
+    ],
+    "correct_answer": 1,
+    "explanation": "Từ láy có tác dụng gợi hình ảnh trực quan (tượng hình) và gợi âm thanh (tượng thanh), làm cho lời văn giàu cảm xúc và hình ảnh."
+  },
+  {
+    "id": "van6_t1_b1_q49",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Nghĩa của từ 'ăn xổi ở thì' trong câu văn nói về tính nết Dế Choắt có nghĩa là gì?",
+    "options": [
+      "A. Thích ăn các món dưa muối xổi",
+      "B. Lối sống tạm bợ, qua ngày đoạn tháng, không tính toán lâu dài",
+      "C. Lối sống tiết kiệm, biết dành dụm cho tương lai",
+      "D. Tính cách siêng năng, chăm chỉ làm lụng"
+    ],
+    "correct_answer": 1,
+    "explanation": "'Ăn xổi ở thì' là thành ngữ chỉ cách sống tạm bợ, ngắn hạn, chỉ biết trước mắt chứ không có quy hoạch hay tính toán lâu dài."
+  },
+  {
+    "id": "van6_t1_b1_q50",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Trong câu văn: 'Cái mỏ Cốc như cái dùi sắt xỏ xuyên cả đá', tác giả sử dụng biện pháp tu từ nào?",
+    "options": [
+      "A. Nhân hóa",
+      "B. So sánh",
+      "C. Ẩn dụ",
+      "D. Liệt kê"
+    ],
+    "correct_answer": 1,
+    "explanation": "Câu văn sử dụng từ so sánh 'như' để đối chiếu hình ảnh 'mỏ Cốc' với 'cái dùi sắt' nhằm nhấn mạnh sự nguy hiểm, sắc nhọn của mỏ chị Cốc."
+  },
+  {
+    "id": "van6_t1_b1_q51",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Biện pháp tu từ SO SÁNH trong câu 'Những chiếc mỏ nhọn như những lưỡi liềm máy làm việc' có hiệu quả nghệ thuật gì?",
+    "options": [
+      "A. Nhấn mạnh sự yếu ớt của loài chim",
+      "B. Khắc họa ấn tượng sự sắc bén, mạnh mẽ, sức tàn phá dữ dội của chiếc mỏ chim",
+      "C. Ca ngợi sự chăm chỉ của các loài vật",
+      "D. Làm cho câu văn mang tính hài hước"
+    ],
+    "correct_answer": 1,
+    "explanation": "So sánh mỏ chim với 'lưỡi liềm máy' giúp người đọc hình dung được sự sắc bén, sức mạnh ghê gớm và nhịp độ làm việc gấp gáp của loài chim."
+  },
+  {
+    "id": "van6_t1_b1_q52",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Trong đoạn văn tả Dế Mèn: 'Hai cái răng đen nhánh lúc nào cũng nhai ngoàm ngoạp như hai lưỡi liềm máy làm việc', câu văn kết hợp những nghệ thuật nào?",
+    "options": [
+      "A. Ẩn dụ và Ẩn dụ chuyển đổi cảm giác",
+      "B. Từ láy tượng hình, từ láy tượng thanh kết hợp với biện pháp so sánh độc đáo",
+      "C. Điệp ngữ và Đối lập",
+      "D. Câu hỏi tu từ và Nói giảm nói tránh"
+    ],
+    "correct_answer": 1,
+    "explanation": "Tác giả kết hợp từ láy 'ngoàm ngoạp' với hình ảnh so sánh 'như hai lưỡi liềm máy' tạo nên bức tranh miêu tả ngoại hình vô cùng sinh động, tràn đầy sức sống."
+  },
+  {
+    "id": "van6_t1_b1_q53",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Yêu cầu BẮT BUỘC về ngôi kể khi viết bài văn kể lại một trải nghiệm của bản thân là gì?",
+    "options": [
+      "A. Phải sử dụng ngôi kể thứ ba (giấu mình)",
+      "B. Bắt buộc sử dụng ngôi kể thứ nhất (xưng 'tôi' hoặc 'em')",
+      "C. Có thể linh hoạt thay đổi giữa ngôi thứ nhất và ngôi thứ ba",
+      "D. Sử dụng ngôi kể thứ hai (xưng 'bạn')"
+    ],
+    "correct_answer": 1,
+    "explanation": "Vì là bài văn kể về trải nghiệm cá nhân của chính mình, người viết bắt buộc phải dùng ngôi kể thứ nhất (xưng 'tôi' hoặc 'em')."
+  },
+  {
+    "id": "van6_t1_b1_q54",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Bố cục chuẩn của một bài văn kể lại trải nghiệm của bản thân gồm mấy phần và nhiệm vụ của từng phần?",
+    "options": [
+      "A. 2 phần: Mở bài và Thân bài",
+      "B. 3 phần: Mở bài (Giới thiệu trải nghiệm), Thân bài (Diễn biến sự việc), Kết bài (Cảm xúc & bài học rút ra)",
+      "C. 4 phần: Giới thiệu, Nguyên nhân, Hậu quả, Kết luận",
+      "D. 3 phần: Lí thuyết, Thực hành, Luyện tập"
+    ],
+    "correct_answer": 1,
+    "explanation": "Bố cục chuẩn gồm 3 phần: Mở bài (giới thiệu sơ lược trải nghiệm), Thân bài (kể chi tiết diễn biến sự việc theo trật tự hợp lý), Kết bài (nêu ý nghĩa và cảm xúc về trải nghiệm)."
+  },
+  {
+    "id": "van6_t1_b1_q55",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Trước khi bắt tay vào viết bài văn kể lại trải nghiệm, học sinh BẮT BUỘC phải thực hiện những bước chuẩn bị nào?",
+    "options": [
+      "A. Viết ngay vào vở không cần suy nghĩ",
+      "B. Lựa chọn đề tài trải nghiệm, tìm ý và lập dàn ý chi tiết",
+      "C. Chép lại bài làm mẫu của học sinh giỏi",
+      "D. Nhờ người khác viết hộ"
+    ],
+    "correct_answer": 1,
+    "explanation": "Quy trình viết chuẩn gồm 4 bước: Lựa chọn đề tài $\rightarrow$ Tìm ý & Lập dàn ý $\rightarrow$ Viết bài $\rightarrow$ Chỉnh sửa và rà soát lỗi."
+  },
+  {
+    "id": "van6_t1_b1_q56",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Nhận biết",
+    "question": "Văn bản đọc mở rộng 'Những người bạn' trong SGK Ngữ văn 6 do nhà văn nào sáng tác?",
+    "options": [
+      "A. Tô Hoài",
+      "B. Nguyễn Nhật Ánh",
+      "C. Phùng Quán",
+      "D. Đoàn Giỏi"
+    ],
+    "correct_answer": 1,
+    "explanation": "Đoạn trích 'Những người bạn' được trích từ tác phẩm nổi tiếng 'Tôi là Bê-tô' của nhà văn Nguyễn Nhật Ánh."
+  },
+  {
+    "id": "van6_t1_b1_q57",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Thông hiểu",
+    "question": "Trong văn bản 'Những người bạn', nhân vật chính Bê-tô là sinh vật gì?",
+    "options": [
+      "A. Một chú mèo vô house",
+      "B. Một chú chó thông minh, tinh nghịch",
+      "C. Một chú dế mèn phiêu lưu",
+      "D. Một chú chim sẻ"
+    ],
+    "correct_answer": 1,
+    "explanation": "Bê-tô là tên một chú chó sống trong gia đình chị Ni, chú chó có những suy nghĩ ngộ nghĩnh và sâu sắc về tình bạn với chú chó Lai-ca và Bi-nô."
+  },
+  {
+    "id": "van6_t1_b1_q58",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Điểm chung ý nghĩa nhất về TÌNH BẠN được thể hiện qua cả 3 văn bản trong Bài 1 là gì?",
+    "options": [
+      "A. Tình bạn chỉ đẹp khi hai người cùng giàu có",
+      "B. Tình bạn cần sự thấu hiểu, tôn trọng sự khác biệt, đồng cảm và biết chia sẻ những khoảnh khắc trong cuộc sống",
+      "C. Tình bạn là phải luôn bao che khuyết điểm cho nhau",
+      "D. Tình bạn chỉ tồn tại ở lứa tuổi học sinh"
+    ],
+    "correct_answer": 1,
+    "explanation": "Cả 3 văn bản (*Bài học đường đời đầu tiên, Nếu cậu muốn có một người bạn, Những người bạn*) đều đề cao sự tôn trọng khác biệt, thấu hiểu chân thành và sự gắn kết trách nhiệm trong tình bạn."
+  },
+  {
+    "id": "van6_t1_b1_q59",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Khi thực hành BÀI NÓI kể lại một trải nghiệm của bản thân trước lớp, học sinh cần chú ý kỹ năng trình bày nào?",
+    "options": [
+      "A. Đọc nguyên văn bài làm văn đã viết sẵn trên giấy mà không nhìn khán giả",
+      "B. Nói tự tin, làm chủ tốc độ và âm lượng, kết hợp ánh mắt, nét mặt và cử chỉ điệu bộ phù hợp",
+      "C. Nói thật nhanh để kết thúc bài nói sớm",
+      "D. Đứng im một chỗ cứng đờ và nhìn lên trần nhà"
+    ],
+    "correct_answer": 1,
+    "explanation": "Kỹ năng nói đòi hỏi sự tương tác ánh mắt với người nghe, điều chỉnh giọng điệu linh hoạt và kết hợp cử chỉ phi ngôn ngữ để bài nói thêm hấp dẫn."
+  },
+  {
+    "id": "van6_t1_b1_q60",
+    "topic": "van6_t1_b1",
+    "chapter": "Bài 1: Tôi và các bạn",
+    "level": "Vận dụng",
+    "question": "Thái độ chuẩn mực của NGƯỜI NGHE khi nghe bạn mình trình bày bài nói kể về trải nghiệm là gì?",
+    "options": [
+      "A. Lắng nghe tôn trọng, ghi chép lại các điểm hay/chưa rõ và phản hồi góp ý tích cực, chân thành",
+      "B. Làm việc riêng và nói chuyện làm mất trật tự",
+      "C. Cười nhạo khi bạn nói vấp hoặc nói sai",
+      "D. Ngắt lời bạn giữa chừng khi bạn đang nói"
+    ],
+    "correct_answer": 0,
+    "explanation": "Văn hóa nghe đòi hỏi sự tôn trọng người nói, tập trung lắng nghe để thấu hiểu và đưa ra những ý kiến nhận xét mang tính xây dựng, văn minh."
+  }
+
+]
