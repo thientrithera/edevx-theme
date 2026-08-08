@@ -150,25 +150,93 @@ document.addEventListener("DOMContentLoaded", function() {
             // Xử lý xuống dòng cho công thức
             document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
             
-            // Render toàn bộ trang (CẤM KATEX CHUI VÀO MARKMAP)
-            renderMathInElement(document.body, { 
-                delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], 
-                ignoredClasses: ["markmap", "markmap-wrapper"],
-                throwOnError: false 
-            });
+            // Render toàn bộ trang
+            renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false });
             
             if(tocContainer) setTimeout(() => tocbot.refresh(), 500);
         })();
     }
 
-    // =======================================================
-    // [BỔ SUNG MỚI]: LAZY LOAD CHÍNH CHỦ MARKMAP AUTOLOADER
-    // =======================================================
-    if (document.querySelector('.markmap')) {
-        // Tải Autoloader chính chủ của Markmap (Tự động biến text thành SVG + Render KaTeX chuẩn 100%)
-        loadScript('https://cdn.jsdelivr.net/npm/markmap-autoloader@0.17.0');
-    }
 
+   // ========================================================
+    // [BỔ SUNG MỚI]: EDEVX GLOBAL MARKMAP + KATEX ENGINE 100%
+    // ========================================================
+    (function initGlobalMarkmapKaTeX() {
+        const wrappers = document.querySelectorAll('.markmap-wrapper');
+        if (!wrappers.length) return;
+
+        function decodeEntities(str) {
+            var txt = document.createElement('textarea');
+            txt.innerHTML = str;
+            return txt.value;
+        }
+
+        function preRenderKaTeX(mdText) {
+            if (typeof katex === 'undefined') return mdText;
+
+            // Dịch công thức khối $$...$$
+            mdText = mdText.replace(/\$\$([\s\S]+?)\$\$/g, function(m, math) {
+                try { return katex.renderToString(math.trim(), { displayMode: true }); }
+                catch(e) { return m; }
+            });
+
+            // Dịch công thức dòng $...$
+            mdText = mdText.replace(/\$([^\$\n]+?)\$/g, function(m, math) {
+                try { return katex.renderToString(math.trim(), { displayMode: false }); }
+                catch(e) { return m; }
+            });
+
+            return mdText;
+        }
+
+        function renderAllMarkmaps() {
+            wrappers.forEach(function(wrap) {
+                var templateEl = wrap.querySelector('.markmap-raw-md') || wrap.querySelector('textarea') || wrap.querySelector('template');
+                var svgEl = wrap.querySelector('.markmap-katex-svg') || wrap.querySelector('svg');
+
+                if (!templateEl || !svgEl) return;
+
+                // Ưu tiên lấy .value từ TEXTAREA (Bất tử trên Blogger)
+                var rawMd = templateEl.value || templateEl.textContent || templateEl.innerHTML || '';
+                rawMd = decodeEntities(rawMd.trim());
+
+                if (!rawMd) return;
+
+                var htmlEnrichedMd = preRenderKaTeX(rawMd);
+
+                if (typeof markmap !== 'undefined' && markmap.Transformer) {
+                    var transformer = new markmap.Transformer();
+                    var result = transformer.transform(htmlEnrichedMd);
+
+                    svgEl.innerHTML = ''; // Clear bộ nhớ
+                    markmap.Markmap.create(svgEl, {
+                        duration: 500,
+                        maxWidth: 280
+                    }, result.root);
+                }
+            });
+        }
+
+        // Tải D3 + Markmap + KaTeX chủ động
+        async function startEngine() {
+            if (typeof katex === 'undefined') {
+                loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css');
+                await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
+            }
+
+            if (typeof markmap === 'undefined' || !markmap.Transformer) {
+                await loadScript('https://cdn.jsdelivr.net/npm/d3@7');
+                await loadScript('https://cdn.jsdelivr.net/npm/markmap-view@0.15.3');
+                await loadScript('https://cdn.jsdelivr.net/npm/markmap-lib@0.15.3');
+            }
+
+            renderAllMarkmaps();
+        }
+
+        startEngine();
+    })();
+
+    
     // --- 6. EDTECH COMPONENTS (Global Event Delegation) ---
     function decodeHTML(html) { var t = document.createElement("textarea"); t.innerHTML = html; return t.value; }
     
