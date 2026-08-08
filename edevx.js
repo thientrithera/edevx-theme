@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
-    // ========================================================
+   // ========================================================
     // [BỔ SUNG MỚI]: EDEVX GLOBAL MARKMAP + KATEX ENGINE 100%
     // ========================================================
     (function initGlobalMarkmapKaTeX() {
@@ -191,12 +191,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         function renderAllMarkmaps() {
             wrappers.forEach(function(wrap) {
-                var templateEl = wrap.querySelector('.markmap-raw-md') || wrap.querySelector('template');
+                var templateEl = wrap.querySelector('.markmap-raw-md') || wrap.querySelector('textarea') || wrap.querySelector('template');
                 var svgEl = wrap.querySelector('.markmap-katex-svg') || wrap.querySelector('svg');
 
                 if (!templateEl || !svgEl) return;
 
-                var rawMd = decodeEntities((templateEl.textContent || templateEl.innerHTML || '').trim());
+                // Ưu tiên lấy .value từ TEXTAREA (Bất tử trên Blogger)
+                var rawMd = templateEl.value || templateEl.textContent || templateEl.innerHTML || '';
+                rawMd = decodeEntities(rawMd.trim());
+
+                if (!rawMd) return;
+
                 var htmlEnrichedMd = preRenderKaTeX(rawMd);
 
                 if (typeof markmap !== 'undefined' && markmap.Transformer) {
@@ -212,15 +217,13 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
 
-        // Tải D3 + Markmap + KaTeX chủ động (Chống lỗi chưa nạp KaTeX)
+        // Tải D3 + Markmap + KaTeX chủ động
         async function startEngine() {
-            // 1. Tự động tải KaTeX nếu trang chưa nạp
             if (typeof katex === 'undefined') {
                 loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css');
                 await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
             }
 
-            // 2. Tải D3 và Markmap
             if (typeof markmap === 'undefined' || !markmap.Transformer) {
                 await loadScript('https://cdn.jsdelivr.net/npm/d3@7');
                 await loadScript('https://cdn.jsdelivr.net/npm/markmap-view@0.15.3');
@@ -232,7 +235,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         startEngine();
     })();
-
 
     
     // --- 6. EDTECH COMPONENTS (Global Event Delegation) ---
