@@ -150,21 +150,15 @@ document.addEventListener("DOMContentLoaded", function() {
             // Xử lý xuống dòng cho công thức
             document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
             
-                  
-            // Render toàn bộ trang (ĐÃ THÊM LỆNH CẤM KATEX CHUI VÀO MARKMAP)
-            renderMathInElement(document.body, { 
-                delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], 
-                ignoredClasses: ["markmap-wrapper", "markmap-raw-md"],
-                throwOnError: false 
-            });
-
-
+            // Render toàn bộ trang
+            renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false });
+            
             if(tocContainer) setTimeout(() => tocbot.refresh(), 500);
         })();
     }
 
 
-  // ========================================================
+   // ========================================================
     // [BỔ SUNG MỚI]: EDEVX GLOBAL MARKMAP + KATEX ENGINE 100%
     // ========================================================
     (function initGlobalMarkmapKaTeX() {
@@ -180,15 +174,15 @@ document.addEventListener("DOMContentLoaded", function() {
         function preRenderKaTeX(mdText) {
             if (typeof katex === 'undefined') return mdText;
 
-            // Dịch công thức khối $$...$$ (Ép xuất HTML sạch chống crash MathML)
+            // Dịch công thức khối $$...$$
             mdText = mdText.replace(/\$\$([\s\S]+?)\$\$/g, function(m, math) {
-                try { return katex.renderToString(math.trim(), { displayMode: true, output: 'html' }); }
+                try { return katex.renderToString(math.trim(), { displayMode: true }); }
                 catch(e) { return m; }
             });
 
-            // Dịch công thức dòng $...$ (Ép xuất HTML sạch chống crash MathML)
+            // Dịch công thức dòng $...$
             mdText = mdText.replace(/\$([^\$\n]+?)\$/g, function(m, math) {
-                try { return katex.renderToString(math.trim(), { displayMode: false, output: 'html' }); }
+                try { return katex.renderToString(math.trim(), { displayMode: false }); }
                 catch(e) { return m; }
             });
 
@@ -202,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (!templateEl || !svgEl) return;
 
+                // Ưu tiên lấy .value từ TEXTAREA (Bất tử trên Blogger)
                 var rawMd = templateEl.value || templateEl.textContent || templateEl.innerHTML || '';
                 rawMd = decodeEntities(rawMd.trim());
 
@@ -210,18 +205,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 var htmlEnrichedMd = preRenderKaTeX(rawMd);
 
                 if (typeof markmap !== 'undefined' && markmap.Transformer) {
-                    try {
-                        var transformer = new markmap.Transformer();
-                        var result = transformer.transform(htmlEnrichedMd);
+                    var transformer = new markmap.Transformer();
+                    var result = transformer.transform(htmlEnrichedMd);
 
-                        svgEl.innerHTML = ''; // Clear bộ nhớ
-                        markmap.Markmap.create(svgEl, {
-                            duration: 500,
-                            maxWidth: 280
-                        }, result.root);
-                    } catch(err) {
-                        console.error("[EDEVX Markmap Error]:", err);
-                    }
+                    svgEl.innerHTML = ''; // Clear bộ nhớ
+                    markmap.Markmap.create(svgEl, {
+                        duration: 500,
+                        maxWidth: 280
+                    }, result.root);
                 }
             });
         }
@@ -233,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
             }
 
-            if (typeof markmap !== 'undefined' && markmap.Transformer) {
+            if (typeof markmap === 'undefined' || !markmap.Transformer) {
                 await loadScript('https://cdn.jsdelivr.net/npm/d3@7');
                 await loadScript('https://cdn.jsdelivr.net/npm/markmap-view@0.15.3');
                 await loadScript('https://cdn.jsdelivr.net/npm/markmap-lib@0.15.3');
