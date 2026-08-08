@@ -131,108 +131,107 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // --- 5. LAZY LOAD (KaTeX & PrismJS) ---
+// --- 5. ĐỘNG CƠ KATEX TOÀN CỤC ---
     function loadLazyCSS(href) { const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); }
     const loadScript = (src) => new Promise(resolve => { const s = document.createElement('script'); s.src = src; s.onload = resolve; document.body.appendChild(s); });
 
-    if (document.querySelector('pre')) {
+    if (document.querySelector('pre') && !document.querySelector('pre.markmap-raw-md')) {
         loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css');
         loadScript('https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js');
     }
-    
-    // [ĐÃ FIX]: Quét toàn bộ thẻ Body để phát hiện dấu $ ở cả Trang chủ lẫn Trang con
-    if (document.body && (document.body.innerText.includes('$$') || document.body.innerText.includes('$'))) {
+
+    const bodyText = document.body ? document.body.innerText : '';
+    if (bodyText.includes('$$') || bodyText.includes('$')) {
         loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css');
+        
         (async () => {
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js');
             
-            // Xử lý xuống dòng cho công thức
-            document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
+            // Bước 1: Sửa lỗi xuống dòng của Blogger (TUYỆT ĐỐI chỉ chạm vào thẻ p)
+            document.querySelectorAll('.prose p').forEach(p => { 
+                if (p.innerHTML.includes('$')) {
+                    p.innerHTML = p.innerHTML
+                        .replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`)
+                        .replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`);
+                }
+            });
             
-            // Render toàn bộ trang
-            renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false });
+            // Bước 2: Dịch KaTeX toàn bài (Lệnh ignoredClasses CẤM CHUI VÀO MARKMAP)
+            renderMathInElement(document.body, { 
+                delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], 
+                ignoredClasses: ["markmap", "markmap-wrapper", "markmap-raw-md"],
+                throwOnError: false 
+            });
             
-            if(tocContainer) setTimeout(() => tocbot.refresh(), 500);
+            if (typeof tocContainer !== 'undefined' && tocContainer) setTimeout(() => tocbot.refresh(), 500);
+
+            // BƯỚC 3: CHỈ KÍCH HOẠT MARKMAP SAU KHI KATEX ĐÃ DỌN DẸP XONG
+            initSafeMarkmapEngine();
         })();
+    } else {
+        // Nếu bài không có công thức Toán nào, cứ chạy Markmap bình thường
+        initSafeMarkmapEngine();
     }
 
-
-  // ========================================================================
-    // [CHỐT HẠ]: EDEVX GLOBAL MARKMAP + KATEX ENGINE 100% (BẤT TỬ TRÊN BLOGGER)
     // ========================================================================
-    (function initGlobalMarkmapKaTeX() {
+    // [ĐỘNG CƠ MỚI]: BỘ NẠP MARKMAP + KATEX ENGINE BẤT TỬ TRÊN BLOGGER
+    // ========================================================================
+    function initSafeMarkmapEngine() {
         const wrappers = document.querySelectorAll('.markmap-wrapper');
         if (!wrappers.length) return;
 
         function decodeEntities(str) {
-            var txt = document.createElement('textarea');
+            const txt = document.createElement('textarea');
             txt.innerHTML = str;
             return txt.value;
         }
 
         function preRenderKaTeX(mdText) {
             if (typeof katex === 'undefined') return mdText;
-
-            // Dịch $$...$$ (Ép xuất HTML chống crash MathML)
-            mdText = mdText.replace(/\$\$([\s\S]+?)\$\$/g, function(m, math) {
-                try { return katex.renderToString(math.trim(), { displayMode: true, output: 'html' }); }
-                catch(e) { return m; }
+            // Ép xuất HTML sạch chống crash MathML
+            mdText = mdText.replace(/\$\$([\s\S]+?)\$\$/g, (m, math) => {
+                try { return katex.renderToString(math.trim(), { displayMode: true, output: 'html' }); } catch(e) { return m; }
             });
-
-            // Dịch $...$ (Ép xuất HTML chống crash MathML)
-            mdText = mdText.replace(/\$([^\$\n]+?)\$/g, function(m, math) {
-                try { return katex.renderToString(math.trim(), { displayMode: false, output: 'html' }); }
-                catch(e) { return m; }
+            mdText = mdText.replace(/\$([^\$\n]+?)\$/g, (m, math) => {
+                try { return katex.renderToString(math.trim(), { displayMode: false, output: 'html' }); } catch(e) { return m; }
             });
-
             return mdText;
         }
 
-        function renderAllMarkmaps() {
-            wrappers.forEach(function(wrap) {
-                var templateEl = wrap.querySelector('.markmap-raw-md') || wrap.querySelector('textarea') || wrap.querySelector('template');
-                var svgEl = wrap.querySelector('.markmap-katex-svg') || wrap.querySelector('svg');
-
-                if (!templateEl || !svgEl) return;
-
-                // Ưu tiên đọc .value từ TEXTAREA để bất tử trên Blogger
-                var rawMd = templateEl.value || templateEl.textContent || templateEl.innerHTML || '';
-                rawMd = decodeEntities(rawMd.trim());
-
-                if (!rawMd) return;
-
-                var htmlEnrichedMd = preRenderKaTeX(rawMd);
-
-                if (typeof markmap !== 'undefined' && markmap.Transformer) {
-                    try {
-                        var transformer = new markmap.Transformer();
-                        var result = transformer.transform(htmlEnrichedMd);
-
-                        svgEl.innerHTML = ''; 
-                        markmap.Markmap.create(svgEl, { duration: 500, maxWidth: 280 }, result.root);
-                    } catch(err) { console.error("Markmap Render Error", err); }
-                }
-            });
-        }
-
-        // Tải D3 + Markmap + KaTeX chủ động
         async function startEngine() {
-            if (typeof katex === 'undefined') {
-                loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css');
-                await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
-            }
+            // Nạp thư viện Markmap
             if (typeof markmap === 'undefined' || !markmap.Transformer) {
                 await loadScript('https://cdn.jsdelivr.net/npm/d3@7');
                 await loadScript('https://cdn.jsdelivr.net/npm/markmap-view@0.15.3');
                 await loadScript('https://cdn.jsdelivr.net/npm/markmap-lib@0.15.3');
             }
-            renderAllMarkmaps();
+
+            wrappers.forEach(wrap => {
+                // BẮT BÀI BLOGGER: Ưu tiên lấy từ PRE hoặc TEXTAREA để bất tử 100%
+                const templateEl = wrap.querySelector('pre') || wrap.querySelector('textarea') || wrap.querySelector('template');
+                const svgEl = wrap.querySelector('svg');
+
+                if (!templateEl || !svgEl) return;
+
+                const rawMd = decodeEntities((templateEl.value || templateEl.textContent || templateEl.innerHTML || '').trim());
+                if (!rawMd) return;
+
+                const htmlEnrichedMd = preRenderKaTeX(rawMd);
+
+                if (typeof markmap !== 'undefined' && markmap.Transformer) {
+                    try {
+                        const transformer = new markmap.Transformer();
+                        const result = transformer.transform(htmlEnrichedMd);
+                        svgEl.innerHTML = ''; // Dọn sạch SVG trước khi vẽ
+                        markmap.Markmap.create(svgEl, { duration: 500, maxWidth: 280 }, result.root);
+                    } catch(err) { console.error("Markmap Render Error", err); }
+                }
+            });
         }
-
+        
         startEngine();
-    })();
-
+    }
     
     // --- 6. EDTECH COMPONENTS (Global Event Delegation) ---
     function decodeHTML(html) { var t = document.createElement("textarea"); t.innerHTML = html; return t.value; }
