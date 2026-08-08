@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
-   // ========================================================
+  // ========================================================
     // [BỔ SUNG MỚI]: EDEVX GLOBAL MARKMAP + KATEX ENGINE 100%
     // ========================================================
     (function initGlobalMarkmapKaTeX() {
@@ -180,15 +180,15 @@ document.addEventListener("DOMContentLoaded", function() {
         function preRenderKaTeX(mdText) {
             if (typeof katex === 'undefined') return mdText;
 
-            // Dịch công thức khối $$...$$
+            // Dịch công thức khối $$...$$ (Ép xuất HTML sạch chống crash MathML)
             mdText = mdText.replace(/\$\$([\s\S]+?)\$\$/g, function(m, math) {
-                try { return katex.renderToString(math.trim(), { displayMode: true }); }
+                try { return katex.renderToString(math.trim(), { displayMode: true, output: 'html' }); }
                 catch(e) { return m; }
             });
 
-            // Dịch công thức dòng $...$
+            // Dịch công thức dòng $...$ (Ép xuất HTML sạch chống crash MathML)
             mdText = mdText.replace(/\$([^\$\n]+?)\$/g, function(m, math) {
-                try { return katex.renderToString(math.trim(), { displayMode: false }); }
+                try { return katex.renderToString(math.trim(), { displayMode: false, output: 'html' }); }
                 catch(e) { return m; }
             });
 
@@ -202,7 +202,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (!templateEl || !svgEl) return;
 
-                // Ưu tiên lấy .value từ TEXTAREA (Bất tử trên Blogger)
                 var rawMd = templateEl.value || templateEl.textContent || templateEl.innerHTML || '';
                 rawMd = decodeEntities(rawMd.trim());
 
@@ -211,14 +210,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 var htmlEnrichedMd = preRenderKaTeX(rawMd);
 
                 if (typeof markmap !== 'undefined' && markmap.Transformer) {
-                    var transformer = new markmap.Transformer();
-                    var result = transformer.transform(htmlEnrichedMd);
+                    try {
+                        var transformer = new markmap.Transformer();
+                        var result = transformer.transform(htmlEnrichedMd);
 
-                    svgEl.innerHTML = ''; // Clear bộ nhớ
-                    markmap.Markmap.create(svgEl, {
-                        duration: 500,
-                        maxWidth: 280
-                    }, result.root);
+                        svgEl.innerHTML = ''; // Clear bộ nhớ
+                        markmap.Markmap.create(svgEl, {
+                            duration: 500,
+                            maxWidth: 280
+                        }, result.root);
+                    } catch(err) {
+                        console.error("[EDEVX Markmap Error]:", err);
+                    }
                 }
             });
         }
@@ -230,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
             }
 
-            if (typeof markmap === 'undefined' || !markmap.Transformer) {
+            if (typeof markmap !== 'undefined' && markmap.Transformer) {
                 await loadScript('https://cdn.jsdelivr.net/npm/d3@7');
                 await loadScript('https://cdn.jsdelivr.net/npm/markmap-view@0.15.3');
                 await loadScript('https://cdn.jsdelivr.net/npm/markmap-lib@0.15.3');
