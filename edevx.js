@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js');
             
             // Xử lý xuống dòng cho công thức
-            document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
+            document.querySelectorAll('.prose p').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
             
             // Render toàn bộ trang
             renderMathInElement(document.body, { 
