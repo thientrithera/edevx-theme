@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (!templateEl || !svgEl) return;
 
-                var rawMd = decodeEntities(templateEl.innerHTML.trim());
+                var rawMd = decodeEntities((templateEl.textContent || templateEl.innerHTML || '').trim());
                 var htmlEnrichedMd = preRenderKaTeX(rawMd);
 
                 if (typeof markmap !== 'undefined' && markmap.Transformer) {
