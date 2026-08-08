@@ -158,13 +158,76 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
-    // =======================================================
-    // [BỔ SUNG MỚI]: LAZY LOAD SƠ ĐỒ TƯ DUY MARKMAP
-    // =======================================================
-    if (document.querySelector('.markmap')) {
-        // Tải Autoloader của Markmap (Nó sẽ tự tìm class .markmap và biến text thành SVG)
-        loadScript('https://cdn.jsdelivr.net/npm/markmap-autoloader@0.17.0');
-    }
+    // ========================================================
+    // [BỔ SUNG MỚI]: EDEVX GLOBAL MARKMAP + KATEX ENGINE 100%
+    // ========================================================
+    (function initGlobalMarkmapKaTeX() {
+        const wrappers = document.querySelectorAll('.markmap-wrapper');
+        if (!wrappers.length) return;
+
+        function decodeEntities(str) {
+            var txt = document.createElement('textarea');
+            txt.innerHTML = str;
+            return txt.value;
+        }
+
+        function preRenderKaTeX(mdText) {
+            if (typeof katex === 'undefined') return mdText;
+
+            // Dịch công thức khối $$...$$
+            mdText = mdText.replace(/\$\$([\s\S]+?)\$\$/g, function(m, math) {
+                try { return katex.renderToString(math.trim(), { displayMode: true }); }
+                catch(e) { return m; }
+            });
+
+            // Dịch công thức dòng $...$
+            mdText = mdText.replace(/\$([^\$\n]+?)\$/g, function(m, math) {
+                try { return katex.renderToString(math.trim(), { displayMode: false }); }
+                catch(e) { return m; }
+            });
+
+            return mdText;
+        }
+
+        function renderAllMarkmaps() {
+            wrappers.forEach(function(wrap) {
+                var templateEl = wrap.querySelector('.markmap-raw-md') || wrap.querySelector('template');
+                var svgEl = wrap.querySelector('.markmap-katex-svg') || wrap.querySelector('svg');
+
+                if (!templateEl || !svgEl) return;
+
+                var rawMd = decodeEntities(templateEl.innerHTML.trim());
+                var htmlEnrichedMd = preRenderKaTeX(rawMd);
+
+                if (typeof markmap !== 'undefined' && markmap.Transformer) {
+                    var transformer = new markmap.Transformer();
+                    var result = transformer.transform(htmlEnrichedMd);
+
+                    svgEl.innerHTML = '';
+                    markmap.Markmap.create(svgEl, {
+                        duration: 500,
+                        maxWidth: 280
+                    }, result.root);
+                }
+            });
+        }
+
+        async function startEngine() {
+            if (typeof markmap === 'undefined' || !markmap.Transformer) {
+                await loadScript('https://cdn.jsdelivr.net/npm/d3@7');
+                await loadScript('https://cdn.jsdelivr.net/npm/markmap-view@0.15.3');
+                await loadScript('https://cdn.jsdelivr.net/npm/markmap-lib@0.15.3');
+            }
+            let retries = 0;
+            while (typeof katex === 'undefined' && retries < 20) {
+                await new Promise(r => setTimeout(r, 100));
+                retries++;
+            }
+            renderAllMarkmaps();
+        }
+
+        startEngine();
+    })();
 
 
     
