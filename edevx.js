@@ -150,9 +150,15 @@ document.addEventListener("DOMContentLoaded", function() {
             // Xử lý xuống dòng cho công thức
             document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
             
-            // Render toàn bộ trang
-            renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false });
-            
+                  
+            // Render toàn bộ trang (ĐÃ THÊM LỆNH CẤM KATEX CHUI VÀO MARKMAP)
+            renderMathInElement(document.body, { 
+                delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], 
+                ignoredClasses: ["markmap-wrapper", "markmap-raw-md"],
+                throwOnError: false 
+            });
+
+
             if(tocContainer) setTimeout(() => tocbot.refresh(), 500);
         })();
     }
