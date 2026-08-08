@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     var transformer = new markmap.Transformer();
                     var result = transformer.transform(htmlEnrichedMd);
 
-                    svgEl.innerHTML = '';
+                    svgEl.innerHTML = ''; // Clear bộ nhớ
                     markmap.Markmap.create(svgEl, {
                         duration: 500,
                         maxWidth: 280
@@ -212,17 +212,21 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
 
+        // Tải D3 + Markmap + KaTeX chủ động (Chống lỗi chưa nạp KaTeX)
         async function startEngine() {
+            // 1. Tự động tải KaTeX nếu trang chưa nạp
+            if (typeof katex === 'undefined') {
+                loadLazyCSS('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css');
+                await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js');
+            }
+
+            // 2. Tải D3 và Markmap
             if (typeof markmap === 'undefined' || !markmap.Transformer) {
                 await loadScript('https://cdn.jsdelivr.net/npm/d3@7');
                 await loadScript('https://cdn.jsdelivr.net/npm/markmap-view@0.15.3');
                 await loadScript('https://cdn.jsdelivr.net/npm/markmap-lib@0.15.3');
             }
-            let retries = 0;
-            while (typeof katex === 'undefined' && retries < 20) {
-                await new Promise(r => setTimeout(r, 100));
-                retries++;
-            }
+
             renderAllMarkmaps();
         }
 
