@@ -148,12 +148,12 @@ document.addEventListener("DOMContentLoaded", function() {
             await loadScript('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js');
             
             // Xử lý xuống dòng cho công thức
-            document.querySelectorAll('.prose p').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
+            document.querySelectorAll('.prose').forEach(p => { p.innerHTML = p.innerHTML.replace(/\$\$([\s\S]*?)\$\$/g, (m,g)=>`$$${g.replace(/<br\s*\/?>/gi,'\n')}$$`).replace(/\$([\s\S]*?)\$/g, (m,g)=>`$${g.replace(/<br\s*\/?>/gi,' ')}$`); });
             
-            // Render toàn bộ trang
+            // Render toàn bộ trang (CẤM KATEX CHUI VÀO MARKMAP)
             renderMathInElement(document.body, { 
                 delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], 
-                ignoredClasses: ["markmap", "markmap-wrapper", "markmap-raw-md"],
+                ignoredClasses: ["markmap", "markmap-wrapper"],
                 throwOnError: false 
             });
             
@@ -161,16 +161,14 @@ document.addEventListener("DOMContentLoaded", function() {
         })();
     }
 
-
-   // =======================================================
+    // =======================================================
     // [BỔ SUNG MỚI]: LAZY LOAD CHÍNH CHỦ MARKMAP AUTOLOADER
     // =======================================================
-    if (document.querySelector('.markmap') || document.querySelector('.markmap-wrapper')) {
+    if (document.querySelector('.markmap')) {
         // Tải Autoloader chính chủ của Markmap (Tự động biến text thành SVG + Render KaTeX chuẩn 100%)
         loadScript('https://cdn.jsdelivr.net/npm/markmap-autoloader@0.17.0');
     }
 
-    
     // --- 6. EDTECH COMPONENTS (Global Event Delegation) ---
     function decodeHTML(html) { var t = document.createElement("textarea"); t.innerHTML = html; return t.value; }
     
